@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import { Button } from "../button";
+import { apiDomain } from "@/api/config";
 
 type Props = {
   name?: string;
@@ -26,7 +27,7 @@ export function TwitterConnect({ name, disabled, onConnect }: Props) {
 
   const authenticateWithTwitter = () => {
     const state = encodeURIComponent(window.location.href);
-    window.location.href = `/api/auth/twitter?state=${state}`;
+    window.location.href = apiDomain + `/auth/twitter?state=${state}`;
   };
 
   return (

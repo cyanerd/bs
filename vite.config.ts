@@ -12,6 +12,7 @@ export default defineConfig({
       typescript: true,
     }),
   ],
+  base: '/presale',
   root: './src',
   build: {
     target: 'esnext',

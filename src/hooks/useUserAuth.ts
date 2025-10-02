@@ -12,7 +12,7 @@ export function useUserAuth() {
   const [walletAddress, setWalletAddress] = useState("");
   const [name, setName] = useState("");
 
-  const { publicKey } = useWallet();
+  const { connected } = useWallet();
 
   const auth = async () => {
     setLoading(true);
@@ -35,8 +35,6 @@ export function useUserAuth() {
   };
 
   const completeWalletConnect = async (publicKey: string) => {
-    // await auth();
-
     setWalletAddress(publicKey);
     setWalletConnected(true);
     setTwitterLocked(false);
@@ -51,8 +49,10 @@ export function useUserAuth() {
   };
 
   useEffect(() => {
-    logout();
-  }, [publicKey]);
+    if (!connected) {
+      logout();
+    }
+  }, [connected]);
 
   return {
     auth,

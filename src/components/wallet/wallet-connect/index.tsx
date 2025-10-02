@@ -1,28 +1,33 @@
-import { useWallet } from "@solana/wallet-adapter-react";
-import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
+import { useWallet } from '@solana/wallet-adapter-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { Container, Copied, Dropdown, Icon, Wrapper } from "./styles";
-import { Web3 } from "@/utils/web3";
-import { Button } from "@/components/button";
+import { WalletModal } from '../wallet-modal';
+
+import { Container, Copied, Dropdown, Icon, Wrapper } from './styles';
+
+// @ts-ignore
+import type { WalletReceiveData } from '~features/client/mixed/ui/content/start-game/content/wallet/types';
+import { Web3 } from '@/utils/web3';
+import { Button } from '@/components/button';
 
 type Props = {
-  isConnected: boolean;
-  setModalVisible: (visible: boolean) => void;
+  sign: boolean
   onConnect: (publicKey: string) => Promise<void>;
 };
 
-export const WalletConnect: React.FC<Props> = ({ isConnected, setModalVisible, onConnect }) => {
+export const WalletConnect: React.FC<Props> = ({ sign, onConnect }) => {
   const { connected, disconnect, wallet, publicKey, signMessage } = useWallet();
 
   const [dropdownActive, setDropdownActive] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [manualSign, setManualSign] = useState(false);
 
   const refDropdown = useRef<HTMLDivElement>(null);
   const refTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const publicKey58 = publicKey?.toBase58() ?? "";
+  const publicKey58 = publicKey?.toBase58() ?? '';
   const icon = wallet?.adapter.icon;
   const isAndroid = /Android/i.test(navigator.userAgent);
 
@@ -97,7 +102,7 @@ export const WalletConnect: React.FC<Props> = ({ isConnected, setModalVisible, o
   }, [connected]);
 
   useEffect(() => {
-    if (publicKey) {
+    if (publicKey58) {
       if (isAndroid) {
         setManualSign(true);
       } else {
@@ -106,22 +111,27 @@ export const WalletConnect: React.FC<Props> = ({ isConnected, setModalVisible, o
     } else {
       setManualSign(false);
     }
-  }, [publicKey]);
+  }, [publicKey58]);
 
   useEffect(() => {
     if (!dropdownActive) {
       return;
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [dropdownActive]);
 
   return (
     <Wrapper>
+      {modalVisible && (
+        <WalletModal
+          onClose={() => setModalVisible(false)}
+        />
+      )}
       <Container>
         <Button onClick={handleClickWallet}>
           {connected ? (
@@ -132,12 +142,12 @@ export const WalletConnect: React.FC<Props> = ({ isConnected, setModalVisible, o
               </span>
             </>
           ) : (
-            "Connect wallet"
+            'Connect wallet'
           )}
         </Button>
-        {(manualSign && !isConnected) && (
+        {(sign && manualSign) && (
           <Button onClick={() => signWallet()}>
-            Sign
+            Sign wallet
           </Button>
         )}
       </Container>
@@ -145,10 +155,16 @@ export const WalletConnect: React.FC<Props> = ({ isConnected, setModalVisible, o
         <Dropdown ref={refDropdown}>
           <Dropdown.Item onClick={handleClickCopy}>
             Copy address
-            {copied && <Copied src="./images/success.svg" />}
+            {copied && (
+              <Copied src='./images/success.svg' />
+            )}
           </Dropdown.Item>
-          <Dropdown.Item onClick={handleClickChange}>Change wallet</Dropdown.Item>
-          <Dropdown.Item onClick={handleClickDisconnect}>Disconnect</Dropdown.Item>
+          <Dropdown.Item onClick={handleClickChange}>
+            Change wallet
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleClickDisconnect}>
+            Disconnect
+          </Dropdown.Item>
         </Dropdown>
       )}
     </Wrapper>

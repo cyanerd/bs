@@ -15,6 +15,7 @@ export default defineConfig({
   base: '/presale',
   root: './src',
   build: {
+    emptyOutDir: true,
     target: 'esnext',
     outDir: '../dist',
     minify: true,

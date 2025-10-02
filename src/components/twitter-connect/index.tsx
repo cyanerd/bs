@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import { Button } from "../button";
 
@@ -9,8 +9,6 @@ type Props = {
 };
 
 export function TwitterConnect({ name, disabled, onConnect }: Props) {
-  const isAndroid = /Android/i.test(navigator.userAgent);
-
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get("access_token");

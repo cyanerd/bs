@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 import { TwitterConnect } from "@/components/twitter-connect";
@@ -61,7 +61,7 @@ const PageContent = () => {
   );
 };
 
-const Page = () => {
+export const Page = () => {
   return (
     <WalletContext>
       <ToastContainer theme="dark" position="top-right" hideProgressBar={true} />
@@ -69,5 +69,3 @@ const Page = () => {
     </WalletContext>
   );
 };
-
-export default Page;

@@ -20,7 +20,7 @@ export const WalletConnect: React.FC<Props> = ({ isConnected, setModalVisible, o
   const [manualSign, setManualSign] = useState(false);
 
   const refDropdown = useRef<HTMLDivElement>(null);
-  const refTimeout = useRef<ReturnType<typeof setTimeout>>(null);
+  const refTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const publicKey58 = publicKey?.toBase58() ?? "";
   const icon = wallet?.adapter.icon;

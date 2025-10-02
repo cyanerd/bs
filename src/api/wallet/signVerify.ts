@@ -1,7 +1,7 @@
-import { apiDomain } from '@/api/config';
+import { API_HOST } from '@/api/config';
 
 export const signVerify = (wallet: string, signature: string) =>
-  fetch(`${apiDomain}/signVerify`, {
+  fetch(`${API_HOST}/signVerify`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

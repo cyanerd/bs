@@ -1,33 +1,36 @@
 import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import { Button } from "../button";
-import { apiDomain } from "@/api/config";
+import { API_HOST } from "@/api/config";
 
 type Props = {
   name?: string;
-  onConnect?: () => void;
+  onConnect: () => void;
   disabled?: boolean;
 };
 
 export function TwitterConnect({ name, disabled, onConnect }: Props) {
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const accessToken = urlParams.get("access_token");
-    const refreshToken = urlParams.get("refresh_token");
+  // useEffect(() => {
+  //   const urlParams = new URLSearchParams(window.location.search);
 
-    if (accessToken && refreshToken) {
-      Cookies.set("access_token", accessToken, { expires: 1 });
-      Cookies.set("refresh_token", refreshToken, { expires: 7 });
+  //   console.log(urlParams, Cookies.get("access_token"), Cookies.get("refresh_token"));
 
-      onConnect?.();
+  //   const accessToken = urlParams.get("access_token");
+  //   const refreshToken = urlParams.get("refresh_token");
 
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  }, []);
+  //   if (accessToken && refreshToken) {
+  //     Cookies.set("access_token", accessToken, { expires: 1 });
+  //     Cookies.set("refresh_token", refreshToken, { expires: 7 });
+
+  //     onConnect();
+
+  //     window.history.replaceState({}, document.title, window.location.pathname);
+  //   }
+  // }, []);
 
   const authenticateWithTwitter = () => {
     const state = encodeURIComponent(window.location.href);
-    window.location.href = apiDomain + `/auth/twitter?state=${state}`;
+    window.location.href = API_HOST + `/auth/twitter?state=${state}`;
   };
 
   return (

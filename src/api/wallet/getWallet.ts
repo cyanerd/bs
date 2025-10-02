@@ -1,7 +1,7 @@
-import { apiDomain } from '@/api/config';
+import { API_HOST } from '@/api/config';
 
 export const getWallet = (wallet: string) =>
-  fetch(`${apiDomain}/getWallet`, {
+  fetch(`${API_HOST}/getWallet`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

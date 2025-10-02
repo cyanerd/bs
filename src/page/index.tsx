@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 import { TwitterConnect } from "@/components/twitter-connect";
@@ -27,12 +27,18 @@ const PageContent = () => {
   const ready = Boolean(isWalletConnected && walletAddress);
 
   const handleTwitterConnect = async () => {
-    toast.success("Twitter Connected Successfully!", {
+    toast.success("Twitter connected successfully!", {
       autoClose: 10000,
     });
 
     await auth();
   };
+
+  useEffect(() => {
+    if (ready) {
+      auth().catch(() => {});
+    }
+  }, [ready]);
 
   return (
     <Wrapper>

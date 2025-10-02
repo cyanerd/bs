@@ -1,8 +1,8 @@
-import { apiDomain } from "./config";
+import { API_HOST } from "./config";
 
 export const getAuth = async () => {
   try {
-    const response = await fetch(`${apiDomain}/auth/jwt`, {
+    const response = await fetch(`${API_HOST}/auth/jwt`, {
       method: "GET",
     });
 

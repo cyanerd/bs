@@ -1,1 +1,1 @@
-export const apiDomain = "https://2.pix.my/api";
+export const API_HOST = "/api";

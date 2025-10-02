@@ -1,0 +1,1 @@
+export const WALLET_SELECT_TIMEOUT = 10000;

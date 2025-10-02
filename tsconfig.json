@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/public/*": ["./public/*"],
+      "@/config/*": ["./config/*"],
+      "@/components": ["./src/components/index"],
+      "@/components/*": ["./src/components/*"],
+      "@/hooks": ["./src/hooks/index"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/page": ["./src/page/index"],
+      "@/api": ["./src/api/index"],
+      "@/api/*": ["./src/api/*"],
+      "@/utils": ["./src/utils/index"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/types/*": ["./src/types/*"]
+    },
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

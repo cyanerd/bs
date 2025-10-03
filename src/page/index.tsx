@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const PageContent = () => {
   const {
-    twitterLocked,
     walletAddress,
     isTwitterConnected,
     isWalletConnected,
@@ -60,11 +59,7 @@ const PageContent = () => {
             <Status $connected={isTwitterConnected}>
               {isTwitterConnected ? "Connected" : "Not Connected"}
             </Status>
-            <TwitterConnect
-              name={name}
-              disabled={twitterLocked}
-              onConnect={handleTwitterConnect}
-            />
+            <TwitterConnect name={name} onConnect={handleTwitterConnect} />
           </Section>
         </Section>
       </Section>

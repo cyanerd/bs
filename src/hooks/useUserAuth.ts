@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 export function useUserAuth() {
   const [isWalletConnected, setWalletConnected] = useState(false);
   const [isTwitterConnected, setTwitterConnected] = useState(false);
-  const [twitterLocked, setTwitterLocked] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const [walletAddress, setWalletAddress] = useState("");
@@ -37,13 +36,11 @@ export function useUserAuth() {
   const completeWalletConnect = async (publicKey: string) => {
     setWalletAddress(publicKey);
     setWalletConnected(true);
-    setTwitterLocked(false);
   };
 
   const logout = () => {
     setWalletAddress("");
     setWalletConnected(false);
-    setTwitterLocked(true);
     setTwitterConnected(false);
     setName("");
   };
@@ -57,7 +54,6 @@ export function useUserAuth() {
   return {
     auth,
     completeWalletConnect,
-    twitterLocked,
     isTwitterConnected,
     isWalletConnected,
     loading,

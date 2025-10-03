@@ -7,8 +7,6 @@ import { useUserAuth } from "@/hooks/useUserAuth";
 import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
 
-import { WalletModal } from "@/components/wallet/wallet-modal";
-
 import { Section, Status, Title, Wrapper } from "./styles";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -46,15 +44,27 @@ const PageContent = () => {
         <Section $direction="column">
           <Title>Wallet Connection</Title>
           <Section $direction="column" $align="start" $gap={8}>
-            <Status $connected={ready}>{ready ? "Connected" : "Not Connected"}</Status>
-            <WalletConnect sign={!ready} onConnect={completeWalletConnect} />
+            <Status $connected={ready}>
+              {ready ? "Connected" : "Not Connected"}
+            </Status>
+            <WalletConnect
+              requiresSignature={!ready}
+              signatureEnabled={false}
+              onConnect={completeWalletConnect}
+            />
           </Section>
         </Section>
         <Section $direction="column">
           <Title>X Connection</Title>
           <Section $direction="column" $align="start" $gap={8}>
-            <Status $connected={isTwitterConnected}>{isTwitterConnected ? "Connected" : "Not Connected"}</Status>
-            <TwitterConnect name={name} disabled={twitterLocked} onConnect={handleTwitterConnect} />
+            <Status $connected={isTwitterConnected}>
+              {isTwitterConnected ? "Connected" : "Not Connected"}
+            </Status>
+            <TwitterConnect
+              name={name}
+              disabled={twitterLocked}
+              onConnect={handleTwitterConnect}
+            />
           </Section>
         </Section>
       </Section>
@@ -65,7 +75,11 @@ const PageContent = () => {
 export const Page = () => {
   return (
     <WalletContext>
-      <ToastContainer theme="dark" position="top-right" hideProgressBar={true} />
+      <ToastContainer
+        theme="dark"
+        position="top-right"
+        hideProgressBar={true}
+      />
       <PageContent />
     </WalletContext>
   );

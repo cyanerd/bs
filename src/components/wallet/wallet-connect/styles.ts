@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -47,4 +47,25 @@ export const Copied = styled.img`
   height: 12px;
   top: 8px;
   right: 10px;
+`;
+// font-family: ${InterfaceFont.PIXEL_LABEL};
+export const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #283c18;
+
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1px;
+  padding: 18px 38px 20px 38px;
+  text-align: center;
+  pointer-events: all;
+  background: #bbf68e;
+  border-bottom: 6px solid #385520;
+  &:hover {
+    background: #a1ec67;
+    cursor: pointer;
+  }
 `;

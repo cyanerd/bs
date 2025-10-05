@@ -68,6 +68,7 @@ export const Button = styled.div`
   text-align: center;
   pointer-events: all;
   background: #bbf68e;
+  text-transform: uppercase;
   &:hover {
     background: #a1ec67;
     cursor: pointer;

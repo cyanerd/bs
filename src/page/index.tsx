@@ -3,12 +3,14 @@ import { toast, ToastContainer } from "react-toastify";
 
 import { TwitterConnect } from "@/components/twitter-connect";
 import { useUserAuth } from "@/hooks/useUserAuth";
+import { useWalletBalance } from "@/hooks/useWalletBalance";
 
 import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
 
 import { Container, Section, Status, Title, Wrapper } from "./styles";
 import { ReferralInput } from "@/components/referral-input";
+import { WalletInfo } from "@/components/wallet/wallet-info";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,6 +23,8 @@ const PageContent = () => {
     completeWalletConnect,
     auth,
   } = useUserAuth();
+
+  const { balanceSol } = useWalletBalance();
 
   const ready = Boolean(isWalletConnected && walletAddress);
 
@@ -57,6 +61,11 @@ const PageContent = () => {
               requiresSignature={!ready}
               signatureEnabled={false}
               onConnect={completeWalletConnect}
+            />
+            <WalletInfo
+              balanceSol={balanceSol}
+              whitelist="WhiteList1"
+              price={0.00023}
             />
           </Section>
           <Section $direction="column" $gap={16} $align="center">

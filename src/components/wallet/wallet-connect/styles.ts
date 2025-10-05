@@ -5,12 +5,11 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
-export const Container = styled.div<{ $hidden?: boolean }>`
+export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  visibility: ${(props) => (props.$hidden ? "hidden" : "visible")};
 `;
 
 export const Icon = styled.img`

@@ -23,7 +23,6 @@ export const WalletConnect: React.FC<Props> = ({
   onConnect,
 }) => {
   const { connected, disconnect, wallet, publicKey, signMessage } = useWallet();
-  const { balanceSol } = useWalletBalance();
 
   const [dropdownActive, setDropdownActive] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -177,11 +176,6 @@ export const WalletConnect: React.FC<Props> = ({
         {willSign && manualSign && (
           <Button onClick={() => signWallet()}>Sign wallet</Button>
         )}
-      </Container>
-
-      <Container $hidden={!balanceSol} style={{ textAlign: "center" }}>
-        <br />
-        Balance: {balanceSol ?? "—"} SOL
       </Container>
     </Wrapper>
   );

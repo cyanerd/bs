@@ -7,7 +7,7 @@ import { useUserAuth } from "@/hooks/useUserAuth";
 import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
 
-import { Section, Status, Title, Wrapper } from "./styles";
+import { Container, Section, Status, Title, Wrapper } from "./styles";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -39,10 +39,10 @@ const PageContent = () => {
 
   return (
     <Wrapper>
-      <Section $direction="column" $gap={16}>
-        <Section $direction="column">
-          <Title>Wallet Connection</Title>
-          <Section $direction="column" $align="start" $gap={8} $width="100%">
+      <Container>
+        <Section $direction="column" $gap={16}>
+          <Section $direction="column" $gap={16} $align="center">
+            <Title>Wallet Connection</Title>
             <Status $connected={ready}>
               {ready ? "Connected" : "Not Connected"}
             </Status>
@@ -52,17 +52,15 @@ const PageContent = () => {
               onConnect={completeWalletConnect}
             />
           </Section>
-        </Section>
-        <Section $direction="column">
-          <Title>X Connection</Title>
-          <Section $direction="column" $align="start" $gap={8} $width="100%">
+          <Section $direction="column" $gap={16} $align="center">
+            <Title>X Connection</Title>
             <Status $connected={isTwitterConnected}>
               {isTwitterConnected ? "Connected" : "Not Connected"}
             </Status>
             <TwitterConnect name={name} onConnect={handleTwitterConnect} />
           </Section>
         </Section>
-      </Section>
+      </Container>
     </Wrapper>
   );
 };

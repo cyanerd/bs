@@ -19,9 +19,8 @@ export const Button = styled.button`
   pointer-events: all;
   background: #333;
   border: none;
-  border-bottom: 6px solid #000;
   &:hover {
-    background: #222;
+    background: #444;
     cursor: pointer;
   }
 `;

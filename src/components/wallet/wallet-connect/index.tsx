@@ -179,7 +179,7 @@ export const WalletConnect: React.FC<Props> = ({
         )}
       </Container>
 
-      <Container $hidden={!balanceSol}>
+      <Container $hidden={!balanceSol} style={{ textAlign: "center" }}>
         <br />
         Balance: {balanceSol ?? "—"} SOL
       </Container>

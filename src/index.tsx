@@ -1,13 +1,13 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React from "react";
+import { createRoot } from "react-dom/client";
 
-import { Page } from './page';
+import { Page } from "./page";
+import "./normilize.css";
+import "./styles.css";
 
-import './styles.css';
-
-const app = document.getElementById('root');
+const app = document.getElementById("root");
 if (!app) {
-  throw Error('Undefined App element');
+  throw Error("Undefined App element");
 }
 
 const root = createRoot(app);

@@ -2,10 +2,13 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 export const Container = styled.div<{ $hidden?: boolean }>`
+  width: 100%;
   display: flex;
+  flex-direction: column;
   gap: 6px;
   visibility: ${(props) => (props.$hidden ? "hidden" : "visible")};
 `;
@@ -51,6 +54,7 @@ export const Copied = styled.img`
 `;
 
 export const Button = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,7 +68,6 @@ export const Button = styled.div`
   text-align: center;
   pointer-events: all;
   background: #bbf68e;
-  border-bottom: 6px solid #385520;
   &:hover {
     background: #a1ec67;
     cursor: pointer;

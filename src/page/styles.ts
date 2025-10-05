@@ -6,20 +6,32 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+`;
+
+export const Container = styled.div`
+  width: 80%;
+  max-width: 468px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
 export const Section = styled.div<{
-  $align?: "center" | "start" | "end";
+  $align?: "center" | "start" | "end" | "stretch" | "flex-start" | "flex-end";
   $direction?: "row" | "column";
   $gap?: number;
   $width?: string;
 }>`
-  width: ${({ $width }) => $width || "auto"};
+  width: ${({ $width }) => $width || "100%"};
   display: flex;
-  align-items: ${({ $align }) => $align || "start"};
+  align-items: ${({ $align }) =>
+    $align === "start"
+      ? "flex-start"
+      : $align === "end"
+      ? "flex-end"
+      : $align || "stretch"};
   flex-direction: ${({ $direction }) => $direction || "row"};
   gap: ${({ $gap }) => $gap || 0}px;
+  padding: 16px;
 `;
 
 export const Title = styled.h3<{
@@ -27,6 +39,8 @@ export const Title = styled.h3<{
 }>`
   font-size: ${({ $size }) => $size || 24}px;
   font-weight: bold;
+  margin: 0;
+  text-align: center;
 `;
 
 export const Status = styled.div<{

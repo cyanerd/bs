@@ -17,7 +17,8 @@
 
 /* Body */
 body {
-  font-size: 14px;
+  background-color: #151515;
+  color: #eee;
   font-family: "PixelText", monospace;
 }
 

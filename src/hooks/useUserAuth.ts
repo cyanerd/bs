@@ -41,8 +41,6 @@ export function useUserAuth() {
   const logout = () => {
     setWalletAddress("");
     setWalletConnected(false);
-    setTwitterConnected(false);
-    setName("");
   };
 
   useEffect(() => {

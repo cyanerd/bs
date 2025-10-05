@@ -8,6 +8,7 @@ import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
 
 import { Container, Section, Status, Title, Wrapper } from "./styles";
+import { ReferralInput } from "@/components/referral-input";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,6 +30,12 @@ const PageContent = () => {
     });
 
     await auth();
+  };
+
+  const handleReferralApply = (refCode: string) => {
+    toast.info(`Referral applied: ${refCode || "(empty)"}`, {
+      autoClose: 5000,
+    });
   };
 
   useEffect(() => {
@@ -59,6 +66,20 @@ const PageContent = () => {
             </Status>
             <TwitterConnect name={name} onConnect={handleTwitterConnect} />
           </Section>
+        </Section>
+      </Container>
+      <Container>
+        <Section $direction="column" $gap={16} $align="center">
+          <Title>Your referral id</Title>
+          <Status $connected={ready}>
+            {ready ? "Available" : "Connect your wallet first"}
+          </Status>
+          <ReferralInput
+            disabled={!ready}
+            onApply={handleReferralApply}
+            minLength={4}
+            maxLength={4}
+          />
         </Section>
       </Container>
     </Wrapper>

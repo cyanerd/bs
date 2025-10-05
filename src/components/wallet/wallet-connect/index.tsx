@@ -23,6 +23,7 @@ export const WalletConnect: React.FC<Props> = ({
   onConnect,
 }) => {
   const { connected, disconnect, wallet, publicKey, signMessage } = useWallet();
+  const { balanceSol } = useWalletBalance();
 
   const [dropdownActive, setDropdownActive] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -143,37 +144,45 @@ export const WalletConnect: React.FC<Props> = ({
     <Wrapper>
       {modalVisible && <WalletModal onClose={() => setModalVisible(false)} />}
       <Container>
-        <Button onClick={handleClickWallet}>
-          {connected ? (
-            <>
-              <Icon src={icon} />
-              <span>
-                {publicKey58.slice(0, 4)}...
-                {publicKey58.slice(-4)}
-              </span>
-            </>
-          ) : (
-            "Connect wallet"
+        <Wrapper>
+          <Button onClick={handleClickWallet}>
+            {connected ? (
+              <>
+                <Icon src={icon} />
+                <span>
+                  {publicKey58.slice(0, 4)}...
+                  {publicKey58.slice(-4)}
+                </span>
+              </>
+            ) : (
+              "Connect wallet"
+            )}
+          </Button>
+          {dropdownActive && (
+            <Dropdown ref={refDropdown}>
+              <Dropdown.Item onClick={handleClickCopy}>
+                Copy address
+                {copied && <Copied src="./images/success.svg" />}
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleClickChange}>
+                Change wallet
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleClickDisconnect}>
+                Disconnect
+              </Dropdown.Item>
+            </Dropdown>
           )}
-        </Button>
+        </Wrapper>
+
         {willSign && manualSign && (
           <Button onClick={() => signWallet()}>Sign wallet</Button>
         )}
       </Container>
-      {dropdownActive && (
-        <Dropdown ref={refDropdown}>
-          <Dropdown.Item onClick={handleClickCopy}>
-            Copy address
-            {copied && <Copied src="./images/success.svg" />}
-          </Dropdown.Item>
-          <Dropdown.Item onClick={handleClickChange}>
-            Change wallet
-          </Dropdown.Item>
-          <Dropdown.Item onClick={handleClickDisconnect}>
-            Disconnect
-          </Dropdown.Item>
-        </Dropdown>
-      )}
+
+      <Container $hidden={!balanceSol}>
+        <br />
+        Balance: {balanceSol ?? "—"} SOL
+      </Container>
     </Wrapper>
   );
 };

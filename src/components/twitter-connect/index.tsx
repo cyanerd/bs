@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Cookies from "js-cookie";
-import { Button } from "../button";
 import { API_HOST } from "@/api/config";
+
+import { Button, Container } from "./styles";
 
 type Props = {
   name?: string;
@@ -34,7 +35,7 @@ export function TwitterConnect({ name, disabled, onConnect }: Props) {
   };
 
   return (
-    <div className="twitter-card">
+    <Container>
       {name ? (
         <Button>@{name}</Button>
       ) : (
@@ -42,6 +43,6 @@ export function TwitterConnect({ name, disabled, onConnect }: Props) {
           Connect X
         </Button>
       )}
-    </div>
+    </Container>
   );
 }

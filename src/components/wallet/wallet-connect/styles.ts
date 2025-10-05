@@ -4,9 +4,10 @@ export const Wrapper = styled.div`
   position: relative;
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<{ $hidden?: boolean }>`
   display: flex;
   gap: 6px;
+  visibility: ${(props) => (props.$hidden ? "hidden" : "visible")};
 `;
 
 export const Icon = styled.img`
@@ -48,14 +49,14 @@ export const Copied = styled.img`
   top: 8px;
   right: 10px;
 `;
-// font-family: ${InterfaceFont.PIXEL_LABEL};
+
 export const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
   color: #283c18;
-
+  font-family: "PixelText";
   font-weight: bold;
   font-size: 18px;
   letter-spacing: 1px;

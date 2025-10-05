@@ -42,7 +42,7 @@ const PageContent = () => {
       <Section $direction="column" $gap={16}>
         <Section $direction="column">
           <Title>Wallet Connection</Title>
-          <Section $direction="column" $align="start" $gap={8}>
+          <Section $direction="column" $align="start" $gap={8} $width="100%">
             <Status $connected={ready}>
               {ready ? "Connected" : "Not Connected"}
             </Status>
@@ -55,7 +55,7 @@ const PageContent = () => {
         </Section>
         <Section $direction="column">
           <Title>X Connection</Title>
-          <Section $direction="column" $align="start" $gap={8}>
+          <Section $direction="column" $align="start" $gap={8} $width="100%">
             <Status $connected={isTwitterConnected}>
               {isTwitterConnected ? "Connected" : "Not Connected"}
             </Status>
@@ -68,6 +68,12 @@ const PageContent = () => {
 };
 
 export const Page = () => {
+  useEffect(() => {
+    toast.success("The page is ready!", {
+      autoClose: 5000,
+    });
+  }, []);
+
   return (
     <WalletContext>
       <ToastContainer

@@ -13,7 +13,9 @@ export const Section = styled.div<{
   $align?: "center" | "start" | "end";
   $direction?: "row" | "column";
   $gap?: number;
+  $width?: string;
 }>`
+  width: ${({ $width }) => $width || "auto"};
   display: flex;
   align-items: ${({ $align }) => $align || "start"};
   flex-direction: ${({ $direction }) => $direction || "row"};
@@ -23,7 +25,7 @@ export const Section = styled.div<{
 export const Title = styled.h3<{
   $size?: number;
 }>`
-  font-size: ${({ $size }) => $size || 16}px;
+  font-size: ${({ $size }) => $size || 24}px;
   font-weight: bold;
 `;
 
@@ -34,10 +36,9 @@ export const Status = styled.div<{
   font-size: 12px;
   padding: 4px 8px;
   border-radius: 6px;
-  background: ${({ $connected }) => $connected ? "#61c11d" : "#e53b3b"};
-  color: ${({ $connected }) => $connected ? "#fff" : "#fff"};
-  border: 1px solid ${({ $connected }) => $connected ? "#61c11d" : "#e53b3b"};
-  font-weight: bold;
+  background: ${({ $connected }) => ($connected ? "#61c11d" : "#e53b3b")};
+  color: ${({ $connected }) => ($connected ? "#fff" : "#fff")};
+  border: 1px solid ${({ $connected }) => ($connected ? "#61c11d" : "#e53b3b")};
   letter-spacing: 0.5px;
   text-align: center;
 `;

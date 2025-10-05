@@ -78,17 +78,19 @@ const PageContent = () => {
         </Section>
       </Container>
       <Container>
-        <Section $direction="column" $gap={16} $align="center">
-          <Title>Your referral id</Title>
-          <Status $connected={ready}>
-            {ready ? "Available" : "Connect your wallet first"}
-          </Status>
-          <ReferralInput
-            disabled={!ready}
-            onApply={handleReferralApply}
-            minLength={4}
-            maxLength={4}
-          />
+        <Section $direction="column" $gap={16}>
+          <Section $direction="column" $gap={16} $align="center">
+            <Title>Your referral id</Title>
+            <Status $connected={ready}>
+              {ready ? "Available" : "Connect your wallet first"}
+            </Status>
+            <ReferralInput
+              disabled={!ready}
+              onApply={handleReferralApply}
+              minLength={4}
+              maxLength={4}
+            />
+          </Section>
         </Section>
       </Container>
     </Wrapper>

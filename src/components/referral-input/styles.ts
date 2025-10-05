@@ -5,6 +5,10 @@ export const Container = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const Input = styled.input`
@@ -41,5 +45,8 @@ export const ApplyButton = styled.button`
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
   }
 `;

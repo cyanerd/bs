@@ -1,9 +1,9 @@
-import path from 'path';
+import path from "path";
 
-import { reuse } from 'alias-reuse';
-import { defineConfig } from 'vite';
-import { checker } from 'vite-plugin-checker';
-import svgr from 'vite-plugin-svgr';
+import { reuse } from "alias-reuse";
+import { defineConfig } from "vite";
+import { checker } from "vite-plugin-checker";
+import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
   plugins: [
@@ -12,17 +12,16 @@ export default defineConfig({
       typescript: true,
     }),
   ],
-  base: '/presale',
-  root: './src',
+  base: "/presale",
+  root: "./src",
+  publicDir: path.resolve(__dirname, "public"),
   build: {
     emptyOutDir: true,
-    target: 'esnext',
-    outDir: '../dist',
+    target: "esnext",
+    outDir: "../dist",
     minify: true,
   },
   resolve: {
-    alias: reuse()
-      .from(path.join(__dirname, 'tsconfig.json'))
-      .for('vite'),
+    alias: reuse().from(path.join(__dirname, "tsconfig.json")).for("vite"),
   },
 });

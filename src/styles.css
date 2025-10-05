@@ -1,3 +1,48 @@
+/* Custom font declarations */
+@font-face {
+  font-family: "PixelLabel";
+  src: url("/fonts/pixel_label.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PixelText";
+  src: url("/fonts/pixel_text.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body */
 body {
-    font-family: 'Monospace', monospace;
+  font-size: 14px;
+  font-family: "PixelText", monospace;
+}
+
+/* Headers */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "PixelLabel", monospace;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Toastify */
+.Toastify__toast {
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.5);
+  white-space: pre-line;
+  border-radius: 0;
+  font-family: "PixelText";
+}
+
+.Toastify__toast-icon {
+  margin-inline-start: 0;
+  margin: 0 16px 0 4px;
 }

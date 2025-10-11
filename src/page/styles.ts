@@ -1,21 +1,23 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 96vh;
+  padding: 2vh 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
   justify-content: center;
   align-items: center;
-  padding: 64px 0;
 `;
 
 export const Container = styled.div`
   width: 80%;
-  max-width: 468px;
   margin: 0 auto;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `;
 
 export const Section = styled.div<{
@@ -40,7 +42,7 @@ export const Section = styled.div<{
 export const Title = styled.h3<{
   $size?: number;
 }>`
-  font-size: ${({ $size }) => $size || 24}px;
+  font-size: ${({ $size }) => $size || 1.25}rem;
   font-weight: bold;
   margin: 0;
   text-align: center;
@@ -50,9 +52,9 @@ export const Status = styled.div<{
   $connected?: boolean;
 }>`
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 0.75rem;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   background: ${({ $connected }) => ($connected ? "#61c11d" : "#e53b3b")};
   color: ${({ $connected }) => ($connected ? "#fff" : "#fff")};
   border: 1px solid ${({ $connected }) => ($connected ? "#61c11d" : "#e53b3b")};

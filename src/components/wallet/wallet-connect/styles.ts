@@ -58,18 +58,17 @@ export const Button = styled.div`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  color: #283c18;
-  font-family: "PixelText";
-  font-weight: bold;
-  font-size: 18px;
+  color: #000;
+  font-size: 1rem;
   letter-spacing: 1px;
-  padding: 18px 38px 20px 38px;
+  line-height: 1.6;
+  padding: 10px 32px;
   text-align: center;
   pointer-events: all;
-  background: #bbf68e;
+  background: var(--primary-color);
   text-transform: uppercase;
   &:hover {
-    background: #a1ec67;
+    opacity: 0.8;
     cursor: pointer;
   }
 `;

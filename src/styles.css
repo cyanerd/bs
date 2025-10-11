@@ -1,3 +1,8 @@
+:root {
+  --container-width: 920px;
+  --primary-color: #bbf68e;
+}
+
 /* Custom font declarations */
 @font-face {
   font-family: "PixelLabel";
@@ -20,6 +25,8 @@ body {
   background-color: #151515;
   color: #eee;
   font-family: "PixelText", monospace;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 /* Headers */
@@ -32,6 +39,7 @@ h6 {
   font-family: "PixelLabel", monospace;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  color: var(--primary-color);
 }
 
 /* Toastify */

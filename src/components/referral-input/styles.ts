@@ -18,6 +18,7 @@ export const Input = styled.input`
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding: 12px;
+  font-size: 1rem;
   outline: none;
   transition: background 0.2s ease;
 
@@ -35,6 +36,8 @@ export const ApplyButton = styled.button`
   color: #ffffff;
   border: none;
   padding: 10px 16px;
+  font-size: 1rem;
+  line-height: 1.6;
   text-transform: uppercase;
   cursor: pointer;
 

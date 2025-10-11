@@ -11,6 +11,13 @@ import { WalletContext } from "@/components/wallet/wallet-context";
 import { Container, Section, Status, Title, Wrapper } from "./styles";
 import { ReferralInput } from "@/components/referral-input";
 import { WalletInfo } from "@/components/wallet/wallet-info";
+import {
+  Header,
+  Hero,
+  Partners,
+  Main as LayoutMain,
+  Section as LayoutSection,
+} from "@/components/layout";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -51,59 +58,112 @@ const PageContent = () => {
   return (
     <Wrapper>
       <Container>
-        <Section $direction="column" $gap={16}>
-          <Section $direction="column" $gap={16} $align="center">
-            <Title>Wallet Connection</Title>
-            <Status $connected={ready}>
-              {ready ? "Connected" : "Not Connected"}
-            </Status>
+        <Header
+          start={
+            <a href="/">
+              <img src="/images/logo.png" alt="Logo" height="40" />
+            </a>
+          }
+          end={
             <WalletConnect
               requiresSignature={!ready}
               signatureEnabled={false}
               onConnect={completeWalletConnect}
             />
-            <WalletInfo
-              balanceSol={balanceSol}
-              whitelist="WhiteList1"
-              price={0.00023}
-            />
-          </Section>
-          <Section $direction="column" $gap={16} $align="center">
-            <Title>X Connection</Title>
-            <Status $connected={isTwitterConnected}>
-              {isTwitterConnected ? "Connected" : "Not Connected"}
-            </Status>
-            <TwitterConnect name={name} onConnect={handleTwitterConnect} />
-          </Section>
-        </Section>
-      </Container>
-      <Container>
-        <Section $direction="column" $gap={16}>
-          <Section $direction="column" $gap={16} $align="center">
-            <Title>Your referral id</Title>
-            <Status $connected={ready}>
-              {ready ? "Available" : "Connect your wallet first"}
-            </Status>
-            <ReferralInput
-              disabled={!ready}
-              onApply={handleReferralApply}
-              minLength={4}
-              maxLength={4}
-            />
-          </Section>
-        </Section>
+          }
+        />
+        <Hero
+          title="Block Stranding"
+          description="The First Fully On-Chain Adventure Game on Solana. On September 11th, 2025, we launched Block Stranding, a fully on-chain adventure game on Solana. We are the first to bring this concept to life and we are proud to be the first to do so."
+          partners={[
+            {
+              name: "Solana",
+              href: "https://solana.com",
+              imageSrc: "/images/solana.png",
+            },
+            {
+              name: "Magic Block",
+              href: "https://github.com/magicblock-labs",
+              imageSrc: "/images/magic-block.png",
+            },
+            {
+              name: "Solflare",
+              href: "https://solflare.com",
+              imageSrc: "/images/solflare.png",
+            },
+            {
+              name: "Solana",
+              href: "https://solana.com",
+              imageSrc: "/images/solana.png",
+            },
+            {
+              name: "Magic Block",
+              href: "https://github.com/magicblock-labs",
+              imageSrc: "/images/magic-block.png",
+            },
+            {
+              name: "Solflare",
+              href: "https://solflare.com",
+              imageSrc: "/images/solflare.png",
+            },
+          ]}
+        />
+        <LayoutMain
+          sidebar={
+            <>
+              <Section $direction="column" $gap={16} $align="center">
+                <Title>X Connection</Title>
+                <Status $connected={isTwitterConnected}>
+                  {isTwitterConnected ? "Connected" : "Not Connected"}
+                </Status>
+                <TwitterConnect name={name} onConnect={handleTwitterConnect} />
+              </Section>
+              <Section $direction="column" $gap={16} $align="center">
+                <Title>Your referral id</Title>
+                <Status $connected={ready}>
+                  {ready ? "Available" : "Connect your wallet first"}
+                </Status>
+                <ReferralInput
+                  disabled={!ready}
+                  onApply={handleReferralApply}
+                  minLength={4}
+                  maxLength={4}
+                />
+              </Section>
+            </>
+          }
+          content={
+            <Section $direction="column" $gap={16} $align="center">
+              <Title>Wallet Connection</Title>
+              <Status $connected={ready}>
+                {ready ? "Connected" : "Not Connected"}
+              </Status>
+              <WalletInfo
+                balanceSol={balanceSol}
+                whitelist="WhiteList1"
+                price={0.00023}
+              />
+            </Section>
+          }
+        />
+        <Partners>
+          <span>Item A</span>
+          <span>Item B</span>
+          <span>Item C</span>
+          <span>Item D</span>
+        </Partners>
+        <LayoutSection>
+          <div>Example Section content</div>
+        </LayoutSection>
+        <LayoutSection>
+          <div>Example Section content</div>
+        </LayoutSection>
       </Container>
     </Wrapper>
   );
 };
 
 export const Page = () => {
-  useEffect(() => {
-    toast.success("The page is ready!", {
-      autoClose: 5000,
-    });
-  }, []);
-
   return (
     <WalletContext>
       <ToastContainer

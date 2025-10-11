@@ -11,10 +11,10 @@ export const Button = styled.button`
   align-items: center;
   gap: 8px;
   color: #ffffff;
-  font-family: "PixelText";
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 1px;
-  padding: 18px 38px 20px 38px;
+  padding: 10px 32px;
+  line-height: 1.6;
   text-align: center;
   pointer-events: all;
   background: #333;

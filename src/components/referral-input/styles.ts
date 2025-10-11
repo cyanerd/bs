@@ -17,7 +17,7 @@ export const Input = styled.input`
   color: #ffffff;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 12px;
+  padding: 0.75rem;
   font-size: 1rem;
   outline: none;
   transition: background 0.2s ease;
@@ -35,9 +35,8 @@ export const ApplyButton = styled.button`
   background: #333;
   color: #ffffff;
   border: none;
-  padding: 10px 16px;
+  padding: 0.625rem 1rem;
   font-size: 1rem;
-  line-height: 1.6;
   text-transform: uppercase;
   cursor: pointer;
 

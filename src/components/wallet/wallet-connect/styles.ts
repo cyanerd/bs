@@ -22,9 +22,9 @@ export const Dropdown: any = styled.div`
   left: 0;
   right: 0;
   background: #222;
-  padding: 12px;
+  padding: 0.75rem;
   z-index: 2;
-  margin-top: -6px;
+  margin-top: -0.375rem;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -34,9 +34,9 @@ export const Dropdown: any = styled.div`
 Dropdown.Item = styled.div`
   background: #2a2a2a;
   position: relative;
-  padding: 4px 10px;
+  padding: 0.25rem 0.625rem;
   color: #ccc;
-  font-size: 14px;
+  font-size: 0.875rem;
   &:hover {
     background: #444;
     cursor: pointer;
@@ -61,8 +61,7 @@ export const Button = styled.div`
   color: #000;
   font-size: 1rem;
   letter-spacing: 1px;
-  line-height: 1.6;
-  padding: 10px 32px;
+  padding: 0.625rem 2rem;
   text-align: center;
   pointer-events: all;
   background: var(--primary-color);

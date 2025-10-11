@@ -12,7 +12,7 @@ export const ModalOverlay = styled.div`
   align-items: center;
   z-index: 1000;
   backdrop-filter: blur(4px);
-  padding: 20px;
+  padding: 1.25rem;
 `;
 
 export const Modal = styled.div`
@@ -38,18 +38,18 @@ export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px;
+  padding: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
   @media (max-width: 480px) {
-    padding: 16px;
+    padding: 1rem;
   }
 `;
 
 export const ModalTitle = styled.h2`
   margin: 0;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
 `;
 
@@ -57,9 +57,9 @@ export const CloseButton = styled.button`
   background: none;
   border: none;
   color: #888;
-  font-size: 20px;
+  font-size: 1.25rem;
   cursor: pointer;
-  padding: 4px;
+  padding: 0.25rem;
   border-radius: 4px;
   transition: all 0.2s ease;
 
@@ -70,15 +70,15 @@ export const CloseButton = styled.button`
 `;
 
 export const ModalContent = styled.div`
-  padding: 24px;
+  padding: 1.5rem;
 
   @media (max-width: 480px) {
-    padding: 16px;
+    padding: 1rem;
   }
 `;
 
 export const WalletSection = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 
   &:last-child {
     margin-bottom: 0;
@@ -86,9 +86,9 @@ export const WalletSection = styled.div`
 `;
 
 export const SectionTitle = styled.h3`
-  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
 `;
 
@@ -101,7 +101,7 @@ export const WalletList = styled.div`
 export const WalletItem = styled.button<{ $notDetected?: boolean }>`
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -109,7 +109,7 @@ export const WalletItem = styled.button<{ $notDetected?: boolean }>`
   transition: all 0.2s ease;
   text-align: left;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 0.875rem;
   gap: 12px;
   opacity: ${(props) => (props.$notDetected ? 0.6 : 1)};
 
@@ -131,7 +131,7 @@ export const WalletItem = styled.button<{ $notDetected?: boolean }>`
   }
 
   @media (max-width: 480px) {
-    padding: 10px 12px;
+    padding: 0.625rem 0.75rem;
   }
 `;
 
@@ -153,8 +153,8 @@ export const WalletName = styled.span`
 `;
 
 export const WalletStatus = styled.span<{ $installed?: boolean }>`
-  font-size: 12px;
-  padding: 4px 8px;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 6px;
   font-weight: 500;
   text-transform: uppercase;
@@ -169,11 +169,11 @@ export const WalletStatus = styled.span<{ $installed?: boolean }>`
 
 export const NoWallets = styled.div`
   text-align: center;
-  padding: 32px 16px;
+  padding: 2rem 1rem;
   color: #888;
 
   p {
     margin: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 `;

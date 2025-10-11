@@ -1,27 +1,28 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
 `;
 
 export const Button = styled.button`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  color: #ffffff;
-  font-size: 16px;
-  letter-spacing: 1px;
-  padding: 10px 32px;
-  line-height: 1.6;
-  text-align: center;
-  pointer-events: all;
-  background: #333;
+  background-color: #000;
+  color: #fff;
+  padding: 0.875rem 1.375rem;
+  border-radius: 5px;
   border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-transform: uppercase;
+  font-size: 1rem;
+
   &:hover {
-    background: #282828;
-    cursor: pointer;
+    background-color: #444;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;

@@ -36,13 +36,13 @@ export const Section = styled.div<{
       : $align || "stretch"};
   flex-direction: ${({ $direction }) => $direction || "row"};
   gap: ${({ $gap }) => $gap || 0}px;
-  padding: 16px;
+  padding: 1rem;
 `;
 
 export const Title = styled.h3<{
   $size?: number;
 }>`
-  font-size: ${({ $size }) => $size || 1.25}rem;
+  font-size: ${({ $size }) => $size || 1.5}rem;
   font-weight: bold;
   margin: 0;
   text-align: center;
@@ -53,7 +53,7 @@ export const Status = styled.div<{
 }>`
   text-transform: uppercase;
   font-size: 0.75rem;
-  padding: 4px 8px;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
   background: ${({ $connected }) => ($connected ? "#61c11d" : "#e53b3b")};
   color: ${({ $connected }) => ($connected ? "#fff" : "#fff")};

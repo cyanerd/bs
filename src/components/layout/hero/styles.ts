@@ -12,7 +12,7 @@ export const Wrapper = styled.section`
 export const Title = styled.h1`
   width: 100%;
   text-align: center;
-  font-size: 36px;
+  font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 0;
 `;
@@ -22,13 +22,13 @@ export const Description = styled.p`
   margin: 0 auto;
   text-align: center;
   opacity: 0.85;
-  font-size: 16px;
+  font-size: 1.125rem;
 `;
 
 export const Partners = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  padding: 16px 0 16px 32px;
+  padding: 1rem 0 1rem 2rem;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
   align-items: center;

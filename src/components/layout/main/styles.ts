@@ -17,11 +17,11 @@ export const Grid = styled.div`
 export const Content = styled.div`
   min-height: 120px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 12px;
+  padding: 0.75rem;
 `;
 
 export const Sidebar = styled.aside`
   min-height: 120px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 12px;
+  padding: 0.75rem;
 `;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
+import { Countdown } from "../countdown";
 // import SolanaIcon from "@/components/icons/solana.svg";
 
 export const FormPresale = () => {
@@ -49,46 +50,7 @@ export const FormPresale = () => {
       </div>
 
       <h4>Time Remaining</h4>
-      <div
-        id="timer"
-        style={{
-          display: "flex",
-          gap: "2rem",
-          margin: "0 auto",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ fontSize: "2rem" }}>0</span>
-          <span>Hrs</span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ fontSize: "2rem" }}>0</span>
-          <span>Min</span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ fontSize: "2rem" }}>0</span>
-          <span>Sec</span>
-        </div>
-      </div>
+      <Countdown />
 
       <div>
         <h4>Deposit Chamber</h4>

@@ -4,8 +4,14 @@ import { Input } from "@/components/input";
 import { Countdown } from "../countdown";
 // import SolanaIcon from "@/components/icons/solana.svg";
 
-export const FormPresale = () => {
-  const [price, setPrice] = useState(1000);
+type Props = {
+  defaultPriceMode?: "SOL" | "USDC";
+};
+
+export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
+  const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
+  const [solPrice, setSOLPrice] = useState(200);
+  const [usdcPrice, setUSDCPrice] = useState(10);
 
   return (
     <form>
@@ -55,7 +61,15 @@ export const FormPresale = () => {
       <div>
         <h4>Deposit Chamber</h4>
       </div>
-      <Button $size="small" $background="#333" $color="#fff">
+      <Button
+        type="button"
+        onClick={() =>
+          setPriceMode((prev) => (prev === "SOL" ? "USDC" : "SOL"))
+        }
+        $size="small"
+        $background="#333"
+        $color="#fff"
+      >
         Switch to USDC
       </Button>
 
@@ -70,13 +84,25 @@ export const FormPresale = () => {
           borderRadius: "1rem",
         }}
       >
-        <span>SOL Amount to deposit:</span>
+        <span>{priceMode} Amount to deposit:</span>
         <div>
-          <Input type="number" placeholder="XX.XX" min={0.2} max={200} />
+          <Input
+            name="price"
+            type="number"
+            placeholder="XX.XX"
+            value={priceMode === "SOL" ? solPrice : usdcPrice}
+            onChange={(e) =>
+              priceMode === "SOL"
+                ? setSOLPrice(Number(e.target.value))
+                : setUSDCPrice(Number(e.target.value))
+            }
+          />
         </div>
       </div>
 
-      <Button type="submit">Deposit {price} SOL</Button>
+      <Button type="submit">
+        Deposit {priceMode === "SOL" ? solPrice : usdcPrice} {priceMode}
+      </Button>
 
       <ul
         style={{ display: "inline-block", textAlign: "left", margin: "2rem 0" }}

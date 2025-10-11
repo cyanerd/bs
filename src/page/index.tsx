@@ -8,7 +8,7 @@ import { useWalletBalance } from "@/hooks/useWalletBalance";
 import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
 
-import { Container, Section, Status, Title, Wrapper } from "./styles";
+import { Container, Section, Status, Wrapper } from "./styles";
 import { ReferralInput } from "@/components/referral-input";
 import { WalletInfo } from "@/components/wallet/wallet-info";
 import {
@@ -20,6 +20,7 @@ import {
 } from "@/components/layout";
 
 import "react-toastify/dist/ReactToastify.css";
+import { FormPresale } from "@/components/form-presale";
 
 const PageContent = () => {
   const {
@@ -112,7 +113,7 @@ const PageContent = () => {
           sidebar={
             <>
               <Section $direction="column" $gap={16} $align="center">
-                <Title>Wallet Connection</Title>
+                <h3>Wallet Connection</h3>
                 <Status $connected={ready}>
                   {ready ? "Connected" : "Not Connected"}
                 </Status>
@@ -123,14 +124,14 @@ const PageContent = () => {
                 />
               </Section>
               <Section $direction="column" $gap={16} $align="center">
-                <Title>X Connection</Title>
+                <h3>X Connection</h3>
                 <Status $connected={isTwitterConnected}>
                   {isTwitterConnected ? "Connected" : "Not Connected"}
                 </Status>
                 <TwitterConnect name={name} onConnect={handleTwitterConnect} />
               </Section>
               <Section $direction="column" $gap={16} $align="center">
-                <Title>Your referral id</Title>
+                <h3>Your referral id</h3>
                 <Status $connected={ready}>
                   {ready ? "Available" : "Connect your wallet first"}
                 </Status>
@@ -143,7 +144,7 @@ const PageContent = () => {
               </Section>
             </>
           }
-          content={<></>}
+          content={<FormPresale />}
         />
         <Partners>
           <span>Item A</span>

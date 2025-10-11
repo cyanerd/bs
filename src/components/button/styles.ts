@@ -4,6 +4,7 @@ export const Button = styled.button<{
   $background?: string;
   $color?: string;
   $width?: string;
+  $size?: "small" | "medium";
 }>`
   width: ${({ $width }) => $width || "auto"};
   margin: 0 auto;
@@ -12,9 +13,9 @@ export const Button = styled.button<{
   align-items: center;
   gap: 0.75rem;
   color: ${({ $color }) => $color || "#000"};
-  font-size: 1rem;
+  font-size: ${({ $size }) => ($size === "small" ? "0.875rem" : "1rem")};
   letter-spacing: 1px;
-  padding: 1rem 2rem;
+  padding: ${({ $size }) => ($size === "small" ? "0.5rem 1rem" : "1rem 2rem")};
   text-align: center;
   pointer-events: all;
   background: ${({ $background }) => $background || "var(--primary-color)"};

@@ -5,6 +5,7 @@ type Props = {
   $background?: string;
   $color?: string;
   $width?: string;
+  $size?: "small" | "medium";
 };
 
 export const Button: React.FC<

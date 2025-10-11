@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/button";
-import { Container, Input } from "./styles";
+import { Input } from "@/components/input";
+import { Container } from "./styles";
 
 type RefInputProps = {
   placeholder?: string;

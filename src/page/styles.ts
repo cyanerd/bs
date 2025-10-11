@@ -39,15 +39,6 @@ export const Section = styled.div<{
   padding: 1rem;
 `;
 
-export const Title = styled.h3<{
-  $size?: number;
-}>`
-  font-size: ${({ $size }) => $size || 1.5}rem;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
-`;
-
 export const Status = styled.div<{
   $connected?: boolean;
 }>`

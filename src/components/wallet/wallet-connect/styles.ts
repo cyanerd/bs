@@ -51,23 +51,3 @@ export const Copied = styled.img`
   top: 8px;
   right: 10px;
 `;
-
-export const Button = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  color: #000;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  padding: 0.625rem 2rem;
-  text-align: center;
-  pointer-events: all;
-  background: var(--primary-color);
-  text-transform: uppercase;
-  &:hover {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-`;

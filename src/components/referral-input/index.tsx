@@ -1,5 +1,6 @@
 import React from "react";
-import { ApplyButton, Container, Input } from "./styles";
+import { Button } from "@/components/button";
+import { Container, Input } from "./styles";
 
 type RefInputProps = {
   placeholder?: string;
@@ -68,7 +69,9 @@ export const ReferralInput: React.FC<RefInputProps> = ({
         disabled={disabled}
         maxLength={effectiveMax}
       />
-      <ApplyButton
+      <Button
+        $background="#333"
+        $color="#fff"
         onClick={handleApply}
         disabled={
           disabled ||
@@ -77,7 +80,7 @@ export const ReferralInput: React.FC<RefInputProps> = ({
         }
       >
         Apply
-      </ApplyButton>
+      </Button>
     </Container>
   );
 };

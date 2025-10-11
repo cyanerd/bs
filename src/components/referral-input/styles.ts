@@ -30,25 +30,3 @@ export const Input = styled.input`
     background: rgba(255, 255, 255, 0.3);
   }
 `;
-
-export const ApplyButton = styled.button`
-  background: #333;
-  color: #ffffff;
-  border: none;
-  padding: 0.625rem 1rem;
-  font-size: 1rem;
-  text-transform: uppercase;
-  cursor: pointer;
-
-  &:hover {
-    background: #282828;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  @media (max-width: 480px) {
-    width: 100%;
-  }
-`;

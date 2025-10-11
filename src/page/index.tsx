@@ -112,6 +112,17 @@ const PageContent = () => {
           sidebar={
             <>
               <Section $direction="column" $gap={16} $align="center">
+                <Title>Wallet Connection</Title>
+                <Status $connected={ready}>
+                  {ready ? "Connected" : "Not Connected"}
+                </Status>
+                <WalletInfo
+                  balanceSol={balanceSol}
+                  whitelist="WhiteList1"
+                  price={0.00023}
+                />
+              </Section>
+              <Section $direction="column" $gap={16} $align="center">
                 <Title>X Connection</Title>
                 <Status $connected={isTwitterConnected}>
                   {isTwitterConnected ? "Connected" : "Not Connected"}
@@ -132,19 +143,7 @@ const PageContent = () => {
               </Section>
             </>
           }
-          content={
-            <Section $direction="column" $gap={16} $align="center">
-              <Title>Wallet Connection</Title>
-              <Status $connected={ready}>
-                {ready ? "Connected" : "Not Connected"}
-              </Status>
-              <WalletInfo
-                balanceSol={balanceSol}
-                whitelist="WhiteList1"
-                price={0.00023}
-              />
-            </Section>
-          }
+          content={<></>}
         />
         <Partners>
           <span>Item A</span>

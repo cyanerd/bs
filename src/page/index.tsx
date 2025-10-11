@@ -113,7 +113,7 @@ const PageContent = () => {
           sidebar={
             <>
               <Section $direction="column" $gap={16} $align="center">
-                <h3>Wallet Connection</h3>
+                <h3 className="mb-0">Wallet Connection</h3>
                 <Status $connected={ready}>
                   {ready ? "Connected" : "Not Connected"}
                 </Status>
@@ -124,14 +124,14 @@ const PageContent = () => {
                 />
               </Section>
               <Section $direction="column" $gap={16} $align="center">
-                <h3>X Connection</h3>
+                <h3 className="mb-0">X Connection</h3>
                 <Status $connected={isTwitterConnected}>
                   {isTwitterConnected ? "Connected" : "Not Connected"}
                 </Status>
                 <TwitterConnect name={name} onConnect={handleTwitterConnect} />
               </Section>
               <Section $direction="column" $gap={16} $align="center">
-                <h3>Your referral id</h3>
+                <h3 className="mb-0">Your referral id</h3>
                 <Status $connected={ready}>
                   {ready ? "Available" : "Connect your wallet first"}
                 </Status>

@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div<{ $visible?: boolean }>`
   width: 100%;
-  display: flex;
   flex-direction: column;
   gap: 10px;
-  visibility: ${({ $visible }) => ($visible ? "visible" : "hidden")};
+  display: ${({ $visible }) => ($visible ? "flex" : "none")};
 `;
 
 export const Item = styled.div`

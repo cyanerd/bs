@@ -105,6 +105,7 @@ export const FormPresale = () => {
           gridTemplateColumns: "1fr 1fr",
           alignItems: "center",
           margin: "1rem",
+          borderRadius: "1rem",
         }}
       >
         <span>SOL Amount to deposit:</span>

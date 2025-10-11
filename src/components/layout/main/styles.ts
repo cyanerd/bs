@@ -15,13 +15,15 @@ export const Grid = styled.div`
 `;
 
 export const Content = styled.div`
-  min-height: 120px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #1a1a1a;
 `;
 
 export const Sidebar = styled.aside`
-  min-height: 120px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #1a1a1a;
 `;

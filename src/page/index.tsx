@@ -21,6 +21,7 @@ import {
 
 import "react-toastify/dist/ReactToastify.css";
 import { FormPresale } from "@/components/form-presale";
+import { Sidebar } from "@/components/sidebar";
 
 const PageContent = () => {
   const {
@@ -109,44 +110,8 @@ const PageContent = () => {
             },
           ]}
         />
-        <LayoutMain
-          sidebar={
-            <>
-              <Section $direction="column" $gap={16} $align="center">
-                <h3 className="mb-0">Wallet Connection</h3>
-                <Status $connected={ready}>
-                  {ready ? "Connected" : "Not Connected"}
-                </Status>
-                <WalletInfo
-                  balanceSol={balanceSol}
-                  whitelist="WhiteList1"
-                  price={0.00023}
-                />
-              </Section>
-              <Section $direction="column" $gap={16} $align="center">
-                <h3 className="mb-0">X Connection</h3>
-                <Status $connected={isTwitterConnected}>
-                  {isTwitterConnected ? "Connected" : "Not Connected"}
-                </Status>
-                <TwitterConnect name={name} onConnect={handleTwitterConnect} />
-              </Section>
-              <Section $direction="column" $gap={16} $align="center">
-                <h3 className="mb-0">Your referral id</h3>
-                <Status $connected={ready}>
-                  {ready ? "Available" : "Connect your wallet first"}
-                </Status>
-                <ReferralInput
-                  disabled={!ready}
-                  onApply={handleReferralApply}
-                  minLength={4}
-                  maxLength={4}
-                />
-              </Section>
-            </>
-          }
-          content={<FormPresale />}
-        />
-        <Partners>
+        <LayoutMain sidebar={<Sidebar />} content={<FormPresale />} />
+        {/* <Partners>
           <span>Item A</span>
           <span>Item B</span>
           <span>Item C</span>
@@ -154,9 +119,46 @@ const PageContent = () => {
         </Partners>
         <LayoutSection>
           <div>Example Section content</div>
-        </LayoutSection>
+        </LayoutSection>*/}
         <LayoutSection>
-          <div>Example Section content</div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gap: "16px",
+            }}
+          >
+            <Section $direction="column" $gap={16} $align="center">
+              <h3 className="my-0">Wallet Connection</h3>
+              <Status $connected={ready}>
+                {ready ? "Connected" : "Not Connected"}
+              </Status>
+              <WalletInfo
+                balanceSol={balanceSol}
+                whitelist="WhiteList1"
+                price={0.00023}
+              />
+            </Section>
+            <Section $direction="column" $gap={16} $align="center">
+              <h3 className="my-0">X Connection</h3>
+              <Status $connected={isTwitterConnected}>
+                {isTwitterConnected ? "Connected" : "Not Connected"}
+              </Status>
+              <TwitterConnect name={name} onConnect={handleTwitterConnect} />
+            </Section>
+            <Section $direction="column" $gap={16} $align="center">
+              <h3 className="my-0">Your referral id</h3>
+              <Status $connected={ready}>
+                {ready ? "Available" : "Connect your wallet first"}
+              </Status>
+              <ReferralInput
+                disabled={!ready}
+                onApply={handleReferralApply}
+                minLength={4}
+                maxLength={4}
+              />
+            </Section>
+          </div>
         </LayoutSection>
       </Container>
     </Wrapper>

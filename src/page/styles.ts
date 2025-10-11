@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   padding: 2vh 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
 `;
@@ -17,7 +17,7 @@ export const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 2rem;
 `;
 
 export const Section = styled.div<{

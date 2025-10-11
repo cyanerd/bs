@@ -8,7 +8,7 @@ export const FormPresale = () => {
   const [price, setPrice] = useState(1000);
 
   return (
-    <form style={{ textAlign: "center" }}>
+    <form>
       <h3>$STRAND Presale Live!</h3>
 
       <div

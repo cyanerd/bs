@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import { API_HOST } from "@/api/config";
 
-import { Container } from "./styles";
 import { Button } from "@/components/button";
 
 type Props = {
@@ -36,21 +35,18 @@ export function TwitterConnect({ name, disabled, onConnect }: Props) {
   };
 
   return (
-    <Container>
+    <>
       {name ? (
-        <Button $background="#333" $color="#fff">
-          @{name}
-        </Button>
+        <Button $background="var(--primary-color)">@{name}</Button>
       ) : (
         <Button
-          $background="#333"
-          $color="#fff"
+          $background="var(--primary-color)"
           onClick={authenticateWithTwitter}
           disabled={disabled}
         >
           Connect X
         </Button>
       )}
-    </Container>
+    </>
   );
 }

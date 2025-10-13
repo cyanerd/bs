@@ -31,7 +31,9 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           }}
         >
           <span>Your price</span>
-          <span style={{ fontSize: "1.25rem" }}>0.00023 SOL</span>
+          <span style={{ fontSize: "1.5rem", color: "var(--accent-color)" }}>
+            0.00023 SOL
+          </span>
         </div>
         <div
           style={{
@@ -41,7 +43,9 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           }}
         >
           <span>Amount Sold</span>
-          <span style={{ fontSize: "1.25rem" }}>4000 SOL</span>
+          <span style={{ fontSize: "1.5rem", color: "var(--accent-color)" }}>
+            4000 SOL
+          </span>
         </div>
         <div
           style={{
@@ -51,41 +55,41 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           }}
         >
           <span>Backers</span>
-          <span style={{ fontSize: "1.25rem" }}>255</span>
+          <span style={{ fontSize: "1.5rem", color: "var(--accent-color)" }}>
+            255
+          </span>
         </div>
       </div>
 
-      <h4>Time Remaining</h4>
+      <h4 style={{ marginTop: "2rem" }}>Time Remaining</h4>
       <Countdown />
 
+      <hr style={{ margin: "3rem 0" }} />
+
       <div>
-        <h4>Deposit Chamber</h4>
+        <h3>Deposit Chamber</h3>
       </div>
-      <Button
-        type="button"
-        onClick={() =>
-          setPriceMode((prev) => (prev === "SOL" ? "USDC" : "SOL"))
-        }
-        $size="small"
-        $background="#333"
-        $color="#fff"
-      >
-        Switch to USDC
-      </Button>
 
       <div
         style={{
           border: "1px solid #333",
           padding: "1rem 2rem",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          display: "inline-flex",
+          gap: "1rem",
           alignItems: "center",
-          margin: "1rem",
           borderRadius: "1rem",
         }}
       >
-        <span>{priceMode} Amount to deposit:</span>
-        <div>
+        <span style={{ textAlign: "left" }}>Amount to deposit:</span>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            width: "12rem",
+            padding: "1rem 0",
+          }}
+        >
           <Input
             name="price"
             type="number"
@@ -97,9 +101,23 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
                 : setUSDCPrice(Number(e.target.value))
             }
           />
+          {priceMode}
         </div>
+        <Button
+          type="button"
+          onClick={() =>
+            setPriceMode((prev) => (prev === "SOL" ? "USDC" : "SOL"))
+          }
+          $size="small"
+          $background="#333"
+          $color="#fff"
+        >
+          Switch to USDC
+        </Button>
       </div>
 
+      <br />
+      <br />
       <Button type="submit">
         Deposit {priceMode === "SOL" ? solPrice : usdcPrice} {priceMode}
       </Button>

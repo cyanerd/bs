@@ -48,7 +48,6 @@ export const Link = styled.a`
   justify-content: center;
   text-align: center;
   align-items: center;
-  color: #999;
   text-decoration: underline;
   &:hover {
     opacity: 0.7;

@@ -6,10 +6,10 @@ export const Wrapper = styled.main`
 
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 2rem;
   text-align: center;
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     grid-template-columns: 1fr;
   }
 `;

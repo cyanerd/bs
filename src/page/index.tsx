@@ -8,7 +8,7 @@ import { useWalletBalance } from "@/hooks/useWalletBalance";
 import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
 
-import { Container, Section, Status, Wrapper } from "./styles";
+import { Container, Wrapper, Flexbox } from "./styles";
 import { ReferralInput } from "@/components/referral-input";
 import { WalletInfo } from "@/components/wallet/wallet-info";
 import {
@@ -79,38 +79,55 @@ const PageContent = () => {
           description="The First Fully On-Chain Adventure Game on Solana. On September 11th, 2025, we launched Block Stranding, a fully on-chain adventure game on Solana. We are the first to bring this concept to life and we are proud to be the first to do so."
           partners={[
             {
-              name: "Solana",
-              href: "https://solana.com",
-              imageSrc: "/images/solana.png",
+              name: "Play Solana",
+              href: "#",
+              imageSrc: "/images/partners/Play-Solana.jpg",
+            },
+            {
+              name: "Solana Mobile",
+              href: "#",
+              imageSrc: "/images/partners/Solana-Mobile.jpg",
             },
             {
               name: "Magic Block",
-              href: "https://github.com/magicblock-labs",
-              imageSrc: "/images/magic-block.png",
+              href: "#",
+              imageSrc: "/images/partners/Magic-Block.jpg",
+            },
+            {
+              name: "Magic Eden",
+              href: "#",
+              imageSrc: "/images/partners/Magic-Eden.jpg",
+            },
+            {
+              name: "Phantom",
+              href: "#",
+              imageSrc: "/images/partners/Phantom.jpg",
             },
             {
               name: "Solflare",
-              href: "https://solflare.com",
-              imageSrc: "/images/solflare.png",
-            },
-            {
-              name: "Solana",
-              href: "https://solana.com",
-              imageSrc: "/images/solana.png",
-            },
-            {
-              name: "Magic Block",
-              href: "https://github.com/magicblock-labs",
-              imageSrc: "/images/magic-block.png",
-            },
-            {
-              name: "Solflare",
-              href: "https://solflare.com",
-              imageSrc: "/images/solflare.png",
+              href: "#",
+              imageSrc: "/images/partners/Solflare.jpg",
             },
           ]}
         />
-        <LayoutMain sidebar={<Sidebar />} content={<FormPresale />} />
+        <LayoutMain
+          sidebar={
+            <>
+              <Sidebar />
+              {/* <hr /> */}
+              <Flexbox $direction="column" $gap={16} $align="center">
+                <h4 className="my-0">Know Ref Code?</h4>
+                <ReferralInput
+                  disabled={!ready}
+                  onApply={handleReferralApply}
+                  minLength={4}
+                  maxLength={4}
+                />
+              </Flexbox>
+            </>
+          }
+          content={<FormPresale />}
+        />
         {/* <Partners>
           <span>Item A</span>
           <span>Item B</span>
@@ -120,15 +137,11 @@ const PageContent = () => {
         <LayoutSection>
           <div>Example Section content</div>
         </LayoutSection>*/}
-        <LayoutSection>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              gap: "16px",
-            }}
-          >
-            <Section $direction="column" $gap={16} $align="center">
+        <LayoutSection
+          $border="3px solid var(--primary-color)"
+          $background="#222"
+        >
+          {/* <Section $direction="column" $gap={16} $align="center">
               <h3 className="my-0">Wallet Connection</h3>
               <Status $connected={ready}>
                 {ready ? "Connected" : "Not Connected"}
@@ -138,27 +151,38 @@ const PageContent = () => {
                 whitelist="WhiteList1"
                 price={0.00023}
               />
-            </Section>
-            <Section $direction="column" $gap={16} $align="center">
+            </Section> */}
+          {/* <Section $direction="column" $gap={16} $align="center">
               <h3 className="my-0">X Connection</h3>
               <Status $connected={isTwitterConnected}>
                 {isTwitterConnected ? "Connected" : "Not Connected"}
               </Status>
               <TwitterConnect name={name} onConnect={handleTwitterConnect} />
-            </Section>
-            <Section $direction="column" $gap={16} $align="center">
-              <h3 className="my-0">Your referral id</h3>
-              <Status $connected={ready}>
-                {ready ? "Available" : "Connect your wallet first"}
-              </Status>
-              <ReferralInput
-                disabled={!ready}
-                onApply={handleReferralApply}
-                minLength={4}
-                maxLength={4}
-              />
-            </Section>
-          </div>
+            </Section> */}
+
+          <Flexbox $direction="row" $gap={16} $align="center">
+            <div
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <h4 style={{ margin: "0 0 .5rem 0" }}>
+                Boost your bag up to 20%! *
+              </h4>
+              <span style={{ fontSize: "1.25rem" }}>
+                Connect your X account and tweet a shoutout to the presale
+              </span>
+              <span style={{ fontSize: "0.875rem", color: "#999" }}>
+                * Your final boost size is calculated based on your X
+                engagement, content uniqueness, smart follower reach, and other
+                factors.
+              </span>
+            </div>
+
+            <TwitterConnect name={name} onConnect={handleTwitterConnect} />
+          </Flexbox>
         </LayoutSection>
       </Container>
     </Wrapper>

@@ -14,13 +14,14 @@ export const Wrapper = styled.div`
 
 export const Container = styled.div`
   width: 80%;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 `;
 
-export const Section = styled.div<{
+export const Flexbox = styled.div<{
   $align?: "center" | "start" | "end" | "stretch" | "flex-start" | "flex-end";
   $direction?: "row" | "column";
   $gap?: number;

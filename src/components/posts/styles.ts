@@ -10,12 +10,12 @@ export type CardPosition = {
 };
 
 export const Board = styled.div`
-  padding: 1.5rem; /* p-6 */
+  padding: 1rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem; /* gap-6 */
+  gap: 1rem;
 
   @media (min-width: 768px) {
     position: relative; /* md:relative */
@@ -31,7 +31,6 @@ export const Card = styled.div<{ $position?: CardPosition }>`
   padding: 1rem; /* p-4 */
 
   width: 100%;
-  max-width: 20rem; /* max-w-xs */
 
   box-shadow: 0 2px 8px color-mix(in srgb, var(--primary-color) 5%, transparent);
   transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;

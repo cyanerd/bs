@@ -8,29 +8,56 @@ type PartnerItem = {
   imageSrc: string;
 };
 
-type Props = {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  partners?: PartnerItem[];
-  className?: string;
-};
+const partners: PartnerItem[] = [
+  {
+    name: "Play Solana",
+    href: "#",
+    imageSrc: "/images/partners/Play-Solana.jpg",
+  },
+  {
+    name: "Solana Mobile",
+    href: "#",
+    imageSrc: "/images/partners/Solana-Mobile.jpg",
+  },
+  {
+    name: "Magic Block",
+    href: "#",
+    imageSrc: "/images/partners/Magic-Block.jpg",
+  },
+  {
+    name: "Magic Eden",
+    href: "#",
+    imageSrc: "/images/partners/Magic-Eden.jpg",
+  },
+  {
+    name: "Phantom",
+    href: "#",
+    imageSrc: "/images/partners/Phantom.jpg",
+  },
+  {
+    name: "Solflare",
+    href: "#",
+    imageSrc: "/images/partners/Solflare.jpg",
+  },
+];
 
-export const Hero: React.FC<Props> = ({
+export const Hero = ({
   title,
   description,
-  partners: partnerItems,
-  className,
+}: {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
 }) => {
   return (
-    <Wrapper className={className}>
+    <Wrapper>
       <Title>{title}</Title>
       <Description>{description}</Description>
-      {partnerItems && partnerItems.length > 0 && (
+      {
         <Partners>
           <Row>
             <span style={{ textTransform: "uppercase" }}>Key partners:</span>
           </Row>
-          {partnerItems.map((partner, index) => (
+          {partners.map((partner, index) => (
             <Row key={index}>
               <Link
                 href={partner.href}
@@ -48,7 +75,7 @@ export const Hero: React.FC<Props> = ({
             </Row>
           ))}
         </Partners>
-      )}
+      }
     </Wrapper>
   );
 };

@@ -63,6 +63,7 @@ export const ReferralInput: React.FC<RefInputProps> = ({
   return (
     <Container>
       <Input
+        name="referralCode"
         placeholder={placeholder}
         value={currentValue}
         onChange={handleChange}

@@ -28,11 +28,21 @@ export const Description = styled.p`
 export const Partners = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
   padding: 1rem 0 1rem 2rem;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    & > :first-child {
+      grid-column: span 3;
+      padding-bottom: 1rem;
+    }
+  }
 `;
 
 export const Row = styled.div`

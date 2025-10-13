@@ -56,6 +56,7 @@ export const FaqChevron = styled.span<{
   transition: transform 200ms ease-in-out, background 200ms ease-in-out,
     border-color 200ms ease-in-out;
   transform: rotate(${({ $open }) => ($open ? 90 : 0)}deg);
+  flex-shrink: 0;
 `;
 
 export const FaqAnswer = styled.div<{

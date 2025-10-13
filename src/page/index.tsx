@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
-import { TwitterConnect } from "@/components/twitter-connect";
+import { TwitterConnect } from "@/components/twitter/twitter-connect";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { useWalletBalance } from "@/hooks/useWalletBalance";
 
@@ -9,7 +9,7 @@ import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
 
 import { Container, Wrapper, Flexbox } from "./styles";
-import { ReferralInput } from "@/components/referral-input";
+import { ReferralInput } from "@/components/referral/referral-input";
 import { WalletInfo } from "@/components/wallet/wallet-info";
 import {
   Header,
@@ -23,6 +23,8 @@ import { FormPresale } from "@/components/form-presale";
 import { Sidebar } from "@/components/sidebar";
 import { Posts } from "@/components/posts";
 import { FAQ } from "@/components/faq";
+import { TwitterBoost } from "@/components/twitter/twitter-boost";
+import { FormReferral } from "@/components/referral/form-referral";
 
 const PageContent = () => {
   const {
@@ -63,7 +65,7 @@ const PageContent = () => {
       <Container>
         <Header
           start={
-            <a href="/">
+            <a href="/" style={{ position: "relative", top: "3px" }}>
               <img src="/images/logo.png" alt="Logo" height="40" />
             </a>
           }
@@ -78,53 +80,15 @@ const PageContent = () => {
         <Hero
           title="Block Stranding"
           description="The First Fully On-Chain Adventure Game on Solana. On September 11th, 2025, we launched Block Stranding, a fully on-chain adventure game on Solana. We are the first to bring this concept to life and we are proud to be the first to do so."
-          partners={[
-            {
-              name: "Play Solana",
-              href: "#",
-              imageSrc: "/images/partners/Play-Solana.jpg",
-            },
-            {
-              name: "Solana Mobile",
-              href: "#",
-              imageSrc: "/images/partners/Solana-Mobile.jpg",
-            },
-            {
-              name: "Magic Block",
-              href: "#",
-              imageSrc: "/images/partners/Magic-Block.jpg",
-            },
-            {
-              name: "Magic Eden",
-              href: "#",
-              imageSrc: "/images/partners/Magic-Eden.jpg",
-            },
-            {
-              name: "Phantom",
-              href: "#",
-              imageSrc: "/images/partners/Phantom.jpg",
-            },
-            {
-              name: "Solflare",
-              href: "#",
-              imageSrc: "/images/partners/Solflare.jpg",
-            },
-          ]}
         />
         <LayoutMain
           sidebar={
             <>
               <Sidebar />
-              {/* <hr /> */}
-              <Flexbox $direction="column" $gap={16} $align="center">
-                <h4 className="my-0">Know Ref Code?</h4>
-                <ReferralInput
-                  disabled={!ready}
-                  onApply={handleReferralApply}
-                  minLength={4}
-                  maxLength={4}
-                />
-              </Flexbox>
+              <FormReferral
+                ready={ready}
+                handleReferralApply={handleReferralApply}
+              />
             </>
           }
           content={<FormPresale />}
@@ -134,29 +98,7 @@ const PageContent = () => {
           $border="3px solid var(--primary-color)"
           $background="#222"
         >
-          <Flexbox $direction="row" $gap={16} $align="center">
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <h4 style={{ margin: "0 0 .5rem 0" }}>
-                Boost your bag up to 20%! *
-              </h4>
-              <span style={{ fontSize: "1.25rem" }}>
-                Connect your X account and tweet a shoutout to the presale
-              </span>
-              <span style={{ fontSize: "0.875rem", color: "#999" }}>
-                * Your final boost size is calculated based on your X
-                engagement, content uniqueness, smart follower reach, and other
-                factors.
-              </span>
-            </div>
-
-            <TwitterConnect name={name} onConnect={handleTwitterConnect} />
-          </Flexbox>
+          <TwitterBoost onConnect={handleTwitterConnect} name={name} />
         </LayoutSection>
 
         <LayoutSection>

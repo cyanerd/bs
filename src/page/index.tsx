@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FormPresale } from "@/components/form-presale";
 import { Sidebar } from "@/components/sidebar";
 import { Posts } from "@/components/posts";
+import { FAQ } from "@/components/faq";
 
 const PageContent = () => {
   const {
@@ -161,6 +162,12 @@ const PageContent = () => {
         <LayoutSection>
           <Posts />
         </LayoutSection>
+
+        <LayoutSection>
+          <FAQ />
+        </LayoutSection>
+
+        <br />
       </Container>
     </Wrapper>
   );

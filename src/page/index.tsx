@@ -14,7 +14,6 @@ import { WalletInfo } from "@/components/wallet/wallet-info";
 import {
   Header,
   Hero,
-  Partners,
   Main as LayoutMain,
   Section as LayoutSection,
 } from "@/components/layout";
@@ -22,6 +21,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { FormPresale } from "@/components/form-presale";
 import { Sidebar } from "@/components/sidebar";
+import { Posts } from "@/components/posts";
 
 const PageContent = () => {
   const {
@@ -128,38 +128,11 @@ const PageContent = () => {
           }
           content={<FormPresale />}
         />
-        {/* <Partners>
-          <span>Item A</span>
-          <span>Item B</span>
-          <span>Item C</span>
-          <span>Item D</span>
-        </Partners>
-        <LayoutSection>
-          <div>Example Section content</div>
-        </LayoutSection>*/}
+
         <LayoutSection
           $border="3px solid var(--primary-color)"
           $background="#222"
         >
-          {/* <Section $direction="column" $gap={16} $align="center">
-              <h3 className="my-0">Wallet Connection</h3>
-              <Status $connected={ready}>
-                {ready ? "Connected" : "Not Connected"}
-              </Status>
-              <WalletInfo
-                balanceSol={balanceSol}
-                whitelist="WhiteList1"
-                price={0.00023}
-              />
-            </Section> */}
-          {/* <Section $direction="column" $gap={16} $align="center">
-              <h3 className="my-0">X Connection</h3>
-              <Status $connected={isTwitterConnected}>
-                {isTwitterConnected ? "Connected" : "Not Connected"}
-              </Status>
-              <TwitterConnect name={name} onConnect={handleTwitterConnect} />
-            </Section> */}
-
           <Flexbox $direction="row" $gap={16} $align="center">
             <div
               style={{
@@ -183,6 +156,10 @@ const PageContent = () => {
 
             <TwitterConnect name={name} onConnect={handleTwitterConnect} />
           </Flexbox>
+        </LayoutSection>
+
+        <LayoutSection>
+          <Posts />
         </LayoutSection>
       </Container>
     </Wrapper>

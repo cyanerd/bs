@@ -9,6 +9,7 @@ type RefInputProps = {
   onChange?: (value: string) => void;
   onApply?: (value: string) => void;
   disabled?: boolean;
+  disabledText?: string;
   minLength?: number; // minimum characters required to allow Apply
   maxLength?: number; // maximum characters allowed in the input
 };
@@ -19,6 +20,7 @@ export const ReferralInput: React.FC<RefInputProps> = ({
   onChange,
   onApply,
   disabled,
+  disabledText,
   minLength,
   maxLength,
 }) => {
@@ -68,13 +70,13 @@ export const ReferralInput: React.FC<RefInputProps> = ({
         value={currentValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        disabled={disabled}
         maxLength={effectiveMax}
       />
       <Button
         $background="#333"
         $color="#fff"
         onClick={handleApply}
+        disabledText={disabledText}
         disabled={
           disabled ||
           currentValue.length < effectiveMin ||

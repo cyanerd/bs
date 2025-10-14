@@ -6,11 +6,17 @@ import { Button } from "@/components/button";
 
 type Props = {
   name?: string;
-  onConnect: () => void;
   disabled?: boolean;
+  disabledText?: string;
+  onConnect: () => void;
 };
 
-export function TwitterConnect({ name, disabled, onConnect }: Props) {
+export function TwitterConnect({
+  name,
+  disabled,
+  disabledText,
+  onConnect,
+}: Props) {
   // useEffect(() => {
   //   const urlParams = new URLSearchParams(window.location.search);
 
@@ -43,6 +49,7 @@ export function TwitterConnect({ name, disabled, onConnect }: Props) {
           $background="var(--primary-color)"
           onClick={authenticateWithTwitter}
           disabled={disabled}
+          disabledText={disabledText}
         >
           Connect X
         </Button>

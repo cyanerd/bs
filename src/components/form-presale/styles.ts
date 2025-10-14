@@ -30,7 +30,7 @@ export const Separator = styled.hr`
 
 export const DepositCard = styled.div`
   border: 1px solid #333;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   display: inline-flex;
   gap: 1rem;
   align-items: center;

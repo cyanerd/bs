@@ -6,8 +6,8 @@ export const Input = styled.input`
   color: #ffffff;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.75rem;
-  font-size: 1rem;
+  padding: 0.85rem;
+  font-size: 1.25rem;
   outline: none;
   transition: background 0.2s ease;
 

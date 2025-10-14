@@ -14,6 +14,7 @@ export const FormReferral = ({
       <h4 className="my-0">Know Ref Code?</h4>
       <ReferralInput
         disabled={!ready}
+        disabledText="Please connect your wallet to apply your referral code"
         onApply={handleReferralApply}
         minLength={4}
         maxLength={4}

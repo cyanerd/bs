@@ -1,6 +1,14 @@
 import React from "react";
 
-import { Description, Partners, Link, Row, Title, Wrapper } from "./styles";
+import {
+  Description,
+  Partners,
+  Link,
+  Row,
+  Title,
+  Wrapper,
+  LinkBadge,
+} from "./styles";
 
 type PartnerItem = {
   name: string;
@@ -67,10 +75,10 @@ export const Hero = ({
                 <img
                   src={partner.imageSrc}
                   alt={partner.name}
-                  height={40}
-                  style={{ borderRadius: 8 }}
+                  height={56}
+                  style={{ borderRadius: 4 }}
                 />
-                [link]
+                <LinkBadge>View on X</LinkBadge>
               </Link>
             </Row>
           ))}

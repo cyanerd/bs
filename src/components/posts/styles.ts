@@ -97,3 +97,7 @@ export const TweetText = styled.p`
   color: #d1d5db; /* text-gray-300 */
   font-size: 0.875rem; /* text-sm */
 `;
+
+export const Title = styled.h3`
+  text-align: center;
+`;

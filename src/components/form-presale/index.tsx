@@ -24,6 +24,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
   const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
   const [solPrice, setSOLPrice] = useState(200);
   const [usdcPrice, setUSDCPrice] = useState(10);
+  const [agree, setAgree] = useState(true);
 
   return (
     <FormRoot>
@@ -32,7 +33,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
       <StatsGrid>
         <StatCard>
           <span>Your price</span>
-          <StatValue>0.00023 SOL</StatValue>
+          <StatValue>$ 0.00023</StatValue>
         </StatCard>
         <StatCard>
           <span>Amount Sold</span>
@@ -69,22 +70,35 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           />
           {priceMode}
         </AmountRow>
-        <Button
-          type="button"
-          onClick={() =>
-            setPriceMode((prev) => (prev === "SOL" ? "USDC" : "SOL"))
-          }
-          $size="small"
-          $background="#333"
-          $color="#fff"
-        >
-          Switch to USDC
-        </Button>
       </DepositCard>
 
-      <br />
-      <br />
-      <Button type="submit">
+      <div
+        style={{
+          display: "flex",
+          gap: "1rem",
+          padding: "2rem 0 3rem",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <input
+          type="checkbox"
+          id="agree"
+          checked={agree}
+          onChange={(e) => setAgree(e.target.checked)}
+        />
+        <label htmlFor="agree">
+          I agree to{" "}
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            the terms and conditions
+          </a>
+        </label>
+      </div>
+
+      <Button
+        disabled={!agree}
+        disabledText="You must agree to the terms and conditions"
+      >
         Deposit {priceMode === "SOL" ? solPrice : usdcPrice} {priceMode}
       </Button>
 

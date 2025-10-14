@@ -20,7 +20,7 @@ export const Sidebar = () => {
       <Card>
         <CardHeader>
           <HeaderText>Token Price:</HeaderText>
-          <HeaderValue>$ 7.00</HeaderValue>
+          <HeaderValue>$ 0.00023</HeaderValue>
         </CardHeader>
         <List>
           <li>
@@ -98,14 +98,14 @@ export const Sidebar = () => {
         <List>
           <li>
             <Row>
-              <RowText>Base amount:</RowText>
-              <RowValue>888,000</RowValue>
+              <RowText>Total deposited:</RowText>
+              <RowValue>200 SOL</RowValue>
             </Row>
           </li>
           <li>
             <Row>
-              <RowText>Total deposited:</RowText>
-              <RowValue>200 SOL</RowValue>
+              <RowText>Base amount:</RowText>
+              <RowValue>888,000</RowValue>
             </Row>
           </li>
           <li>

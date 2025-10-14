@@ -7,6 +7,7 @@ import {
   HeaderRow,
   Name,
   TweetText,
+  Title,
   type CardPosition,
 } from "./styles";
 
@@ -39,7 +40,7 @@ const tweets: Tweet[] = [
     name: "CryptoKing",
     handle: "@OfficialCryptoK",
     text: '"Just aped into the $STRAND presale, this project is going to be absolutely huge."',
-    position: { topPercent: 5, rightPercent: 10, rotateDeg: 12, zIndex: 10 },
+    position: { topPercent: 2, rightPercent: 5, rotateDeg: 12, zIndex: 10 },
   },
   {
     avatar: "D",
@@ -65,28 +66,50 @@ const tweets: Tweet[] = [
     name: "FutureFin",
     handle: "@FutureFinance",
     text: "\"Seriously, don't sleep on what's happening over on Solana with this new game.\"",
-    position: { bottomPercent: 5, rightPercent: 35, rotateDeg: -5, zIndex: 10 },
+    position: {
+      bottomPercent: 10,
+      rightPercent: 25,
+      rotateDeg: -15,
+      zIndex: 10,
+    },
+  },
+  {
+    avatar: "G",
+    name: "GameGuru",
+    handle: "@GameGuru",
+    text: '"Been testing the alpha—smooth gameplay and instant finality on Solana."',
+    position: { topPercent: 12, leftPercent: 55, rotateDeg: -3, zIndex: 25 },
+  },
+  {
+    avatar: "H",
+    name: "HODLHarper",
+    handle: "@HODLHarper",
+    text: '"NFT utility that actually matters. Stoked for launch."',
+    position: { bottomPercent: 8, leftPercent: 35, rotateDeg: 9, zIndex: 15 },
   },
 ];
 
 export const Posts = () => {
   return (
-    <Board>
-      {tweets.map((tweet, index) => (
-        <Card key={index} $position={tweet.position}>
-          <HeaderRow>
-            <AvatarImg
-              src={`https://placehold.co/40x40/BBF68E/1A1A1A?text=${tweet.avatar}`}
-              alt={`${tweet.name}'s avatar`}
-            />
-            <div>
-              <Name>{tweet.name}</Name>
-              <Handle>{tweet.handle}</Handle>
-            </div>
-          </HeaderRow>
-          <TweetText>{tweet.text}</TweetText>
-        </Card>
-      ))}
-    </Board>
+    <>
+      <Title>X Says</Title>
+      <Board>
+        {tweets.map((tweet, index) => (
+          <Card key={index} $position={tweet.position}>
+            <HeaderRow>
+              <AvatarImg
+                src={`https://placehold.co/40x40/BBF68E/1A1A1A?text=${tweet.avatar}`}
+                alt={`${tweet.name}'s avatar`}
+              />
+              <div>
+                <Name>{tweet.name}</Name>
+                <Handle>{tweet.handle}</Handle>
+              </div>
+            </HeaderRow>
+            <TweetText>{tweet.text}</TweetText>
+          </Card>
+        ))}
+      </Board>
+    </>
   );
 };

@@ -58,9 +58,16 @@ export const Link = styled.a`
   justify-content: center;
   text-align: center;
   align-items: center;
-  text-decoration: underline;
+  text-decoration: none;
   &:hover {
     opacity: 0.7;
-    text-decoration: none;
   }
+`;
+
+export const LinkBadge = styled.span`
+  background: #292929;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.875rem;
+  color: #eee;
+  text-transform: none;
 `;

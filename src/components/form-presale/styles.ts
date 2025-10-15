@@ -7,6 +7,10 @@ export const FormRoot = styled.form`
 export const StatsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 `;
 
 export const StatCard = styled.div`
@@ -39,8 +43,8 @@ export const DepositCard = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: stretch;
-    width: 100%;
-    padding: 2rem;
+    padding: 1.5rem 2.5rem;
+    margin: 0 1rem;
   }
 `;
 
@@ -68,3 +72,22 @@ export const ConstraintsList = styled.ul`
   text-align: left;
   margin: 2rem 0;
 `;
+
+// Agree checkbox block
+export const AgreeContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  padding: 2rem 0 3rem;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  margin: 0 2rem;
+`;
+
+export const AgreeCheckbox = styled.input.attrs({ type: "checkbox" })`
+  flex-shrink: 0;
+`;
+
+export const AgreeLabel = styled.label``;
+
+export const AgreeLink = styled.a``;

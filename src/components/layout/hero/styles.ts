@@ -70,4 +70,5 @@ export const LinkBadge = styled.span`
   font-size: 0.875rem;
   color: #eee;
   text-transform: none;
+  white-space: nowrap;
 `;

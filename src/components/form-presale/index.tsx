@@ -13,6 +13,10 @@ import {
   AmountLabel,
   AmountRow,
   ConstraintsList,
+  AgreeContainer,
+  AgreeCheckbox,
+  AgreeLabel,
+  AgreeLink,
 } from "./styles";
 // import SolanaIcon from "@/components/icons/solana.svg";
 
@@ -22,9 +26,20 @@ type Props = {
 
 export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
   const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
-  const [solPrice, setSOLPrice] = useState(200);
-  const [usdcPrice, setUSDCPrice] = useState(10);
+  const [solPrice, setSOLPrice] = useState<number | null>(200);
+  const [usdcPrice, setUSDCPrice] = useState<number | null>(10);
   const [agree, setAgree] = useState(true);
+
+  // Deposit constraints
+  const MIN_DEPOSIT = 0.2;
+  const MAX_DEPOSIT = 200;
+
+  // Derived state
+  const activePrice = priceMode === "SOL" ? solPrice : usdcPrice;
+  const isPriceValid =
+    activePrice !== null &&
+    activePrice >= MIN_DEPOSIT &&
+    activePrice <= MAX_DEPOSIT;
 
   return (
     <FormRoot>
@@ -61,50 +76,73 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           <Input
             name="price"
             type="number"
-            placeholder="XX.XX"
-            value={priceMode === "SOL" ? solPrice : usdcPrice}
-            onChange={(e) =>
-              priceMode === "SOL"
-                ? setSOLPrice(Number(e.target.value))
-                : setUSDCPrice(Number(e.target.value))
-            }
+            placeholder="XXX.XX"
+            min={MIN_DEPOSIT}
+            max={MAX_DEPOSIT}
+            step="0.1"
+            value={priceMode === "SOL" ? solPrice ?? "" : usdcPrice ?? ""}
+            onChange={(e) => {
+              const nextValue =
+                e.target.value === "" ? null : Number(e.target.value);
+              if (priceMode === "SOL") {
+                setSOLPrice(nextValue);
+              } else {
+                setUSDCPrice(nextValue);
+              }
+            }}
+            onBlur={() => {
+              if (priceMode === "SOL") {
+                if (solPrice === null) return;
+                const clamped = Math.min(
+                  MAX_DEPOSIT,
+                  Math.max(MIN_DEPOSIT, solPrice),
+                );
+                if (clamped !== solPrice) setSOLPrice(clamped);
+              } else {
+                if (usdcPrice === null) return;
+                const clamped = Math.min(
+                  MAX_DEPOSIT,
+                  Math.max(MIN_DEPOSIT, usdcPrice),
+                );
+                if (clamped !== usdcPrice) setUSDCPrice(clamped);
+              }
+            }}
           />
           {priceMode}
         </AmountRow>
       </DepositCard>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "1rem",
-          padding: "2rem 0 3rem",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <input
-          type="checkbox"
+      <AgreeContainer>
+        <AgreeCheckbox
           id="agree"
           checked={agree}
           onChange={(e) => setAgree(e.target.checked)}
         />
-        <label htmlFor="agree">
+        <AgreeLabel htmlFor="agree">
           I agree to{" "}
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          <AgreeLink href="#" target="_blank" rel="noopener noreferrer">
             the terms and conditions
-          </a>
-        </label>
-      </div>
+          </AgreeLink>
+        </AgreeLabel>
+      </AgreeContainer>
 
       <Button
-        disabled={!agree}
-        disabledText="You must agree to the terms and conditions"
+        type="submit"
+        disabled={!agree || !isPriceValid}
+        disabledText={
+          !isPriceValid
+            ? `Invalid deposit amount. Please enter a value between ${MIN_DEPOSIT} ${priceMode} and ${MAX_DEPOSIT} ${priceMode}.`
+            : "You must agree to the terms and conditions"
+        }
       >
-        Deposit {priceMode === "SOL" ? solPrice : usdcPrice} {priceMode}
+        Deposit {priceMode === "SOL" ? solPrice ?? 0 : usdcPrice ?? 0}{" "}
+        {priceMode}
       </Button>
 
       <ConstraintsList>
-        <li>Deposit range: 0.2 SOL - 200 SOL</li>
+        <li>
+          Deposit range: {MIN_DEPOSIT} {priceMode} - {MAX_DEPOSIT} {priceMode}
+        </li>
         <li>Vesting: 100% unlocked at TGE</li>
       </ConstraintsList>
     </FormRoot>

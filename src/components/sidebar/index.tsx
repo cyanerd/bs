@@ -19,6 +19,7 @@ export const Sidebar = () => {
 
       <Card>
         <CardHeader>
+          {/* Token Price equal Your price below */}
           <HeaderText>Token Price:</HeaderText>
           <HeaderValue>$ 0.00023</HeaderValue>
         </CardHeader>
@@ -32,19 +33,19 @@ export const Sidebar = () => {
           <li>
             <Row>
               <RowText>Your price:</RowText>
-              <RowValue>$ 0.003</RowValue>
+              <RowValue>$ 0.00023</RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>Public price:</RowText>
-              <RowValue>$ 0.004</RowValue>
+              <RowValue>$ 0.00038</RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>TGE price:</RowText>
-              <RowValue>$ 0.0045</RowValue>
+              <RowValue>$ 0.00045</RowValue>
             </Row>
           </li>
         </List>

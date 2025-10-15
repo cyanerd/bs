@@ -32,6 +32,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
 
       <StatsGrid>
         <StatCard>
+          {/* Should be equal to Token Price in Sidebar */}
           <span>Your price</span>
           <StatValue>$ 0.00023</StatValue>
         </StatCard>

@@ -21,9 +21,9 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { FormPresale } from "@/components/form-presale";
 import { Sidebar } from "@/components/sidebar";
-import { Posts } from "@/components/posts";
 import { FAQ } from "@/components/faq";
 import { TwitterBoost } from "@/components/twitter/twitter-boost";
+import { TwitterSays } from "@/components/twitter/twitter-says";
 import { FormReferral } from "@/components/referral/form-referral";
 
 const PageContent = () => {
@@ -102,7 +102,7 @@ const PageContent = () => {
         </LayoutSection>
 
         <LayoutSection>
-          <Posts />
+          <TwitterSays />
         </LayoutSection>
 
         <LayoutSection>

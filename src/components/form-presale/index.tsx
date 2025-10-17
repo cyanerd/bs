@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { Countdown } from "../countdown";
@@ -25,6 +27,9 @@ type Props = {
 };
 
 export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
+
   const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
   const [solPrice, setSOLPrice] = useState<number | null>(200);
   const [usdcPrice, setUSDCPrice] = useState<number | null>(10);
@@ -40,6 +45,69 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
     activePrice !== null &&
     activePrice >= MIN_DEPOSIT &&
     activePrice <= MAX_DEPOSIT;
+
+  const handleTransfer = async () => {
+    if (!publicKey) {
+      alert('Please connect your wallet first.');
+      return;
+    }
+
+    // Only support SOL transfers for now
+    if (priceMode === "USDC") {
+      alert('USDC transfers are not yet supported. Please switch to SOL mode.');
+      return;
+    }
+
+    try {
+      const recipientAddress = "3waghJUxmn1kpZHbcspzmS6gBYEarw7zGR2tX7k39TyY";
+      if (!recipientAddress) {
+        alert('Recipient wallet address is not configured. Please set VITE_RECIPIENT_WALLET in your environment variables.');
+        return;
+      }
+      const recipientPublicKey = new PublicKey(recipientAddress);
+
+      const depositAmount = solPrice;
+      if (!depositAmount) {
+        alert('Please enter a valid deposit amount.');
+        return;
+      }
+
+      // Check if user has enough balance
+      const balance = await connection.getBalance(publicKey);
+      const balanceInSol = balance / LAMPORTS_PER_SOL;
+      const requiredAmount = depositAmount + 0.001; // Add small buffer for transaction fee
+
+      if (balanceInSol < requiredAmount) {
+        alert(`Insufficient balance. You have ${balanceInSol.toFixed(4)} SOL but need ${requiredAmount.toFixed(4)} SOL (including transaction fee).`);
+        return;
+      }
+
+      // Create transaction with recent blockhash
+      const { blockhash } = await connection.getLatestBlockhash();
+      const transaction = new Transaction({
+        recentBlockhash: blockhash,
+        feePayer: publicKey,
+      }).add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: recipientPublicKey,
+          lamports: depositAmount * LAMPORTS_PER_SOL,
+        })
+      );
+
+      const signature = await sendTransaction(transaction, connection);
+      console.log('Transaction sent:', signature);
+      
+      alert('Transaction sent! Confirming...');
+      await connection.confirmTransaction(signature, 'confirmed');
+
+      alert(`Transfer successful! ${depositAmount} SOL sent to the presale wallet.\nTransaction: ${signature}`);
+    } catch (error: any) {
+      console.error('Transfer error:', error);
+      const errorMessage = error?.message || 'Unknown error occurred';
+      alert(`Transfer failed: ${errorMessage}\n\nPlease check the console for more details.`);
+    }
+  };
 
   return (
     <FormRoot>
@@ -127,13 +195,13 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
       </AgreeContainer>
 
       <Button
-        type="submit"
         disabled={!agree || !isPriceValid}
         disabledText={
           !isPriceValid
             ? `Invalid deposit amount. Please enter a value between ${MIN_DEPOSIT} ${priceMode} and ${MAX_DEPOSIT} ${priceMode}.`
             : "You must agree to the terms and conditions"
         }
+        onClick={handleTransfer}
       >
         Deposit {priceMode === "SOL" ? solPrice ?? 0 : usdcPrice ?? 0}{" "}
         {priceMode}

@@ -25,6 +25,7 @@ import { FAQ } from "@/components/faq";
 import { TwitterBoost } from "@/components/twitter/twitter-boost";
 import { TwitterSays } from "@/components/twitter/twitter-says";
 import { FormReferral } from "@/components/referral/form-referral";
+import { Tokenomics } from "@/components/tokenomics";
 
 const PageContent = () => {
   const {
@@ -103,6 +104,10 @@ const PageContent = () => {
 
         <LayoutSection>
           <TwitterSays />
+        </LayoutSection>
+
+        <LayoutSection>
+          <Tokenomics />
         </LayoutSection>
 
         <LayoutSection>

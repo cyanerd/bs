@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   SidebarRoot,
   SidebarHeader,
@@ -10,7 +10,7 @@ import {
   Row,
   RowText,
   RowValue,
-} from "./styles";
+} from './styles';
 
 export const Sidebar = () => {
   return (
@@ -19,9 +19,8 @@ export const Sidebar = () => {
 
       <Card>
         <CardHeader>
-          {/* Token Price equal Your price below */}
-          <HeaderText>Token Price:</HeaderText>
-          <HeaderValue>$ 0.00023</HeaderValue>
+          <HeaderText>Your deposit:</HeaderText>
+          <HeaderValue>200 SOL</HeaderValue>
         </CardHeader>
         <List>
           <li>
@@ -40,12 +39,6 @@ export const Sidebar = () => {
             <Row>
               <RowText>Public price:</RowText>
               <RowValue>$ 0.00038</RowValue>
-            </Row>
-          </li>
-          <li>
-            <Row>
-              <RowText>TGE price:</RowText>
-              <RowValue>$ 0.00045</RowValue>
             </Row>
           </li>
         </List>
@@ -85,34 +78,6 @@ export const Sidebar = () => {
             <Row>
               <RowText>Code applied:</RowText>
               <RowValue>+1%</RowValue>
-            </Row>
-          </li>
-        </List>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <HeaderText>$STRAND to Receive:</HeaderText>
-          <HeaderValue>978,000</HeaderValue>
-        </CardHeader>
-
-        <List>
-          <li>
-            <Row>
-              <RowText>Total deposited:</RowText>
-              <RowValue>200 SOL</RowValue>
-            </Row>
-          </li>
-          <li>
-            <Row>
-              <RowText>Base amount:</RowText>
-              <RowValue>888,000</RowValue>
-            </Row>
-          </li>
-          <li>
-            <Row>
-              <RowText>Bonus amount:</RowText>
-              <RowValue>+65,000</RowValue>
             </Row>
           </li>
         </List>

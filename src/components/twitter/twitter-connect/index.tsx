@@ -19,7 +19,7 @@ export function TwitterConnect({
 
   const authenticateWithTwitter = () => {
     const state = encodeURIComponent(window.location.href);
-    // console.log('q1', `${API_X_CALLBACK}?state=${state}`, onConnect);
+    console.log(onConnect);
     window.location.href = `${API_X_CALLBACK}?state=${state}`;
   };
 

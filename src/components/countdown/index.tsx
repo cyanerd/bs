@@ -39,46 +39,28 @@ export const Countdown: React.FC<Props> = ({ dateTarget = 1760475600000 }) => {
     <div
       id="timer"
       style={{
-        display: "inline-grid",
-        gridTemplateColumns: "repeat(3, 40px)",
-        gap: "2rem",
-        margin: "0 auto",
+        display: "inline-flex",
+        alignItems: "center",
         justifyContent: "center",
+        gap: "1rem",
+        margin: "0 auto",
         border: "1px solid #333",
-        padding: "1rem 2rem",
+        padding: "0.75rem 1.5rem",
         borderRadius: "1rem",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <span style={{ fontSize: "1.75rem" }}>{hoursStr}</span>
-        <span>Hrs</span>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <span style={{ fontSize: "1.75rem" }}>{minutesStr}</span>
-        <span>Min</span>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <span style={{ fontSize: "1.75rem" }}>{secondsStr}</span>
-        <span>Sec</span>
-      </div>
+      <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{hoursStr}</span>
+      <span style={{ fontSize: "0.9rem", color: "#ccc" }}>Hrs</span>
+
+      <span style={{ fontSize: "1.2rem", color: "#666", margin: "0 0.25rem" }}>:</span>
+
+      <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{minutesStr}</span>
+      <span style={{ fontSize: "0.9rem", color: "#ccc" }}>Min</span>
+
+      <span style={{ fontSize: "1.2rem", color: "#666", margin: "0 0.25rem" }}>:</span>
+
+      <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{secondsStr}</span>
+      <span style={{ fontSize: "0.9rem", color: "#ccc" }}>Sec</span>
     </div>
   );
 };

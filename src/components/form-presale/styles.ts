@@ -7,9 +7,10 @@ export const FormRoot = styled.form`
 export const StatsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin: 0.5rem 0 1rem;
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 `;
 
@@ -25,16 +26,17 @@ export const StatValue = styled.span`
 `;
 
 export const SectionTitle = styled.h4`
-  margin-top: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
 `;
 
 export const Separator = styled.hr`
-  margin: 3rem 0;
+  margin: 1.5rem 0;
 `;
 
 export const DepositCard = styled.div`
   border: 1px solid #333;
-  padding: 1rem 2.5rem;
+  padding: 0.75rem 2rem;
   display: inline-flex;
   gap: 1rem;
   align-items: center;
@@ -43,7 +45,7 @@ export const DepositCard = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: stretch;
-    padding: 1.5rem 2.5rem;
+    padding: 1.25rem 2rem;
     margin: 0 1rem;
   }
 `;
@@ -70,14 +72,16 @@ export const AmountRow = styled.div`
 export const ConstraintsList = styled.ul`
   display: inline-block;
   text-align: left;
-  margin: 2rem 0;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  padding: 0;
 `;
 
 // Agree checkbox block
 export const AgreeContainer = styled.div`
   display: flex;
   gap: 1rem;
-  padding: 2rem 0 3rem;
+  padding: 1.5rem 0 2rem;
   align-items: center;
   justify-content: center;
   text-align: left;

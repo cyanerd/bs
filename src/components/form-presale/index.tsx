@@ -212,7 +212,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
         />
         <AgreeLabel htmlFor="agree">
           I agree to{" "}
-          <AgreeLink href="#" target="_blank" rel="noopener noreferrer">
+          <AgreeLink href="/terms.pdf" target="_blank" rel="noopener noreferrer">
             the terms and conditions
           </AgreeLink>
         </AgreeLabel>

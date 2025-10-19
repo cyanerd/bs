@@ -39,6 +39,8 @@
     "alias-reuse": "3.0.5",
     "eslint": "8.56.0",
     "eslint-plugin-import": "2.29.1",
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5",
     "typescript": "5.4.3",
     "vite": "5.2.2",
     "vite-plugin-checker": "0.6.4",

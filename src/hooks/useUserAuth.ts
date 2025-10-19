@@ -1,4 +1,5 @@
 import { getAuth } from "@/api/getAuth";
+import { fetchWalletInfo, WalletInfo } from "@/api/presale";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -10,6 +11,7 @@ export function useUserAuth() {
 
   const [walletAddress, setWalletAddress] = useState("");
   const [name, setName] = useState("");
+  const [walletInfo, setWalletInfo] = useState<WalletInfo | null>(null);
 
   const { connected } = useWallet();
 
@@ -36,6 +38,10 @@ export function useUserAuth() {
   const completeWalletConnect = async (publicKey: string) => {
     setWalletAddress(publicKey);
     setWalletConnected(true);
+    try {
+      const info = await fetchWalletInfo(publicKey);
+      setWalletInfo(info);
+    } catch {}
   };
 
   const logout = () => {
@@ -57,5 +63,6 @@ export function useUserAuth() {
     loading,
     walletAddress,
     name,
+    walletInfo,
   };
 }

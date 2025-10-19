@@ -16,7 +16,7 @@ export const Content = styled.div`
   flex-direction: column;
 `;
 
-export const Title = styled.h4`
+export const Title = styled.h3`
   margin: 0 0 0.5rem 0;
 `;
 

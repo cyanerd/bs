@@ -160,7 +160,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
       <Separator />
 
       <div>
-        <h4 style={{ marginBottom: '0.8rem' }}>Deposit Chamber</h4>
+        <h3 style={{ marginBottom: '0.8rem' }}>Deposit Chamber</h3>
       </div>
 
       <DepositCard>
@@ -201,7 +201,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
               }
             }}
           />
-          {priceMode}
+          <span style={{ fontSize: '1.25rem' }}>{priceMode}</span>
         </AmountRow>
       </DepositCard>
 

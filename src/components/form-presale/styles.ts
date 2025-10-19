@@ -52,6 +52,8 @@ export const DepositCard = styled.div`
 
 export const AmountLabel = styled.span`
   text-align: left;
+  font-size: 1.25rem;
+    
   @media (max-width: 768px) {
     text-align: center;
   }
@@ -61,7 +63,7 @@ export const AmountRow = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  width: 10rem;
+  width: 11rem;
   padding: 0.55rem 0;
 
   @media (max-width: 768px) {
@@ -73,7 +75,6 @@ export const ConstraintsList = styled.ul`
   display: inline-block;
   text-align: left;
   margin-top: 1rem;
-  font-size: 0.8rem;
   padding: 0;
 `;
 

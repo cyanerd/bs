@@ -56,5 +56,4 @@ export const BottomRow = styled.div`
   align-items: center;
   padding: 0 0.25rem;
   color: #bbb;
-  font-size: 0.8rem;
 `;

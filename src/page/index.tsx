@@ -66,9 +66,65 @@ const PageContent = () => {
       <Container>
         <Header
           start={
-            <a href="/" style={{ position: "relative", top: "3px" }}>
-              <img src="/images/logo.png" alt="Logo" height="40" />
-            </a>
+            <>
+              <a href="/" style={{ position: "relative", top: "3px" }}>
+                <img src="/images/logo.png" alt="Logo" height="40" />
+              </a>
+              <div style={{ display: "flex", gap: "0.75rem", marginLeft: "1.5rem" }}>
+                <a
+                  href="https://google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "34px",
+                    height: "34px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "8px",
+                    transition: "all 0.2s ease",
+                    border: "1px solid rgba(255, 255, 255, 0.2)"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
+                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                  }}
+                >
+                  <img src="/icons/discord.png" alt="Discord" height="20" />
+                </a>
+                <a
+                  href="https://google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "34px",
+                    height: "34px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "8px",
+                    transition: "all 0.2s ease",
+                    border: "1px solid rgba(255, 255, 255, 0.2)"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
+                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                  }}
+                >
+                  <img src="/icons/git.png" alt="Git" height="20" />
+                </a>
+              </div>
+            </>
           }
           end={
             <WalletConnect

@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import {
+  PublicKey,
+  Transaction,
+  SystemProgram,
+  LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { Countdown } from "../countdown";
@@ -20,6 +25,7 @@ import {
   AgreeLabel,
   AgreeLink,
 } from "./styles";
+import { ProgressBar } from "../progress-bar";
 // import SolanaIcon from "@/components/icons/solana.svg";
 
 type Props = {
@@ -48,27 +54,29 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
 
   const handleTransfer = async () => {
     if (!publicKey) {
-      alert('Please connect your wallet first.');
+      alert("Please connect your wallet first.");
       return;
     }
 
     // Only support SOL transfers for now
     if (priceMode === "USDC") {
-      alert('USDC transfers are not yet supported. Please switch to SOL mode.');
+      alert("USDC transfers are not yet supported. Please switch to SOL mode.");
       return;
     }
 
     try {
       const recipientAddress = "3waghJUxmn1kpZHbcspzmS6gBYEarw7zGR2tX7k39TyY";
       if (!recipientAddress) {
-        alert('Recipient wallet address is not configured. Please set VITE_RECIPIENT_WALLET in your environment variables.');
+        alert(
+          "Recipient wallet address is not configured. Please set VITE_RECIPIENT_WALLET in your environment variables.",
+        );
         return;
       }
       const recipientPublicKey = new PublicKey(recipientAddress);
 
       const depositAmount = solPrice;
       if (!depositAmount) {
-        alert('Please enter a valid deposit amount.');
+        alert("Please enter a valid deposit amount.");
         return;
       }
 
@@ -78,7 +86,13 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
       const requiredAmount = depositAmount + 0.001; // Add small buffer for transaction fee
 
       if (balanceInSol < requiredAmount) {
-        alert(`Insufficient balance. You have ${balanceInSol.toFixed(4)} SOL but need ${requiredAmount.toFixed(4)} SOL (including transaction fee).`);
+        alert(
+          `Insufficient balance. You have ${balanceInSol.toFixed(
+            4,
+          )} SOL but need ${requiredAmount.toFixed(
+            4,
+          )} SOL (including transaction fee).`,
+        );
         return;
       }
 
@@ -92,20 +106,24 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           fromPubkey: publicKey,
           toPubkey: recipientPublicKey,
           lamports: depositAmount * LAMPORTS_PER_SOL,
-        })
+        }),
       );
 
       const signature = await sendTransaction(transaction, connection);
-      console.log('Transaction sent:', signature);
-      
-      alert('Transaction sent! Confirming...');
-      await connection.confirmTransaction(signature, 'confirmed');
+      console.log("Transaction sent:", signature);
 
-      alert(`Transfer successful! ${depositAmount} SOL sent to the presale wallet.\nTransaction: ${signature}`);
+      alert("Transaction sent! Confirming...");
+      await connection.confirmTransaction(signature, "confirmed");
+
+      alert(
+        `Transfer successful! ${depositAmount} SOL sent to the presale wallet.\nTransaction: ${signature}`,
+      );
     } catch (error: any) {
-      console.error('Transfer error:', error);
-      const errorMessage = error?.message || 'Unknown error occurred';
-      alert(`Transfer failed: ${errorMessage}\n\nPlease check the console for more details.`);
+      console.error("Transfer error:", error);
+      const errorMessage = error?.message || "Unknown error occurred";
+      alert(
+        `Transfer failed: ${errorMessage}\n\nPlease check the console for more details.`,
+      );
     }
   };
 
@@ -128,6 +146,12 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           <StatValue>255</StatValue>
         </StatCard>
       </StatsGrid>
+
+      <ProgressBar
+        value={20}
+        leftLabel="20% of $ 700.000 minimum"
+        style={{ margin: "1.5rem 2rem 0" }}
+      />
 
       <SectionTitle>Time Remaining</SectionTitle>
       <Countdown />
@@ -188,7 +212,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
         />
         <AgreeLabel htmlFor="agree">
           I agree to{" "}
-          <AgreeLink href="#" target="_blank" rel="noopener noreferrer">
+          <AgreeLink href="/terms.pdf" target="_blank" rel="noopener noreferrer">
             the terms and conditions
           </AgreeLink>
         </AgreeLabel>

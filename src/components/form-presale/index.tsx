@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import {
   PublicKey,
@@ -54,20 +55,20 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
 
   const handleTransfer = async () => {
     if (!publicKey) {
-      alert("Please connect your wallet first.");
+      toast.error("Please connect your wallet first.");
       return;
     }
 
     // Only support SOL transfers for now
     if (priceMode === "USDC") {
-      alert("USDC transfers are not yet supported. Please switch to SOL mode.");
+      toast.error("USDC transfers are not yet supported. Please switch to SOL mode.");
       return;
     }
 
     try {
       const recipientAddress = "3waghJUxmn1kpZHbcspzmS6gBYEarw7zGR2tX7k39TyY";
       if (!recipientAddress) {
-        alert(
+        toast.error(
           "Recipient wallet address is not configured. Please set VITE_RECIPIENT_WALLET in your environment variables.",
         );
         return;
@@ -76,7 +77,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
 
       const depositAmount = solPrice;
       if (!depositAmount) {
-        alert("Please enter a valid deposit amount.");
+        toast.error("Please enter a valid deposit amount.");
         return;
       }
 
@@ -86,7 +87,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
       const requiredAmount = depositAmount + 0.001; // Add small buffer for transaction fee
 
       if (balanceInSol < requiredAmount) {
-        alert(
+        toast.error(
           `Insufficient balance. You have ${balanceInSol.toFixed(
             4,
           )} SOL but need ${requiredAmount.toFixed(
@@ -112,16 +113,16 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
       const signature = await sendTransaction(transaction, connection);
       console.log("Transaction sent:", signature);
 
-      alert("Transaction sent! Confirming...");
+      toast.error("Transaction sent! Confirming...");
       await connection.confirmTransaction(signature, "confirmed");
 
-      alert(
+      toast.error(
         `Transfer successful! ${depositAmount} SOL sent to the presale wallet.\nTransaction: ${signature}`,
       );
     } catch (error: any) {
       console.error("Transfer error:", error);
       const errorMessage = error?.message || "Unknown error occurred";
-      alert(
+      toast.error(
         `Transfer failed: ${errorMessage}\n\nPlease check the console for more details.`,
       );
     }
@@ -129,7 +130,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
 
   return (
     <FormRoot>
-      <h3>$STRAND Presale Live!</h3>
+      <h3 style={{ marginTop: 0 }}>$STRAND Presale Live!</h3>
 
       <StatsGrid>
         <StatCard>
@@ -138,7 +139,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           <StatValue>$ 0.00023</StatValue>
         </StatCard>
         <StatCard>
-          <span>Amount Sold</span>
+          <span>Total deposited</span>
           <StatValue>4000 SOL</StatValue>
         </StatCard>
         <StatCard>
@@ -149,8 +150,8 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
 
       <ProgressBar
         value={20}
-        leftLabel="20% of $ 700.000 minimum"
-        style={{ margin: "1.5rem 2rem 0" }}
+        leftLabel="20% of $700.000 minimum"
+        style={{ margin: "1rem 2rem 0" }}
       />
 
       <SectionTitle>Time Remaining</SectionTitle>
@@ -159,7 +160,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
       <Separator />
 
       <div>
-        <h3>Deposit Chamber</h3>
+        <h4 style={{ marginBottom: '0.8rem' }}>Deposit Chamber</h4>
       </div>
 
       <DepositCard>

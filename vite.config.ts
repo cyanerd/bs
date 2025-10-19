@@ -12,7 +12,7 @@ export default defineConfig({
       typescript: true,
     }),
   ],
-  base: "/presale",
+  base: "/",
   root: "./src",
   publicDir: path.resolve(__dirname, "public"),
   build: {

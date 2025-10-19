@@ -4,6 +4,8 @@ import { toast, ToastContainer } from "react-toastify";
 import { TwitterConnect } from "@/components/twitter/twitter-connect";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { useWalletBalance } from "@/hooks/useWalletBalance";
+import { usePresaleState } from "@/hooks/usePresaleState";
+import { fetchWalletInfo } from "@/api/presale";
 
 import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
@@ -35,9 +37,11 @@ const PageContent = () => {
     name,
     completeWalletConnect,
     auth,
+    walletInfo,
   } = useUserAuth();
 
   const { balanceSol } = useWalletBalance();
+  const { presaleState } = usePresaleState();
 
   const ready = Boolean(isWalletConnected && walletAddress);
 
@@ -56,10 +60,17 @@ const PageContent = () => {
   };
 
   useEffect(() => {
-    if (ready) {
-      auth().catch(() => {});
+    console.log('q1', ready, walletAddress);
+    if (ready && walletAddress) {
+      (async () => {
+        try {
+          await fetchWalletInfo(walletAddress);
+        } catch (e) {
+          // swallow, already logged in API layer
+        }
+      })();
     }
-  }, [ready]);
+  }, [ready, walletAddress]);
 
   return (
     <Wrapper>
@@ -123,6 +134,32 @@ const PageContent = () => {
                 >
                   <img src="/icons/git.png" alt="Git" height="20" />
                 </a>
+                <a
+                  href="https://google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "34px",
+                    height: "34px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "8px",
+                    transition: "all 0.2s ease",
+                    border: "1px solid rgba(255, 255, 255, 0.2)"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
+                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                  }}
+                >
+                  <img src="/icons/git.png" alt="Git" height="20" />
+                </a>
               </div>
             </>
           }
@@ -141,7 +178,7 @@ const PageContent = () => {
         <LayoutMain
           sidebar={
             <>
-              <Sidebar />
+              <Sidebar presaleState={presaleState} walletInfo={walletInfo} />
               <FormReferral
                 ready={ready}
                 handleReferralApply={handleReferralApply}

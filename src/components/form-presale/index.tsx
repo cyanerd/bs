@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { usePresaleState } from "@/hooks/usePresaleState";
 import {
   PublicKey,
   Transaction,
@@ -36,6 +37,7 @@ type Props = {
 export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
+  const { presaleState } = usePresaleState();
 
   const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
   const [solPrice, setSOLPrice] = useState<number | null>(200);
@@ -136,15 +138,15 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
         <StatCard>
           {/* Should be equal to Token Price in Sidebar */}
           <span>Your price</span>
-          <StatValue>$ 0.00023</StatValue>
+          <StatValue>$ {presaleState.publicPrice.toFixed(5)}</StatValue>
         </StatCard>
         <StatCard>
           <span>Total deposited</span>
-          <StatValue>4000 SOL</StatValue>
+          <StatValue>{presaleState.sold.toLocaleString()} SOL</StatValue>
         </StatCard>
         <StatCard>
           <span>Backers</span>
-          <StatValue>255</StatValue>
+          <StatValue>{presaleState.backers.toLocaleString()}</StatValue>
         </StatCard>
       </StatsGrid>
 
@@ -155,7 +157,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
       />
 
       <SectionTitle>Time Remaining</SectionTitle>
-      <Countdown />
+      <Countdown dateTarget={presaleState.finish * 1000} />
 
       <Separator />
 

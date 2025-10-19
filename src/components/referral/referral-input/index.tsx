@@ -15,7 +15,7 @@ type RefInputProps = {
 };
 
 export const ReferralInput: React.FC<RefInputProps> = ({
-  placeholder = "XXXX",
+  placeholder = "",
   value,
   onChange,
   onApply,

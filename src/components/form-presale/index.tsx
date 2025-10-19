@@ -171,7 +171,6 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
           <Input
             name="price"
             type="number"
-            placeholder="XXX.XX"
             min={MIN_DEPOSIT}
             max={MAX_DEPOSIT}
             step="0.1"

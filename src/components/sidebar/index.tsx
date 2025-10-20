@@ -2,6 +2,7 @@ import React from 'react';
 import {PresaleState} from '@/api/config';
 import {WalletInfo} from '@/api/presale';
 import {LoadingWrapper} from '@/components/loading-wrapper';
+import {formatPrice} from '@/utils/format';
 import {
   SidebarRoot,
   SidebarHeader,
@@ -26,6 +27,9 @@ type Props = {
 };
 
 export const Sidebar = ({presaleState, walletInfo, loaded}: Props) => {
+
+  console.log('walletInfo', walletInfo);
+
   return (
     <SidebarRoot>
       <SidebarHeader>Inventory & Stats</SidebarHeader>
@@ -55,7 +59,7 @@ export const Sidebar = ({presaleState, walletInfo, loaded}: Props) => {
               <RowText>Price:</RowText>
               <RowValue>
                 <LoadingWrapper loaded={loaded}>
-                  $ {(walletInfo?.price ?? presaleState?.priceNoWL)?.toFixed(5)}
+                  $ {formatPrice(walletInfo?.price ?? presaleState?.priceNoWL)}
                 </LoadingWrapper>
               </RowValue>
             </Row>

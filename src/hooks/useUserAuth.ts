@@ -37,14 +37,18 @@ export function useUserAuth() {
       });
   };
 
-  const completeWalletConnect = async (publicKey: string) => {
-    setWalletAddress(publicKey);
-    setWalletConnected(true);
-    setCookie(WALLET_COOKIE_NAME, publicKey);
+  const fetchWallet = async () => {
     try {
       const info = await fetchWalletInfo(wallet?.adapter.name, referralCode);
       setWalletInfo(info);
     } catch {}
+  }
+
+  const completeWalletConnect = async (publicKey: string) => {
+    setWalletAddress(publicKey);
+    setWalletConnected(true);
+    setCookie(WALLET_COOKIE_NAME, publicKey);
+    fetchWallet();
   };
 
   const logout = () => {
@@ -70,5 +74,6 @@ export function useUserAuth() {
     walletName: wallet?.adapter.name,
     referralCode,
     setReferralCode,
+    fetchWalletInfo: fetchWallet
   };
 }

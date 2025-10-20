@@ -76,7 +76,7 @@ export const ReferralInput: React.FC<RefInputProps> = ({
         $background="#333"
         $color="#fff"
         onClick={handleApply}
-        disabledText={disabledText}
+        disabledText={disabled ? disabledText : (currentValue.length < effectiveMin ? `Min ${effectiveMin} characters` : `Max ${effectiveMax} characters`)}
         disabled={
           disabled ||
           currentValue.length < effectiveMin ||

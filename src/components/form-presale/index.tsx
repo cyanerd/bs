@@ -31,6 +31,7 @@ import { ProgressBar } from "../progress-bar";
 import {WalletInfo} from '@/api/presale';
 import { PRESALE_TOTAL_SOL } from '@/api/config';
 import { LoadingWrapper } from '@/components/loading-wrapper';
+import {formatPrice} from '@/utils/format';
 
 type Props = {
   defaultPriceMode?: "SOL" | "USDC";
@@ -100,10 +101,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
       const requiredAmount = depositAmount + 0.001; // Add small buffer for transaction fee
 
       if (balanceInSol < requiredAmount) {
-        toast.error(
-          `Insufficient balance. You have ${balanceInSol?.toFixed(4)} SOL 
-          but need ${requiredAmount?.toFixed(4)} SOL (including transaction fee).`,
-        );
+        toast.error('Insufficient balance');
         return;
       }
 
@@ -147,7 +145,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
           <span>Price</span>
           <StatValue>
             <LoadingWrapper loaded={loaded}>
-              $ {(walletInfo?.price ?? presaleState?.priceNoWL)?.toFixed(5)}
+              $ {formatPrice(walletInfo?.price ?? presaleState?.priceNoWL)}
             </LoadingWrapper>
           </StatValue>
         </StatCard>

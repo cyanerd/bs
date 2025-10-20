@@ -3,7 +3,6 @@ import { toast, ToastContainer } from "react-toastify";
 
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { usePresaleState } from "@/hooks/usePresaleState";
-import { fetchWalletInfo } from "@/api/presale";
 import { setCookie, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
 
 import { WalletConnect } from "@/components/wallet/wallet-connect";
@@ -30,7 +29,6 @@ import { Tokenomics } from "@/components/tokenomics";
 const PageContent = () => {
   const {
     walletAddress,
-    isTwitterConnected,
     isWalletConnected,
     name,
     completeWalletConnect,
@@ -39,6 +37,7 @@ const PageContent = () => {
     walletName,
     referralCode,
     setReferralCode,
+    fetchWalletInfo
   } = useUserAuth();
 
   const { presaleState, loaded } = usePresaleState(walletName);
@@ -66,7 +65,7 @@ const PageContent = () => {
     if (ready && walletAddress) {
       (async () => {
         try {
-          await fetchWalletInfo(walletName, referralCode);
+          await fetchWalletInfo();
         } catch (e) {
           // swallow, already logged in API layer
         }

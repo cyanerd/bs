@@ -36,8 +36,8 @@ type Props = {
 
 export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
   const { connection } = useConnection();
-  const { publicKey, sendTransaction } = useWallet();
-  const { presaleState } = usePresaleState();
+  const { publicKey, sendTransaction, wallet } = useWallet();
+  const { presaleState } = usePresaleState(wallet?.adapter.name);
 
   const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
   const [solPrice, setSOLPrice] = useState<number | null>(200);

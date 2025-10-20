@@ -3,6 +3,7 @@ import { fetchWalletInfo, WalletInfo } from "@/api/presale";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { setCookie, getCookie, WALLET_COOKIE_NAME, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
 
 export function useUserAuth() {
   const [isWalletConnected, setWalletConnected] = useState(false);
@@ -12,8 +13,9 @@ export function useUserAuth() {
   const [walletAddress, setWalletAddress] = useState("");
   const [name, setName] = useState("");
   const [walletInfo, setWalletInfo] = useState<WalletInfo | null>(null);
+  const [referralCode, setReferralCode] = useState<string>(() => getCookie(REFERRAL_CODE_COOKIE_NAME) || "");
 
-  const { connected } = useWallet();
+  const { connected, wallet } = useWallet();
 
   const auth = async () => {
     setLoading(true);
@@ -38,8 +40,9 @@ export function useUserAuth() {
   const completeWalletConnect = async (publicKey: string) => {
     setWalletAddress(publicKey);
     setWalletConnected(true);
+    setCookie(WALLET_COOKIE_NAME, publicKey);
     try {
-      const info = await fetchWalletInfo(publicKey);
+      const info = await fetchWalletInfo(wallet?.adapter.name, referralCode);
       setWalletInfo(info);
     } catch {}
   };
@@ -64,5 +67,8 @@ export function useUserAuth() {
     walletAddress,
     name,
     walletInfo,
+    walletName: wallet?.adapter.name,
+    referralCode,
+    setReferralCode,
   };
 }

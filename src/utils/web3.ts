@@ -17,7 +17,7 @@ export class Web3 {
       console.info('Found existing signature, verifying...');
   
       try {
-        const data = await signVerify(wallet, storedSignature);
+        const data = await signVerify(storedSignature);
         if (data.result === "success") {
           return true;
         } else {
@@ -49,7 +49,7 @@ export class Web3 {
         if (newSignature) {
           console.info('Verifying newly created signature');
           try {
-            const data = await signVerify(wallet, newSignature);
+            const data = await signVerify(newSignature);
             if (data.result === "success") {
               return true;
             } else {
@@ -85,7 +85,7 @@ export class Web3 {
       return false;
     }
 
-    const { result, message } = await getSignMessage(publicKeyString);
+    const { result, message } = await getSignMessage();
     if (result !== 'success') {
       throw new Error('Unable to sign wallet: ' + message);
     }

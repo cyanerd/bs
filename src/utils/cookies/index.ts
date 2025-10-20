@@ -1,7 +1,7 @@
 import type { WalletContextState } from '@solana/wallet-adapter-react';
 import type { CookieGetOptions, CookieSetOptions } from 'universal-cookie';
 import Cookies from 'universal-cookie';
-import { COOKIE_MAX_AGE } from './const';
+import { COOKIE_MAX_AGE, WALLET_COOKIE_NAME } from './const';
 
 export type SignCustomMessageProps = Pick<WalletContextState, 'publicKey' | 'signMessage'>;
 
@@ -22,3 +22,5 @@ export const setCookie = (name: string, value: string | boolean | null, options:
     ...options,
   });
 };
+
+export { WALLET_COOKIE_NAME, SIGNATURE_COOKIE_NAME, SIGNATURE_WALLET_COOKIE_NAME, REFERRAL_CODE_COOKIE_NAME } from './const';

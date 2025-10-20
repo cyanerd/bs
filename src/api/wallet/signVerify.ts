@@ -1,14 +1,17 @@
+import axios from 'axios';
 import { API_HOST } from '@/api/config';
 
-export const signVerify = (wallet: string, signature: string) =>
-  fetch(`${API_HOST}/signVerify`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      wallet,
+export const signVerify = async (signature: string) => {
+  try {
+    const response = await axios.post(`${API_HOST}/signVerify`, {
       signature,
-    }),
-  })
-    .then((response) => response.json());
+    }, {
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Sign verify error:', error);
+    throw error;
+  }
+};

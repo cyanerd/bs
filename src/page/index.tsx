@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
-import { TwitterConnect } from "@/components/twitter/twitter-connect";
 import { useUserAuth } from "@/hooks/useUserAuth";
-import { useWalletBalance } from "@/hooks/useWalletBalance";
 import { usePresaleState } from "@/hooks/usePresaleState";
 import { fetchWalletInfo } from "@/api/presale";
+import { setCookie, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
 
 import { WalletConnect } from "@/components/wallet/wallet-connect";
 import { WalletContext } from "@/components/wallet/wallet-context";
 
-import { Container, Wrapper, Flexbox } from "./styles";
-import { ReferralInput } from "@/components/referral/referral-input";
-import { WalletInfo } from "@/components/wallet/wallet-info";
+import { Container, Wrapper } from "./styles";
 import {
   Header,
   Hero,
   Main as LayoutMain,
   Section as LayoutSection,
 } from "@/components/layout";
+import { Partners, Row, Link, LinkBadge } from "@/components/layout/hero/styles";
 
 import "react-toastify/dist/ReactToastify.css";
 import { FormPresale } from "@/components/form-presale";
@@ -38,10 +36,12 @@ const PageContent = () => {
     completeWalletConnect,
     auth,
     walletInfo,
+    walletName,
+    referralCode,
+    setReferralCode,
   } = useUserAuth();
 
-  const { balanceSol } = useWalletBalance();
-  const { presaleState } = usePresaleState();
+  const { presaleState } = usePresaleState(walletName);
 
   const ready = Boolean(isWalletConnected && walletAddress);
 
@@ -53,24 +53,65 @@ const PageContent = () => {
     await auth();
   };
 
-  const handleReferralApply = (refCode: string) => {
-    toast.info(`Referral applied: ${refCode || "(empty)"}`, {
+  const handleReferralApply = async (refCode: string) => {
+    setReferralCode(refCode);
+    setCookie(REFERRAL_CODE_COOKIE_NAME, refCode);
+
+    toast.success(`Referral code applied: ${refCode}`, {
       autoClose: 5000,
     });
   };
 
   useEffect(() => {
-    console.log('q1', ready, walletAddress);
     if (ready && walletAddress) {
       (async () => {
         try {
-          await fetchWalletInfo(walletAddress);
+          await fetchWalletInfo(walletName, referralCode);
         } catch (e) {
           // swallow, already logged in API layer
         }
       })();
     }
-  }, [ready, walletAddress]);
+  }, [ready, walletAddress, walletName, referralCode]);
+
+  type PartnerItem = {
+    name: string;
+    href: string;
+    imageSrc: string;
+  };
+  
+  const partners: PartnerItem[] = [
+    {
+      name: "Play Solana",
+      href: "#",
+      imageSrc: "/images/partners/Play-Solana.jpg",
+    },
+    {
+      name: "Solana Mobile",
+      href: "#",
+      imageSrc: "/images/partners/Solana-Mobile.jpg",
+    },
+    {
+      name: "Magic Block",
+      href: "#",
+      imageSrc: "/images/partners/Magic-Block.jpg",
+    },
+    {
+      name: "Magic Eden",
+      href: "#",
+      imageSrc: "/images/partners/Magic-Eden.jpg",
+    },
+    {
+      name: "Phantom",
+      href: "#",
+      imageSrc: "/images/partners/Phantom.jpg",
+    },
+    {
+      name: "Solflare",
+      href: "#",
+      imageSrc: "/images/partners/Solflare.jpg",
+    },
+  ];
 
   return (
     <Wrapper>
@@ -87,78 +128,57 @@ const PageContent = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    display: "block",
                     width: "34px",
                     height: "34px",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    borderRadius: "8px",
                     transition: "all 0.2s ease",
-                    border: "1px solid rgba(255, 255, 255, 0.2)"
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
-                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.4)";
+                    e.currentTarget.style.opacity = "0.8";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                    e.currentTarget.style.opacity = "1";
                   }}
                 >
-                  <img src="/icons/discord.png" alt="Discord" height="20" />
+                  <img src="/icons/1_twi.png" alt="X" width="100%" height="100%" />
                 </a>
                 <a
                   href="https://google.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    display: "block",
                     width: "34px",
                     height: "34px",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    borderRadius: "8px",
                     transition: "all 0.2s ease",
-                    border: "1px solid rgba(255, 255, 255, 0.2)"
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
-                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.4)";
+                    e.currentTarget.style.opacity = "0.8";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                    e.currentTarget.style.opacity = "1";
                   }}
                 >
-                  <img src="/icons/git.png" alt="Git" height="20" />
+                  <img src="/icons/2_discord_button.png" alt="Discord" width="100%" height="100%" />
                 </a>
                 <a
                   href="https://google.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    display: "block",
                     width: "34px",
                     height: "34px",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    borderRadius: "8px",
                     transition: "all 0.2s ease",
-                    border: "1px solid rgba(255, 255, 255, 0.2)"
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
-                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.4)";
+                    e.currentTarget.style.opacity = "0.8";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                    e.currentTarget.style.opacity = "1";
                   }}
                 >
-                  <img src="/icons/git.png" alt="Git" height="20" />
+                  <img src="/icons/3_gitbook_button.png" alt="GitBook" width="100%" height="100%" />
                 </a>
               </div>
             </>
@@ -182,6 +202,7 @@ const PageContent = () => {
               <FormReferral
                 ready={ready}
                 handleReferralApply={handleReferralApply}
+                currentReferralCode={referralCode}
               />
             </>
           }
@@ -205,6 +226,29 @@ const PageContent = () => {
 
         <LayoutSection>
           <FAQ />
+        </LayoutSection>
+
+        <LayoutSection>
+          <h3 style={{ textAlign: 'center', marginBottom: '2rem' }}>Partners</h3>
+          <Partners style={{ border: 'none', display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+            {partners.map((partner, index) => (
+              <Row key={index}>
+                <Link
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={partner.imageSrc}
+                    alt={partner.name}
+                    height={56}
+                    style={{ borderRadius: 4 }}
+                  />
+                  <LinkBadge>View on X</LinkBadge>
+                </Link>
+              </Row>
+            ))}
+          </Partners>
         </LayoutSection>
 
         <br />

@@ -14,23 +14,26 @@ const getBasicAuthHeader = () => {
   return { Authorization: `Basic ${token}` };
 };
 
-// CORS middleware
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  
+// Proxy middleware
+app.use('/api', (req, res, next) => {
+  // Set CORS headers before proxy
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  // Handle OPTIONS preflight
   if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie');
     return res.sendStatus(200);
   }
-  
-  next();
-});
 
-// Proxy middleware
-app.use('/api', createProxyMiddleware({
+  next();
+}, createProxyMiddleware({
   target: API_BASE_URL,
   changeOrigin: true,
+  cookieDomainRewrite: {
+    '*': '', // Remove domain from cookies to make them work on localhost
+  },
   pathRewrite: {
     '^/api': '',
   },
@@ -42,20 +45,20 @@ app.use('/api', createProxyMiddleware({
 
     console.log(`[PROXY] ${req.method} ${req.url} -> ${API_BASE_URL}${req.url.replace(/^\/api/, '')}`);
   },
-  onProxyRes: (proxyRes, req) => {
-    console.log(`[PROXY] ${req.method} ${req.url} <- ${proxyRes.statusCode}`);
-  },
-  onError: (err, req, res) => {
-    console.error(`[PROXY ERROR] ${req.method} ${req.url}:`, err.message);
-    res.status(500).json({ error: 'Proxy error', message: err.message });
-  },
 }));
 
+
 // Healthcheck and fallback 404 with logging
-app.get('/health', (_req, res) => res.json({ ok: true }));
+app.get('/health', (_req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.json({ ok: true });
+});
 
 app.use((req, res) => {
   console.warn(`[404] ${req.method} ${req.url}`);
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.status(404).json({ error: 'Not found' });
 });
 

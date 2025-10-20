@@ -44,7 +44,7 @@ const tweets: Tweet[] = [
     handle: "@TylerDurden",
     text: '"Crypto Twitter 2.0 will exist in one of these online one day."',
     link: "https://x.com/TylerDurden/status/1934804659484676123",
-    position: { topPercent: 0, rightPercent: 3, rotateDeg: 12, zIndex: 10 },
+    position: { topPercent: 0, rightPercent: 6, rotateDeg: 12, zIndex: 10 },
   },
   {
     avatar: '/images/avatars/MagicBlock.jpg',
@@ -65,7 +65,7 @@ const tweets: Tweet[] = [
     handle: "@SolPlay_jonas",
     text: '"This is crazy, im actually playing a Solana on chain RPG O.O"',
     link: "https://x.com/SolPlay_jonas/status/1932739996521517162",
-    position: { bottomPercent: 20, rightPercent: 5, rotateDeg: 6, zIndex: 20 },
+    position: { bottomPercent: 20, rightPercent: 18, rotateDeg: 6, zIndex: 20 },
   },
   {
     avatar: '/images/avatars/xcryptobroeth.jpg',
@@ -74,8 +74,8 @@ const tweets: Tweet[] = [
     text: '"I get some nostalgic vibes whenever I start playing @blockstranding.Throw back to my Minecraft days."',
     link: "https://x.com/xCryptoBro/status/1964521046788473184",
     position: {
-      bottomPercent: 10,
-      rightPercent: 25,
+      bottomPercent: 0,
+      rightPercent: 20,
       rotateDeg: -15,
       zIndex: 10,
     },
@@ -102,7 +102,7 @@ const tweets: Tweet[] = [
     handle: "@tsubasaP2E",
     text: '"I can\'t remember the last time I pushed a leaderboard this hard"',
     link: "https://x.com/tsubasaP2E/status/1974041215726170252",
-    position: { topPercent: 5, leftPercent: 32, rotateDeg: 7, zIndex: 18 },
+    position: { topPercent: 5, leftPercent: 38, rotateDeg: 7, zIndex: 18 },
   },
   {
     avatar: '/images/avatars/Lawrence.jpg',
@@ -142,7 +142,7 @@ const tweets: Tweet[] = [
     handle: "@7_Tolani",
     text: '"staying up tonight to complete my game missions on @blockstranding. one of the best web3 games I\'ve ever played."',
     link: "https://x.com/7_Tolani/status/1964080600106635484",
-    position: { topPercent: 18, leftPercent: 45, rotateDeg: 5, zIndex: 16 },
+    position: { bottomPercent: 3, leftPercent: 25, rotateDeg: 5, zIndex: 16 },
   },
   {
     avatar: '/images/avatars/Explorer.jpg',
@@ -158,7 +158,7 @@ const tweets: Tweet[] = [
     handle: "@0x27eth",
     text: '"All i can see is Magic @blockstranding and @magicblock are real cook"',
     link: "https://x.com/0x27eth/status/1974837635534217651",
-    position: { topPercent: 8, rightPercent: 10, rotateDeg: 8, zIndex: 17 },
+    position: { topPercent: 18, rightPercent: 4, rotateDeg: 8, zIndex: 17 },
   },
   {
     avatar: '/images/avatars/DefiedPiper.jpg',
@@ -166,7 +166,7 @@ const tweets: Tweet[] = [
     handle: "@DefiedPiper",
     text: '"@blockstranding so smooth it makes me feel like im playing an old school zelda game until i realize i have no stam while in the middle of 20 monster thugs"',
     link: "https://x.com/DefiedPiper/status/1945770339130286213",
-    position: { bottomPercent: 5, rightPercent: 15, rotateDeg: -5, zIndex: 13 },
+    position: { bottomPercent: 5, rightPercent: 4, rotateDeg: -5, zIndex: 13 },
   },
   {
     avatar: '/images/avatars/yellowpanther黄豹💎.jpg',

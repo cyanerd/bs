@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchPresaleState } from '../api/presale';
 import { PresaleState } from '../api/config';
 
-export const usePresaleState = () => {
+export const usePresaleState = (walletName?: string) => {
   const [presaleState, setPresaleState] = useState<PresaleState>({
     backers: 255,
     sold: 4000,
@@ -17,7 +17,7 @@ export const usePresaleState = () => {
     const loadPresaleState = async () => {
       try {
         setLoading(true);
-        const data = await fetchPresaleState();
+        const data = await fetchPresaleState(walletName);
         setPresaleState(data);
         setError(null);
       } catch (err) {
@@ -28,7 +28,7 @@ export const usePresaleState = () => {
     };
 
     loadPresaleState();
-  }, []);
+  }, [walletName]);
 
   return { presaleState, loading, error };
 };

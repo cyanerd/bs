@@ -26,4 +26,7 @@ export const Sidebar = styled.aside`
   padding: 1rem;
   border-radius: 1rem;
   background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;

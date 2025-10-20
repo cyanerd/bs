@@ -1,10 +1,13 @@
 import axios from "axios";
-import { API_HOST, PresaleResponse, PresaleState, getBasicAuthHeaders } from "./config";
+import { API_HOST, PresaleResponse, PresaleState, getBasicAuthHeaders, getWalletParams } from "./config";
 
-export const fetchPresaleState = async (): Promise<PresaleState> => {
+export const fetchPresaleState = async (walletName?: string): Promise<PresaleState> => {
   try {
+    const params = getWalletParams(walletName);
     const response = await axios.get<PresaleResponse>(`${API_HOST}/presale/state`, {
-      headers: { ...getBasicAuthHeaders() }
+      headers: { ...getBasicAuthHeaders() },
+      params,
+      withCredentials: true,
     });
 
     if (response.data.result === 'success') {
@@ -41,12 +44,14 @@ type WalletInfoResponse = {
   data: WalletInfo;
 };
 
-export const fetchWalletInfo = async (wallet: string): Promise<WalletInfo> => {
+export const fetchWalletInfo = async (walletName?: string, referralCode?: string): Promise<WalletInfo> => {
   const url = `${API_HOST}/presale/wallet`;
   try {
+    const params = getWalletParams(walletName, referralCode);
     const response = await axios.get<WalletInfoResponse>(url, {
-      params: { wallet },
       headers: { ...getBasicAuthHeaders() },
+      params,
+      withCredentials: true,
     });
     if (response.data.result === 'success') {
       return response.data.data;

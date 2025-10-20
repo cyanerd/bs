@@ -14,6 +14,10 @@ import {
   RowValue,
 } from './styles';
 
+const formatBoost = (value: number): string => {
+  return value > 0 ? `+${value}%` : '-';
+};
+
 type Props = {
   presaleState: PresaleState;
   walletInfo?: WalletInfo | null;
@@ -55,38 +59,41 @@ export const Sidebar = ({ presaleState, walletInfo }: Props) => {
         <CardHeader>
           <HeaderText>Token Boost:</HeaderText>
           <HeaderValue>
-            +{(walletInfo?.boostSolflare ?? 0) + (walletInfo?.boostBonk ?? 0) + (walletInfo?.boostLucky ?? 0) + (walletInfo?.boost1Hour ?? 0) + (walletInfo?.boostCode ?? 0)}%
+            {(() => {
+              const total = (walletInfo?.boostSolflare ?? 0) + (walletInfo?.boostBonk ?? 0) + (walletInfo?.boostLucky ?? 0) + (walletInfo?.boost1Hour ?? 0) + (walletInfo?.boostCode ?? 0);
+              return total > 0 ? `+${total}%` : '-';
+            })()}
           </HeaderValue>
         </CardHeader>
         <List>
           <li>
             <Row>
               <RowText>SolFlare partner:</RowText>
-              <RowValue>+{walletInfo?.boostSolflare ?? 0}%</RowValue>
+              <RowValue>{formatBoost(walletInfo?.boostSolflare ?? 0)}</RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>Bonk Family:</RowText>
-              <RowValue>+{walletInfo?.boostBonk ?? 0}%</RowValue>
+              <RowValue>{formatBoost(walletInfo?.boostBonk ?? 0)}</RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>Lucky number:</RowText>
-              <RowValue>+{walletInfo?.boostLucky ?? 0}%</RowValue>
+              <RowValue>{formatBoost(walletInfo?.boostLucky ?? 0)}</RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>1st Hour Buyer:</RowText>
-              <RowValue>+{walletInfo?.boost1Hour ?? 0}%</RowValue>
+              <RowValue>{formatBoost(walletInfo?.boost1Hour ?? 0)}</RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>Code applied:</RowText>
-              <RowValue>+{walletInfo?.boostCode ?? 0}%</RowValue>
+              <RowValue>{formatBoost(walletInfo?.boostCode ?? 0)}</RowValue>
             </Row>
           </li>
         </List>

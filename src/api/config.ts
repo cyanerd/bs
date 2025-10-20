@@ -14,7 +14,27 @@ export const getBasicAuthHeaders = (): Record<string, string> => {
   }
 };
 
-export const API_X_CALLBACK = `https://presale.blockstranding.com/api/auth/twitter`;
+
+export const API_X_CALLBACK = `https://presale.blockstranding.com/api/presale/auth/twitter`;
+
+export const isSolflareWallet = (walletName?: string): boolean => {
+  if (!walletName) return false;
+  return walletName.toLowerCase().includes('solflare');
+};
+
+export const getWalletParams = (walletName?: string, referralCode?: string): Record<string, string> => {
+  const params: Record<string, string> = {};
+
+  if (isSolflareWallet(walletName)) {
+    params.solflare = '1';
+  }
+
+  if (referralCode) {
+    params.code = referralCode;
+  }
+
+  return params;
+};
 
 export interface PresaleState {
   backers: number;

@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "@/components/button";
-import { Input } from "@/components/input";
+import { Button } from "@/components/common/button";
+import { Input } from "@/components/common/input";
 import { Container } from "./styles";
 
 type RefInputProps = {
@@ -76,7 +76,13 @@ export const ReferralInput: React.FC<RefInputProps> = ({
         $background="#333"
         $color="#fff"
         onClick={handleApply}
-        disabledText={disabled ? disabledText : (currentValue.length < effectiveMin ? `Min ${effectiveMin} characters` : `Max ${effectiveMax} characters`)}
+        disabledText={
+          disabled
+            ? disabledText
+            : currentValue.length < effectiveMin
+            ? `Min ${effectiveMin} characters`
+            : `Max ${effectiveMax} characters`
+        }
         disabled={
           disabled ||
           currentValue.length < effectiveMin ||

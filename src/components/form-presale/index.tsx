@@ -8,8 +8,8 @@ import {
   SystemProgram,
   LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
-import { Button } from "@/components/button";
-import { Input } from "@/components/input";
+import { Button } from "@/components/common/button";
+import { Input } from "@/components/common/input";
 import { Countdown } from "../countdown";
 import {
   FormRoot,
@@ -27,10 +27,10 @@ import {
   AgreeLabel,
   AgreeLink,
 } from "./styles";
-import { ProgressBar } from "../progress-bar";
+import { ProgressBar } from "../common/progress-bar";
 import { WalletInfo } from "@/api/presale";
 import { PRESALE_TOTAL_SOL } from "@/api/config";
-import { LoadingWrapper } from "@/components/loading-wrapper";
+import { LoadingWrapper } from "@/components/common/loading-wrapper";
 import { formatPrice } from "@/utils/format";
 import { WalletConnect } from "../wallet/wallet-connect";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Flexbox } from "@/components/flexbox";
+import { Flexbox } from "@/components/common/flexbox";
 import { ReferralInput } from "../referral-input";
 
 export const FormReferral = ({

@@ -1,7 +1,7 @@
 import React from "react";
 import { API_X_CALLBACK } from "@/api/config";
 
-import { Button } from "@/components/button";
+import { Button } from "@/components/common/button";
 
 type Props = {
   name?: string;
@@ -16,7 +16,6 @@ export function TwitterConnect({
   disabledText,
   onConnect,
 }: Props) {
-
   const authenticateWithTwitter = () => {
     const state = encodeURIComponent(window.location.href);
     console.log(onConnect);

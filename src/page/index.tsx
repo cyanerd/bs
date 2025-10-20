@@ -14,6 +14,7 @@ import {
   Hero,
   Main as LayoutMain,
   Section as LayoutSection,
+  Footer,
 } from "@/components/layout";
 import {
   Partners,
@@ -289,6 +290,8 @@ const PageContent = () => {
         <LayoutSection>
           <FAQ />
         </LayoutSection>
+
+        <Footer />
       </Container>
     </Wrapper>
   );

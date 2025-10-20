@@ -8,6 +8,8 @@ type Props = {
   $color?: string;
   $width?: string;
   $size?: "small" | "medium";
+  $minWidth?: string;
+  $maxWidth?: string;
 };
 
 export const Button: React.FC<

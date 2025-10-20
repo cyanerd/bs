@@ -145,7 +145,11 @@ export const WalletConnect: React.FC<Props> = ({
       {modalVisible && <WalletModal onClose={() => setModalVisible(false)} />}
       <Container>
         <Wrapper>
-          <Button onClick={handleClickWallet}>
+          <Button
+            onClick={handleClickWallet}
+            $minWidth="250px"
+            $maxWidth="250px"
+          >
             {connected ? (
               <>
                 <Icon src={icon} />

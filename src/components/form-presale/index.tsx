@@ -28,17 +28,27 @@ import {
   AgreeLink,
 } from "./styles";
 import { ProgressBar } from "../progress-bar";
-import {WalletInfo} from '@/api/presale';
-import { PRESALE_TOTAL_SOL } from '@/api/config';
-import { LoadingWrapper } from '@/components/loading-wrapper';
-import {formatPrice} from '@/utils/format';
+import { WalletInfo } from "@/api/presale";
+import { PRESALE_TOTAL_SOL } from "@/api/config";
+import { LoadingWrapper } from "@/components/loading-wrapper";
+import { formatPrice } from "@/utils/format";
+import { WalletConnect } from "../wallet/wallet-connect";
 
 type Props = {
   defaultPriceMode?: "SOL" | "USDC";
   walletInfo?: WalletInfo | null;
+  showDepositPrice?: boolean;
+  requiresSignature: boolean;
+  onConnect: (publicKey: string) => Promise<void>;
 };
 
-export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => {
+export const FormPresale = ({
+  defaultPriceMode = "SOL",
+  walletInfo,
+  showDepositPrice,
+  requiresSignature,
+  onConnect,
+}: Props) => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction, wallet } = useWallet();
   const { presaleState, loaded } = usePresaleState(wallet?.adapter.name);
@@ -67,7 +77,9 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
 
     // Only support SOL transfers for now
     if (priceMode === "USDC") {
-      toast.error("USDC transfers are not yet supported. Please switch to SOL mode.");
+      toast.error(
+        "USDC transfers are not yet supported. Please switch to SOL mode.",
+      );
       return;
     }
 
@@ -90,7 +102,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
       // Validate deposit amount range
       if (depositAmount < MIN_DEPOSIT || depositAmount > MAX_DEPOSIT) {
         toast.error(
-          `Deposit amount must be between ${MIN_DEPOSIT} SOL and ${MAX_DEPOSIT} SOL.`
+          `Deposit amount must be between ${MIN_DEPOSIT} SOL and ${MAX_DEPOSIT} SOL.`,
         );
         return;
       }
@@ -101,7 +113,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
       const requiredAmount = depositAmount + 0.001; // Add small buffer for transaction fee
 
       if (balanceInSol < requiredAmount) {
-        toast.error('Insufficient balance');
+        toast.error("Insufficient balance");
         return;
       }
 
@@ -168,8 +180,13 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
       </StatsGrid>
 
       <ProgressBar
-        value={Math.min((presaleState?.sold ?? 0) / PRESALE_TOTAL_SOL * 100, 100)}
-        leftLabel={`${Math.round((presaleState?.sold ?? 0) / PRESALE_TOTAL_SOL * 100)}% of ${PRESALE_TOTAL_SOL?.toLocaleString()} SOL minimum`}
+        value={Math.min(
+          ((presaleState?.sold ?? 0) / PRESALE_TOTAL_SOL) * 100,
+          100,
+        )}
+        leftLabel={`${Math.round(
+          ((presaleState?.sold ?? 0) / PRESALE_TOTAL_SOL) * 100,
+        )}% of ${PRESALE_TOTAL_SOL?.toLocaleString()} SOL minimum`}
         style={{ margin: "1rem 2rem 0" }}
         loaded={loaded}
       />
@@ -180,7 +197,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
       <Separator />
 
       <div>
-        <h3 style={{ marginBottom: '0.8rem' }}>Deposit Chamber</h3>
+        <h3 style={{ marginBottom: "0.8rem" }}>Deposit Chamber</h3>
       </div>
 
       <DepositCard>
@@ -204,7 +221,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
               }
             }}
           />
-          <span style={{ fontSize: '1.25rem' }}>{priceMode}</span>
+          <span style={{ fontSize: "1.25rem" }}>{priceMode}</span>
         </AmountRow>
       </DepositCard>
 
@@ -216,11 +233,23 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
         />
         <AgreeLabel htmlFor="agree">
           I agree to{" "}
-          <AgreeLink href="/terms.pdf" target="_blank" rel="noopener noreferrer">
+          <AgreeLink
+            href="/terms.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             the terms and conditions
           </AgreeLink>
         </AgreeLabel>
       </AgreeContainer>
+
+      <WalletConnect
+        requiresSignature={requiresSignature}
+        signatureEnabled={false}
+        onConnect={onConnect}
+      />
+
+      <br />
 
       <Button
         disabled={!agree || !isPriceValid}
@@ -230,9 +259,16 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
             : "You must agree to the terms and conditions"
         }
         onClick={handleTransfer}
+        $minWidth="250px"
+        $maxWidth="250px"
       >
-        Deposit {priceMode === "SOL" ? solPrice ?? 0 : usdcPrice ?? 0}{" "}
-        {priceMode}
+        Deposit
+        {showDepositPrice && (
+          <>
+            {" "}
+            {priceMode === "SOL" ? solPrice ?? 0 : usdcPrice ?? 0} {priceMode}
+          </>
+        )}
       </Button>
 
       <ConstraintsList>

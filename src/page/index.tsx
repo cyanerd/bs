@@ -15,7 +15,12 @@ import {
   Main as LayoutMain,
   Section as LayoutSection,
 } from "@/components/layout";
-import { Partners, Row, Link, LinkBadge } from "@/components/layout/hero/styles";
+import {
+  Partners,
+  Row,
+  Link,
+  LinkBadge,
+} from "@/components/layout/hero/styles";
 
 import "react-toastify/dist/ReactToastify.css";
 import { FormPresale } from "@/components/form-presale";
@@ -37,7 +42,7 @@ const PageContent = () => {
     walletName,
     referralCode,
     setReferralCode,
-    fetchWalletInfo
+    fetchWalletInfo,
   } = useUserAuth();
 
   const { presaleState, loaded } = usePresaleState(walletName);
@@ -121,7 +126,13 @@ const PageContent = () => {
               <a href="/" style={{ position: "relative", top: "3px" }}>
                 <img src="/images/logo.png" alt="Logo" height="40" />
               </a>
-              <div style={{ display: "flex", gap: "0.75rem", marginLeft: "1.5rem" }}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.75rem",
+                  marginLeft: "1.5rem",
+                }}
+              >
                 <a
                   href="https://google.com"
                   target="_blank"
@@ -139,7 +150,12 @@ const PageContent = () => {
                     e.currentTarget.style.opacity = "1";
                   }}
                 >
-                  <img src="/icons/1_twi.png" alt="X" width="100%" height="100%" />
+                  <img
+                    src="/icons/1_twi.png"
+                    alt="X"
+                    width="100%"
+                    height="100%"
+                  />
                 </a>
                 <a
                   href="https://google.com"
@@ -158,7 +174,12 @@ const PageContent = () => {
                     e.currentTarget.style.opacity = "1";
                   }}
                 >
-                  <img src="/icons/2_discord_button.png" alt="Discord" width="100%" height="100%" />
+                  <img
+                    src="/icons/2_discord_button.png"
+                    alt="Discord"
+                    width="100%"
+                    height="100%"
+                  />
                 </a>
                 <a
                   href="https://google.com"
@@ -177,18 +198,17 @@ const PageContent = () => {
                     e.currentTarget.style.opacity = "1";
                   }}
                 >
-                  <img src="/icons/3_gitbook_button.png" alt="GitBook" width="100%" height="100%" />
+                  <img
+                    src="/icons/3_gitbook_button.png"
+                    alt="GitBook"
+                    width="100%"
+                    height="100%"
+                  />
                 </a>
               </div>
             </>
           }
-          end={
-            <WalletConnect
-              requiresSignature={!ready}
-              signatureEnabled={false}
-              onConnect={completeWalletConnect}
-            />
-          }
+          end={<></>}
         />
         <Hero
           title="Block Stranding"
@@ -197,7 +217,11 @@ const PageContent = () => {
         <LayoutMain
           sidebar={
             <>
-              <Sidebar presaleState={presaleState} walletInfo={walletInfo} loaded={loaded} />
+              <Sidebar
+                presaleState={presaleState}
+                walletInfo={walletInfo}
+                loaded={loaded}
+              />
               <FormReferral
                 ready={ready}
                 handleReferralApply={handleReferralApply}
@@ -205,7 +229,14 @@ const PageContent = () => {
               />
             </>
           }
-          content={<FormPresale walletInfo={walletInfo} />}
+          content={
+            <FormPresale
+              walletInfo={walletInfo}
+              requiresSignature={ready}
+              onConnect={completeWalletConnect}
+              showDepositPrice
+            />
+          }
         />
 
         <LayoutSection
@@ -224,8 +255,17 @@ const PageContent = () => {
         </LayoutSection>
 
         <LayoutSection>
-          <h3 style={{ textAlign: 'center', marginBottom: '2rem' }}>Partners</h3>
-          <Partners style={{ border: 'none', display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+          <h3 style={{ textAlign: "center", marginBottom: "2rem" }}>
+            Partners
+          </h3>
+          <Partners
+            style={{
+              border: "none",
+              display: "flex",
+              gap: "3rem",
+              flexWrap: "wrap",
+            }}
+          >
             {partners.map((partner, index) => (
               <Row key={index}>
                 <Link
@@ -249,8 +289,6 @@ const PageContent = () => {
         <LayoutSection>
           <FAQ />
         </LayoutSection>
-
-        <br />
       </Container>
     </Wrapper>
   );
@@ -261,7 +299,7 @@ export const Page = () => {
     <WalletContext>
       <ToastContainer
         theme="dark"
-        position="top-right"
+        position="top-center"
         hideProgressBar={true}
       />
       <PageContent />

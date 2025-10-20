@@ -74,7 +74,7 @@ export function useWalletBalance(): UseWalletBalanceResult {
 
   const balanceSol = useMemo(() => {
     if (lamports == null) return null;
-    return (lamports / LAMPORTS_PER_SOL).toFixed(4);
+    return (lamports / LAMPORTS_PER_SOL)?.toFixed(4);
   }, [lamports]);
 
   return {

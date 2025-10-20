@@ -1,6 +1,7 @@
 import React from 'react';
-import { PresaleState } from '@/api/config';
-import { WalletInfo } from '@/api/presale';
+import {PresaleState} from '@/api/config';
+import {WalletInfo} from '@/api/presale';
+import {LoadingWrapper} from '@/components/loading-wrapper';
 import {
   SidebarRoot,
   SidebarHeader,
@@ -21,9 +22,10 @@ const formatBoost = (value: number): string => {
 type Props = {
   presaleState: PresaleState;
   walletInfo?: WalletInfo | null;
+  loaded: boolean;
 };
 
-export const Sidebar = ({ presaleState, walletInfo }: Props) => {
+export const Sidebar = ({presaleState, walletInfo, loaded}: Props) => {
   return (
     <SidebarRoot>
       <SidebarHeader>Inventory & Stats</SidebarHeader>
@@ -31,25 +33,31 @@ export const Sidebar = ({ presaleState, walletInfo }: Props) => {
       <Card>
         <CardHeader>
           <HeaderText>Your deposit:</HeaderText>
-          <HeaderValue>{walletInfo?.totalDeposited ?? 0} SOL</HeaderValue>
+          <HeaderValue>
+            <LoadingWrapper loaded={walletInfo !== null}>
+              {walletInfo?.totalDeposited ?? 0} SOL
+            </LoadingWrapper>
+          </HeaderValue>
         </CardHeader>
         <List>
           <li>
             <Row>
               <RowText>Your WL tier:</RowText>
-              <RowValue>WL{walletInfo?.tier ?? 0}</RowValue>
+              <RowValue>
+                <LoadingWrapper loaded={walletInfo !== null}>
+                  WL{walletInfo?.tier ?? 0}
+                </LoadingWrapper>
+              </RowValue>
             </Row>
           </li>
           <li>
             <Row>
-              <RowText>Your price:</RowText>
-              <RowValue>$ {(walletInfo?.price ?? presaleState.publicPrice).toFixed(5)}</RowValue>
-            </Row>
-          </li>
-          <li>
-            <Row>
-              <RowText>Public price:</RowText>
-              <RowValue>$ {presaleState.publicPrice.toFixed(5)}</RowValue>
+              <RowText>Price:</RowText>
+              <RowValue>
+                <LoadingWrapper loaded={loaded}>
+                  $ {(walletInfo?.price ?? presaleState?.priceNoWL)?.toFixed(5)}
+                </LoadingWrapper>
+              </RowValue>
             </Row>
           </li>
         </List>
@@ -59,41 +67,63 @@ export const Sidebar = ({ presaleState, walletInfo }: Props) => {
         <CardHeader>
           <HeaderText>Token Boost:</HeaderText>
           <HeaderValue>
-            {(() => {
-              const total = (walletInfo?.boostSolflare ?? 0) + (walletInfo?.boostBonk ?? 0) + (walletInfo?.boostLucky ?? 0) + (walletInfo?.boost1Hour ?? 0) + (walletInfo?.boostCode ?? 0);
-              return total > 0 ? `+${total}%` : '-';
-            })()}
+            <LoadingWrapper loaded={walletInfo !== null}>
+              {(() => {
+                const total = (walletInfo?.boostSolflare ?? 0) + (walletInfo?.boostBonk ?? 0) + (walletInfo?.boostLucky ?? 0) + (walletInfo?.boost1Hour ?? 0) + (walletInfo?.boostCode ?? 0);
+                return total > 0 ? `+${total}%` : '-';
+              })()}
+            </LoadingWrapper>
           </HeaderValue>
         </CardHeader>
         <List>
           <li>
             <Row>
               <RowText>SolFlare partner:</RowText>
-              <RowValue>{formatBoost(walletInfo?.boostSolflare ?? 0)}</RowValue>
+              <RowValue>
+                <LoadingWrapper loaded={walletInfo !== null}>
+                  {formatBoost(walletInfo?.boostSolflare ?? 0)}
+                </LoadingWrapper>
+              </RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>Bonk Family:</RowText>
-              <RowValue>{formatBoost(walletInfo?.boostBonk ?? 0)}</RowValue>
+              <RowValue>
+                <LoadingWrapper loaded={walletInfo !== null}>
+                  {formatBoost(walletInfo?.boostBonk ?? 0)}
+                </LoadingWrapper>
+              </RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>Lucky number:</RowText>
-              <RowValue>{formatBoost(walletInfo?.boostLucky ?? 0)}</RowValue>
+              <RowValue>
+                <LoadingWrapper loaded={walletInfo !== null}>
+                  {formatBoost(walletInfo?.boostLucky ?? 0)}
+                </LoadingWrapper>
+              </RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>1st Hour Buyer:</RowText>
-              <RowValue>{formatBoost(walletInfo?.boost1Hour ?? 0)}</RowValue>
+              <RowValue>
+                <LoadingWrapper loaded={walletInfo !== null}>
+                  {formatBoost(walletInfo?.boost1Hour ?? 0)}
+                </LoadingWrapper>
+              </RowValue>
             </Row>
           </li>
           <li>
             <Row>
               <RowText>Code applied:</RowText>
-              <RowValue>{formatBoost(walletInfo?.boostCode ?? 0)}</RowValue>
+              <RowValue>
+                <LoadingWrapper loaded={walletInfo !== null}>
+                  {formatBoost(walletInfo?.boostCode ?? 0)}
+                </LoadingWrapper>
+              </RowValue>
             </Row>
           </li>
         </List>

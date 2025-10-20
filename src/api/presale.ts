@@ -22,8 +22,7 @@ export const fetchPresaleState = async (walletName?: string): Promise<PresaleSta
       backers: 255,
       sold: 4000,
       finish: 1761127157,
-      publicPrice: 0.00023,
-      tgePrice: 0.0045
+      priceNoWL: 0.00023,
     };
   }
 };

@@ -28,20 +28,23 @@ import {
   AgreeLink,
 } from "./styles";
 import { ProgressBar } from "../progress-bar";
-// import SolanaIcon from "@/components/icons/solana.svg";
+import {WalletInfo} from '@/api/presale';
+import { PRESALE_TOTAL_SOL } from '@/api/config';
+import { LoadingWrapper } from '@/components/loading-wrapper';
 
 type Props = {
   defaultPriceMode?: "SOL" | "USDC";
+  walletInfo?: WalletInfo | null;
 };
 
-export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
+export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction, wallet } = useWallet();
-  const { presaleState } = usePresaleState(wallet?.adapter.name);
+  const { presaleState, loaded } = usePresaleState(wallet?.adapter.name);
 
   const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
-  const [solPrice, setSOLPrice] = useState<number | null>(200);
-  const [usdcPrice, setUSDCPrice] = useState<number | null>(10);
+  const [solPrice, setSOLPrice] = useState<number | null>(null);
+  const [usdcPrice, setUSDCPrice] = useState<number | null>(null);
   const [agree, setAgree] = useState(true);
 
   // Deposit constraints
@@ -83,6 +86,14 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
         return;
       }
 
+      // Validate deposit amount range
+      if (depositAmount < MIN_DEPOSIT || depositAmount > MAX_DEPOSIT) {
+        toast.error(
+          `Deposit amount must be between ${MIN_DEPOSIT} SOL and ${MAX_DEPOSIT} SOL.`
+        );
+        return;
+      }
+
       // Check if user has enough balance
       const balance = await connection.getBalance(publicKey);
       const balanceInSol = balance / LAMPORTS_PER_SOL;
@@ -90,11 +101,8 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
 
       if (balanceInSol < requiredAmount) {
         toast.error(
-          `Insufficient balance. You have ${balanceInSol.toFixed(
-            4,
-          )} SOL but need ${requiredAmount.toFixed(
-            4,
-          )} SOL (including transaction fee).`,
+          `Insufficient balance. You have ${balanceInSol?.toFixed(4)} SOL 
+          but need ${requiredAmount?.toFixed(4)} SOL (including transaction fee).`,
         );
         return;
       }
@@ -136,28 +144,40 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
 
       <StatsGrid>
         <StatCard>
-          {/* Should be equal to Token Price in Sidebar */}
-          <span>Your price</span>
-          <StatValue>$ {presaleState.publicPrice.toFixed(5)}</StatValue>
+          <span>Price</span>
+          <StatValue>
+            <LoadingWrapper loaded={loaded}>
+              $ {(walletInfo?.price ?? presaleState?.priceNoWL)?.toFixed(5)}
+            </LoadingWrapper>
+          </StatValue>
         </StatCard>
         <StatCard>
           <span>Total deposited</span>
-          <StatValue>{presaleState.sold.toLocaleString()} SOL</StatValue>
+          <StatValue>
+            <LoadingWrapper loaded={loaded}>
+              {presaleState?.sold?.toLocaleString()} SOL
+            </LoadingWrapper>
+          </StatValue>
         </StatCard>
         <StatCard>
           <span>Backers</span>
-          <StatValue>{presaleState.backers.toLocaleString()}</StatValue>
+          <StatValue>
+            <LoadingWrapper loaded={loaded}>
+              {presaleState?.backers?.toLocaleString()}
+            </LoadingWrapper>
+          </StatValue>
         </StatCard>
       </StatsGrid>
 
       <ProgressBar
-        value={20}
-        leftLabel="20% of $700.000 minimum"
+        value={Math.min((presaleState?.sold ?? 0) / PRESALE_TOTAL_SOL * 100, 100)}
+        leftLabel={`${Math.round((presaleState?.sold ?? 0) / PRESALE_TOTAL_SOL * 100)}% of ${PRESALE_TOTAL_SOL?.toLocaleString()} SOL minimum`}
         style={{ margin: "1rem 2rem 0" }}
+        loaded={loaded}
       />
 
       <SectionTitle>Time Remaining</SectionTitle>
-      <Countdown dateTarget={presaleState.finish * 1000} />
+      <Countdown dateTarget={(presaleState?.finish ?? 0) * 1000} />
 
       <Separator />
 
@@ -174,6 +194,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
             min={MIN_DEPOSIT}
             max={MAX_DEPOSIT}
             step="0.1"
+            maxLength={6}
             value={priceMode === "SOL" ? solPrice ?? "" : usdcPrice ?? ""}
             onChange={(e) => {
               const nextValue =
@@ -182,23 +203,6 @@ export const FormPresale = ({ defaultPriceMode = "SOL" }: Props) => {
                 setSOLPrice(nextValue);
               } else {
                 setUSDCPrice(nextValue);
-              }
-            }}
-            onBlur={() => {
-              if (priceMode === "SOL") {
-                if (solPrice === null) return;
-                const clamped = Math.min(
-                  MAX_DEPOSIT,
-                  Math.max(MIN_DEPOSIT, solPrice),
-                );
-                if (clamped !== solPrice) setSOLPrice(clamped);
-              } else {
-                if (usdcPrice === null) return;
-                const clamped = Math.min(
-                  MAX_DEPOSIT,
-                  Math.max(MIN_DEPOSIT, usdcPrice),
-                );
-                if (clamped !== usdcPrice) setUSDCPrice(clamped);
               }
             }}
           />

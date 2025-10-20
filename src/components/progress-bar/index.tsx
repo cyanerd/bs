@@ -1,5 +1,6 @@
 import React from "react";
 import { BarWrapper, Bar, Fill, InBarText, BottomRow } from "./styles";
+import { LoadingWrapper } from '@/components/loading-wrapper';
 
 type Props = {
   value: number; // 0 - 100
@@ -8,6 +9,7 @@ type Props = {
   rightLabel?: React.ReactNode; // text under bar right
   className?: string;
   style?: React.CSSProperties;
+  loaded: boolean;
 };
 
 export const ProgressBar: React.FC<Props> = ({
@@ -17,6 +19,7 @@ export const ProgressBar: React.FC<Props> = ({
   rightLabel,
   className,
   style,
+  loaded,
 }) => {
   return (
     <BarWrapper className={className} style={style}>
@@ -26,7 +29,7 @@ export const ProgressBar: React.FC<Props> = ({
       </Bar>
       {(leftLabel || rightLabel) && (
         <BottomRow>
-          <div>{leftLabel}</div>
+          <LoadingWrapper loaded={loaded}>{leftLabel}</LoadingWrapper>
           <div>{rightLabel}</div>
         </BottomRow>
       )}

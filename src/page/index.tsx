@@ -41,7 +41,7 @@ const PageContent = () => {
     setReferralCode,
   } = useUserAuth();
 
-  const { presaleState } = usePresaleState(walletName);
+  const { presaleState, loaded } = usePresaleState(walletName);
 
   const ready = Boolean(isWalletConnected && walletAddress);
 
@@ -79,7 +79,7 @@ const PageContent = () => {
     href: string;
     imageSrc: string;
   };
-  
+
   const partners: PartnerItem[] = [
     {
       name: "Play Solana",
@@ -198,7 +198,7 @@ const PageContent = () => {
         <LayoutMain
           sidebar={
             <>
-              <Sidebar presaleState={presaleState} walletInfo={walletInfo} />
+              <Sidebar presaleState={presaleState} walletInfo={walletInfo} loaded={loaded} />
               <FormReferral
                 ready={ready}
                 handleReferralApply={handleReferralApply}
@@ -206,7 +206,7 @@ const PageContent = () => {
               />
             </>
           }
-          content={<FormPresale />}
+          content={<FormPresale walletInfo={walletInfo} />}
         />
 
         <LayoutSection
@@ -222,10 +222,6 @@ const PageContent = () => {
 
         <LayoutSection>
           <Tokenomics />
-        </LayoutSection>
-
-        <LayoutSection>
-          <FAQ />
         </LayoutSection>
 
         <LayoutSection>
@@ -249,6 +245,10 @@ const PageContent = () => {
               </Row>
             ))}
           </Partners>
+        </LayoutSection>
+
+        <LayoutSection>
+          <FAQ />
         </LayoutSection>
 
         <br />

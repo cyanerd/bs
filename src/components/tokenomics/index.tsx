@@ -80,7 +80,7 @@ export const Tokenomics: React.FC = () => {
 
   return (
     <>
-      <h3 style={{ textAlign: "center" }}>Tokenomics</h3>
+      <h3 style={{ textAlign: "center", marginTop: 0 }}>Tokenomics</h3>
       <Wrap onMouseLeave={() => setActiveIndex(null)} onFocus={() => undefined}>
         <DonutSvg
           viewBox={`0 0 ${size} ${size}`}

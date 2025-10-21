@@ -2,24 +2,24 @@ import { PartnerItem } from "./types";
 
 export const KEY_PARTNERS: PartnerItem[] = [
   {
-    name: "Play Solana",
-    href: "#",
-    imageSrc: "/images/partners/Play-Solana.jpg",
-  },
-  {
-    name: "Solana Mobile",
-    href: "#",
-    imageSrc: "/images/partners/Solana-Mobile.jpg",
-  },
-  {
     name: "Magic Block",
-    href: "#",
+    href: "https://x.com/magicblock/status/1971560707541160376",
     imageSrc: "/images/partners/Magic-Block.jpg",
   },
   {
+    name: "Solflare",
+    href: "https://x.com/blockstranding/status/1958141511754973361",
+    imageSrc: "/images/partners/Solflare.jpg",
+  },
+  {
     name: "Magic Eden",
-    href: "#",
+    href: "https://x.com/blockstranding/status/1970460818798948547",
     imageSrc: "/images/partners/Magic-Eden.jpg",
+  },
+  {
+    name: "Play Solana",
+    href: "#",
+    imageSrc: "/images/partners/Play-Solana.jpg",
   },
   {
     name: "Phantom",
@@ -27,9 +27,14 @@ export const KEY_PARTNERS: PartnerItem[] = [
     imageSrc: "/images/partners/Phantom.jpg",
   },
   {
-    name: "Solflare",
+    name: "Solana Name Services",
     href: "#",
-    imageSrc: "/images/partners/Solflare.jpg",
+    imageSrc: "/images/partners/Solana-Name-Services.png",
+  },
+  {
+    name: "Solana Mobile",
+    href: "https://x.com/blockstranding/status/1980295884827980000",
+    imageSrc: "/images/partners/Solana-Mobile.jpg",
   },
 ];
 

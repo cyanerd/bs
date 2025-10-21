@@ -27,8 +27,6 @@ type Props = {
 };
 
 export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
-  console.log("walletInfo", walletInfo);
-
   return (
     <SidebarRoot>
       <SidebarHeader>Inventory & Stats</SidebarHeader>
@@ -37,7 +35,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
         <CardHeader>
           <HeaderText>Your deposit:</HeaderText>
           <HeaderValue>
-            <LoadingWrapper loaded={walletInfo !== null}>
+            <LoadingWrapper loaded={true}>
               {walletInfo?.totalDeposited ?? 0} SOL
             </LoadingWrapper>
           </HeaderValue>
@@ -47,9 +45,10 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Your WL tier:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
-                  WL{walletInfo?.tier ?? 0}
-                </LoadingWrapper>
+                {walletInfo !== null && <LoadingWrapper loaded={true}>
+                  {walletInfo?.tier && walletInfo.tier > 0 ? `WL${walletInfo.tier}` : 'no WL'}
+                </LoadingWrapper>}
+                {walletInfo === null && '-' }
               </RowValue>
             </Row>
           </li>
@@ -70,7 +69,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
         <CardHeader>
           <HeaderText>Token Boost:</HeaderText>
           <HeaderValue>
-            <LoadingWrapper loaded={walletInfo !== null}>
+            <LoadingWrapper loaded={true}>
               {(() => {
                 const total =
                   (walletInfo?.boostSolflare ?? 0) +
@@ -88,7 +87,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>SolFlare partner:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostSolflare ?? 0)}
                 </LoadingWrapper>
               </RowValue>
@@ -98,7 +97,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Bonk Family:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostBonk ?? 0)}
                 </LoadingWrapper>
               </RowValue>
@@ -108,7 +107,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Lucky number:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostLucky ?? 0)}
                 </LoadingWrapper>
               </RowValue>
@@ -118,7 +117,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>1st Hour Buyer:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boost1Hour ?? 0)}
                 </LoadingWrapper>
               </RowValue>
@@ -128,7 +127,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Code applied:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostCode ?? 0)}
                 </LoadingWrapper>
               </RowValue>

@@ -26,10 +26,10 @@ export const ReferralInput: React.FC<RefInputProps> = ({
 }) => {
   const [internalValue, setInternalValue] = React.useState("");
 
-  const currentValue = value !== undefined ? value : internalValue;
+  const currentValue = String(value !== undefined ? value : internalValue);
 
-  const effectiveMax = maxLength ?? 4;
-  const effectiveMin = minLength ?? effectiveMax;
+  const effectiveMax = maxLength ?? 8;
+  const effectiveMin = minLength ?? 0;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = e.target.value.slice(0, effectiveMax);
@@ -43,9 +43,10 @@ export const ReferralInput: React.FC<RefInputProps> = ({
   const handleApply = () => {
     const meetsMin =
       currentValue.length >= effectiveMin &&
-      currentValue.length <= effectiveMax;
+      currentValue.length <= effectiveMax &&
+      currentValue.trim().length > 0;
     if (onApply && meetsMin) {
-      onApply(currentValue);
+      onApply(currentValue.trim());
     }
   };
 
@@ -53,7 +54,8 @@ export const ReferralInput: React.FC<RefInputProps> = ({
     if (e.key === "Enter") {
       const meetsMin =
         currentValue.length >= effectiveMin &&
-        currentValue.length <= effectiveMax;
+        currentValue.length <= effectiveMax &&
+        currentValue.trim().length > 0;
       if (!meetsMin || disabled) {
         e.preventDefault();
         return;
@@ -79,12 +81,15 @@ export const ReferralInput: React.FC<RefInputProps> = ({
         disabledText={
           disabled
             ? disabledText
+            : currentValue.trim().length === 0
+            ? "Enter referral code"
             : currentValue.length < effectiveMin
             ? `Min ${effectiveMin} characters`
             : `Max ${effectiveMax} characters`
         }
         disabled={
           disabled ||
+          currentValue.trim().length === 0 ||
           currentValue.length < effectiveMin ||
           currentValue.length > effectiveMax
         }

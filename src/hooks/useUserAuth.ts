@@ -1,9 +1,18 @@
 import { getAuth } from "@/api/getAuth";
 import { fetchWalletInfo, WalletInfo } from "@/api/presale";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
-import { setCookie, getCookie, WALLET_COOKIE_NAME, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
+import {
+  setCookie,
+  getCookie,
+  removeCookie,
+  WALLET_COOKIE_NAME,
+  REFERRAL_CODE_COOKIE_NAME,
+  SIGNATURE_COOKIE_NAME,
+  SIGNATURE_WALLET_COOKIE_NAME
+} from "@/utils/cookies";
+import { centrifugeService } from "@/utils/centrifuge";
 
 export function useUserAuth() {
   const [isWalletConnected, setWalletConnected] = useState(false);
@@ -16,6 +25,11 @@ export function useUserAuth() {
   const [referralCode, setReferralCode] = useState<string>(() => getCookie(REFERRAL_CODE_COOKIE_NAME) || "");
 
   const { connected, wallet } = useWallet();
+
+  // Callback for updating totalDeposited from centrifuge
+  const handleWalletDepositUpdate = useCallback((totalDepositedValue: number) => {
+    setWalletInfo(prevInfo => prevInfo ? { ...prevInfo, totalDeposited: totalDepositedValue } : null);
+  }, []);
 
   const auth = async () => {
     setLoading(true);
@@ -48,12 +62,27 @@ export function useUserAuth() {
     setWalletAddress(publicKey);
     setWalletConnected(true);
     setCookie(WALLET_COOKIE_NAME, publicKey);
+
+    // Subscribe to wallet channel in centrifuge
+    centrifugeService.subscribeToWallet(publicKey);
+    centrifugeService.updateCallbacks({
+      onWalletDepositUpdate: handleWalletDepositUpdate
+    });
+
     fetchWallet();
   };
 
   const logout = () => {
     setWalletAddress("");
     setWalletConnected(false);
+    setWalletInfo(prevInfo => prevInfo ? { ...prevInfo, totalDeposited: 0 } : null); // Reset totalDeposited on disconnect
+
+    // Unsubscribe from wallet channel in centrifuge
+    centrifugeService.unsubscribeFromWallet();
+
+    removeCookie(WALLET_COOKIE_NAME);
+    removeCookie(SIGNATURE_COOKIE_NAME);
+    removeCookie(SIGNATURE_WALLET_COOKIE_NAME);
   };
 
   useEffect(() => {
@@ -74,6 +103,7 @@ export function useUserAuth() {
     walletName: wallet?.adapter.name,
     referralCode,
     setReferralCode,
-    fetchWalletInfo: fetchWallet
+    fetchWalletInfo: fetchWallet,
+    totalDeposited: walletInfo?.totalDeposited || 0
   };
 }

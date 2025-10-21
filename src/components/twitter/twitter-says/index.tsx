@@ -181,7 +181,7 @@ const tweets: Tweet[] = [
 export const TwitterSays = () => {
   return (
     <>
-      <Title>X Says</Title>
+      <Title style={{ marginTop: 0 }}>X Says</Title>
       <Board>
         {tweets.map((tweet, index) => (
           <Card key={index} $position={tweet.position}>

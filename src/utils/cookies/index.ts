@@ -12,7 +12,7 @@ export const getCookie = (name: string, options?: CookieGetOptions) => {
 };
 
 export const removeCookie = (name: string) => {
-  return cookies.remove(name);
+  return cookies.remove(name, { path: '/' });
 };
 
 export const setCookie = (name: string, value: string | boolean | null, options: CookieSetOptions = {}) => {

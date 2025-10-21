@@ -17,8 +17,9 @@ export const Hero = () => {
           <ListItem>Powered by breakthrough Solana tech</ListItem>
           <ListItem>Pioneer of a new paradigm in Web3</ListItem>
           <ListItem>Colosseum Hackathon Winner</ListItem>
-          <ListItem>40k+ players, 150 TPS, 7k content creators</ListItem>
+          <ListItem>Early access version available now</ListItem>
           <ListItem>Live on the Solana dApp Store</ListItem>
+          <ListItem>40k+ players, 150 TPS, 7k content creators</ListItem>
         </List>
       </Description>
       <Partners

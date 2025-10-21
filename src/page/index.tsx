@@ -23,6 +23,8 @@ import { setCookie, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
 
 import { Container, Wrapper } from "./styles";
 
+const PRESALE_OFF = false;
+
 const PageContent = () => {
   const {
     walletAddress,
@@ -186,6 +188,7 @@ const PageContent = () => {
               onConnect={completeWalletConnect}
               onRefreshWalletInfo={fetchWalletInfo}
               showDepositPrice
+              presaleOff={PRESALE_OFF}
             />
           }
         />

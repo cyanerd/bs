@@ -35,6 +35,7 @@ import { formatPrice } from "@/utils/format";
 import { WalletConnect } from "../wallet/wallet-connect";
 
 type Props = {
+  presaleOff: boolean;
   defaultPriceMode?: "SOL" | "USDC";
   walletInfo?: WalletInfo | null;
   showDepositPrice?: boolean;
@@ -44,6 +45,7 @@ type Props = {
 };
 
 export const FormPresale = ({
+  presaleOff,
   defaultPriceMode = "SOL",
   walletInfo,
   showDepositPrice,
@@ -138,12 +140,11 @@ export const FormPresale = ({
       toast.info("Transaction sent! Confirming...");
       await connection.confirmTransaction(signature, "confirmed");
 
-      toast.success('Transfer successful!');
+      toast.success("Transfer successful!");
 
       setTimeout(() => {
         onRefreshWalletInfo?.();
       }, 2000);
-
     } catch (error: any) {
       console.error("Transfer error:", error);
       const errorMessage = error?.message || "Unknown error occurred";
@@ -155,7 +156,11 @@ export const FormPresale = ({
 
   return (
     <FormRoot>
-      <h3 style={{ marginTop: 0 }}>$STRAND Presale Live!</h3>
+      <h3 style={{ marginTop: 0 }}>
+        {presaleOff
+          ? "$STRAND Presale Starting Soon!"
+          : "$STRAND Presale Live!"}
+      </h3>
 
       <StatsGrid>
         <StatCard>
@@ -196,57 +201,66 @@ export const FormPresale = ({
         loaded={loaded}
       />
 
-      <SectionTitle>Time Remaining</SectionTitle>
-      <Countdown dateTarget={(presaleState?.finish ?? 0) * 1000} />
+      {!presaleOff && (
+        <>
+          <SectionTitle>Time Remaining</SectionTitle>
+          <Countdown dateTarget={(presaleState?.finish ?? 0) * 1000} />
 
-      <Separator />
+          <Separator />
 
-      <div>
-        <h3 style={{ marginBottom: "0.8rem" }}>Deposit Chamber</h3>
-      </div>
+          <div>
+            <h3 style={{ marginBottom: "0.8rem" }}>Deposit Chamber</h3>
+          </div>
 
-      <DepositCard>
-        <AmountLabel>Amount to deposit:</AmountLabel>
-        <AmountRow>
-          <Input
-            name="price"
-            type="number"
-            min={MIN_DEPOSIT}
-            max={MAX_DEPOSIT}
-            step="0.1"
-            maxLength={6}
-            value={priceMode === "SOL" ? solPrice ?? "" : usdcPrice ?? ""}
-            onChange={(e) => {
-              const inputValue = e.target.value.replace(/-/g, '').slice(0, 6);
-              const nextValue = inputValue === "" ? null : Number(inputValue);
-              if (priceMode === "SOL") {
-                setSOLPrice(nextValue);
-              } else {
-                setUSDCPrice(nextValue);
-              }
-            }}
-          />
-          <span style={{ fontSize: "1.25rem" }}>{priceMode}</span>
-        </AmountRow>
-      </DepositCard>
+          <DepositCard>
+            <AmountLabel>Amount to deposit:</AmountLabel>
+            <AmountRow>
+              <Input
+                name="price"
+                type="number"
+                min={MIN_DEPOSIT}
+                max={MAX_DEPOSIT}
+                step="0.1"
+                maxLength={6}
+                value={priceMode === "SOL" ? solPrice ?? "" : usdcPrice ?? ""}
+                onChange={(e) => {
+                  const inputValue = e.target.value
+                    .replace(/-/g, "")
+                    .slice(0, 6);
+                  const nextValue =
+                    inputValue === "" ? null : Number(inputValue);
+                  if (priceMode === "SOL") {
+                    setSOLPrice(nextValue);
+                  } else {
+                    setUSDCPrice(nextValue);
+                  }
+                }}
+              />
+              <span style={{ fontSize: "1.25rem" }}>{priceMode}</span>
+            </AmountRow>
+          </DepositCard>
 
-      <AgreeContainer>
-        <AgreeCheckbox
-          id="agree"
-          checked={agree}
-          onChange={(e) => setAgree(e.target.checked)}
-        />
-        <AgreeLabel htmlFor="agree">
-          I agree to{" "}
-          <AgreeLink
-            href="/terms.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            the terms and conditions
-          </AgreeLink>
-        </AgreeLabel>
-      </AgreeContainer>
+          <AgreeContainer>
+            <AgreeCheckbox
+              id="agree"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+            />
+            <AgreeLabel htmlFor="agree">
+              I agree to{" "}
+              <AgreeLink
+                href="/terms.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                the terms and conditions
+              </AgreeLink>
+            </AgreeLabel>
+          </AgreeContainer>
+        </>
+      )}
+
+      {presaleOff && <br />}
 
       <WalletConnect
         requiresSignature={requiresSignature}
@@ -256,32 +270,38 @@ export const FormPresale = ({
 
       <br />
 
-      <Button
-        disabled={!agree || !isPriceValid}
-        disabledText={
-          !isPriceValid
-            ? `Invalid deposit amount. Please enter a value between ${MIN_DEPOSIT} ${priceMode} and ${MAX_DEPOSIT} ${priceMode}.`
-            : "You must agree to the terms and conditions"
-        }
-        onClick={handleTransfer}
-        $minWidth="250px"
-        $maxWidth="250px"
-      >
-        Deposit
-        {showDepositPrice && (
-          <>
-            {" "}
-            {priceMode === "SOL" ? solPrice ?? 0 : usdcPrice ?? 0} {priceMode}
-          </>
-        )}
-      </Button>
+      {!presaleOff && (
+        <>
+          <Button
+            disabled={!agree || !isPriceValid}
+            disabledText={
+              !isPriceValid
+                ? `Invalid deposit amount. Please enter a value between ${MIN_DEPOSIT} ${priceMode} and ${MAX_DEPOSIT} ${priceMode}.`
+                : "You must agree to the terms and conditions"
+            }
+            onClick={handleTransfer}
+            $minWidth="250px"
+            $maxWidth="250px"
+          >
+            Deposit
+            {showDepositPrice && (
+              <>
+                {" "}
+                {priceMode === "SOL" ? solPrice ?? 0 : usdcPrice ?? 0}{" "}
+                {priceMode}
+              </>
+            )}
+          </Button>
 
-      <ConstraintsList>
-        <li>
-          Deposit range: {MIN_DEPOSIT} {priceMode} - {MAX_DEPOSIT} {priceMode}
-        </li>
-        <li>Vesting: 100% unlocked at TGE</li>
-      </ConstraintsList>
+          <ConstraintsList>
+            <li>
+              Deposit range: {MIN_DEPOSIT} {priceMode} - {MAX_DEPOSIT}{" "}
+              {priceMode}
+            </li>
+            <li>Vesting: 100% unlocked at TGE</li>
+          </ConstraintsList>
+        </>
+      )}
 
       <div style={{ textAlign: "center", marginTop: "1rem", color: "#999" }}>
         Need help?{" "}

@@ -53,7 +53,7 @@ export const DepositCard = styled.div`
 export const AmountLabel = styled.span`
   text-align: left;
   font-size: 1.25rem;
-    
+
   @media (max-width: 768px) {
     text-align: center;
   }

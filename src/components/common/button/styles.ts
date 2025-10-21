@@ -28,6 +28,10 @@ export const Button = styled.button<{
   border-radius: 0;
   cursor: pointer;
 
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+
   &:hover {
     opacity: 0.8;
     cursor: pointer;

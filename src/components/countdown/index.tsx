@@ -42,6 +42,7 @@ export const Countdown: React.FC<Props> = ({ dateTarget = 1760475600000 }) => {
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
+        textAlign: "center",
         gap: "1rem",
         margin: "0 auto",
         border: "1px solid #333",
@@ -49,17 +50,33 @@ export const Countdown: React.FC<Props> = ({ dateTarget = 1760475600000 }) => {
         borderRadius: "1rem",
       }}
     >
-      <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{hoursStr}</span>
+      <span
+        style={{ width: "1.75rem", fontSize: "1.5rem", fontWeight: "bold" }}
+      >
+        {hoursStr}
+      </span>
       <span style={{ fontSize: "0.9rem", color: "#ccc" }}>Hrs</span>
 
-      <span style={{ fontSize: "1.2rem", color: "#666", margin: "0 0.25rem" }}>:</span>
+      <span style={{ fontSize: "1.2rem", color: "#666", margin: "0 0.25rem" }}>
+        :
+      </span>
 
-      <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{minutesStr}</span>
+      <span
+        style={{ width: "1.75rem", fontSize: "1.5rem", fontWeight: "bold" }}
+      >
+        {minutesStr}
+      </span>
       <span style={{ fontSize: "0.9rem", color: "#ccc" }}>Min</span>
 
-      <span style={{ fontSize: "1.2rem", color: "#666", margin: "0 0.25rem" }}>:</span>
+      <span style={{ fontSize: "1.2rem", color: "#666", margin: "0 0.25rem" }}>
+        :
+      </span>
 
-      <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{secondsStr}</span>
+      <span
+        style={{ width: "1.75rem", fontSize: "1.5rem", fontWeight: "bold" }}
+      >
+        {secondsStr}
+      </span>
       <span style={{ fontSize: "0.9rem", color: "#ccc" }}>Sec</span>
     </div>
   );

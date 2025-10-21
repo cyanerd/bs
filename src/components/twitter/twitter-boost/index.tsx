@@ -12,14 +12,18 @@ export const TwitterBoost = ({
   return (
     <Container>
       <Content>
-        <Title>Boost your bag up to 20%! *</Title>
+        <Title>Boost your bag up to 20%!</Title>
         <Subtitle>
-          Connect your X account and tweet a shoutout to the presale
+          Connect your X account and tweet a shoutout to the presale.
         </Subtitle>
-        <Note>
+        <Subtitle>
+          We will add extra tokens to your final allocation based on X
+          engagement, smart follower reach, content quality, and other factors.
+        </Subtitle>
+        {/* <Note>
           * Your final boost size is calculated based on your X engagement,
           content uniqueness, smart follower reach, and other factors.
-        </Note>
+        </Note> */}
       </Content>
 
       <TwitterConnect name={name} onConnect={onConnect} />

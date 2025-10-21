@@ -7,7 +7,6 @@ import {
   Hero,
   Main as LayoutMain,
   Section as LayoutSection,
-  Footer,
 } from "@/components/layout";
 import { FormPresale } from "@/components/form-presale";
 import { Sidebar } from "@/components/sidebar";
@@ -70,45 +69,6 @@ const PageContent = () => {
       })();
     }
   }, [ready, walletAddress, walletName, referralCode]);
-
-  type PartnerItem = {
-    name: string;
-    href: string;
-    imageSrc: string;
-  };
-
-  const partners: PartnerItem[] = [
-    {
-      name: "Play Solana",
-      href: "#",
-      imageSrc: "/images/partners/Play-Solana.jpg",
-    },
-    {
-      name: "Solana Mobile",
-      href: "#",
-      imageSrc: "/images/partners/Solana-Mobile.jpg",
-    },
-    {
-      name: "Magic Block",
-      href: "#",
-      imageSrc: "/images/partners/Magic-Block.jpg",
-    },
-    {
-      name: "Magic Eden",
-      href: "#",
-      imageSrc: "/images/partners/Magic-Eden.jpg",
-    },
-    {
-      name: "Phantom",
-      href: "#",
-      imageSrc: "/images/partners/Phantom.jpg",
-    },
-    {
-      name: "Solflare",
-      href: "#",
-      imageSrc: "/images/partners/Solflare.jpg",
-    },
-  ];
 
   return (
     <Wrapper>
@@ -249,14 +209,12 @@ const PageContent = () => {
         </LayoutSection>
 
         <LayoutSection>
-          <Partners items={OUR_FRIENDS} title="Our Friends" noBorder />
+          <Partners items={OUR_FRIENDS} title="Collaborations" noBorder />
         </LayoutSection>
 
         <LayoutSection>
           <FAQ />
         </LayoutSection>
-
-        <Footer />
       </Container>
     </Wrapper>
   );

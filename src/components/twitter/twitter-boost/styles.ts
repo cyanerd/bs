@@ -14,6 +14,7 @@ export const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 `;
 
 export const Title = styled.h3`

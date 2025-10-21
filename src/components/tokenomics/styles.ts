@@ -18,6 +18,7 @@ export const DonutSvg = styled.svg`
   height: 320px;
   display: block;
   margin: 0 auto;
+  max-width: 100%;
 `;
 
 export const Legend = styled.ul`

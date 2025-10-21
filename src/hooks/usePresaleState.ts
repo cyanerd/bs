@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { fetchPresaleState } from '../api/presale';
 import { PresaleState } from '../api/config';
+import { centrifugeService } from '../utils/centrifuge';
 
 export const usePresaleState = (walletName?: string) => {
   const [presaleState, setPresaleState] = useState<PresaleState>({
@@ -11,6 +12,16 @@ export const usePresaleState = (walletName?: string) => {
   });
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Callback for updating presale state via centrifuge
+  const handlePresaleStateUpdate = useCallback((data: any) => {
+    if (data && typeof data === 'object') {
+      setPresaleState(prevState => ({
+        ...prevState,
+        ...data
+      }));
+    }
+  }, []);
 
   useEffect(() => {
     const loadPresaleState = async () => {
@@ -27,6 +38,18 @@ export const usePresaleState = (walletName?: string) => {
 
     loadPresaleState();
   }, [walletName]);
+
+  // Подключаемся к центрифуге при монтировании компонента
+  useEffect(() => {
+    centrifugeService.connect({
+      onPresaleStateUpdate: handlePresaleStateUpdate
+    });
+
+    // Отписываемся при размонтировании
+    return () => {
+      centrifugeService.disconnect();
+    };
+  }, [handlePresaleStateUpdate]);
 
   return { presaleState, loaded, error };
 };

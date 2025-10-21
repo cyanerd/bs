@@ -11,11 +11,11 @@ type Props = {
 };
 
 export function TwitterConnect({
-                                 name,
-                                 disabled,
-                                 disabledText,
-                                 onConnect,
-                               }: Props) {
+  name,
+  disabled,
+  disabledText,
+  onConnect,
+}: Props) {
   const authenticateWithTwitter = () => {
     const state = encodeURIComponent(window.location.href);
     console.log(onConnect);

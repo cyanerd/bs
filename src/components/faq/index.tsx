@@ -13,36 +13,36 @@ type QA = { q: string; a: string };
 
 const data: QA[] = [
   {
-    q: "What is Play Solana?",
-    a: "Play Solana is the fastest-growing Web3 gaming ecosystem on Solana. It unites prime hardware, flagship games, branded IP, DeFi, and more into a SuperHUB where gamers can play, build, live, and earn.",
+    q: "What is Block Stranding?",
+    a: "Block Stranding is the first fully onchain MMORPG running in real time on Solana. It scales into massive worlds and logs every player action instantly with zero fees. The project is built to push the limits of onchain gaming and pioneer a new paradigm in Web3.",
   },
   {
-    q: "What is the PlaySolana SuperHUB?",
-    a: "The SuperHUB is an aggregation of products, content, and community that make it easy for gamers to discover, play, and earn across the Solana ecosystem.",
+    q: "What makes Block Stranding unique?",
+    a: "Block Stranding is among the first projects to use breakthrough Solana technology to solve the latency challenge in onchain gaming. More than a game, Block Stranding is designed as a live showcase of what next-gen onchain experiences can look like today. Its world serves as a testbed for experimenting with instant onchain verification of real-time actions and scaling them to thousands of parallel sessions.",
   },
   {
-    q: "What is PlaySolana Gen1 (PSG1)?",
-    a: "PSG1 is an early community collection offering access, rewards, and participation benefits in the ecosystem.",
+    q: "What is $STRAND?",
+    a: "$STRAND is the core utility token that powers rewards and in-game mechanics. It’s used to acquire items, unlock upgrades, and take part in player-driven events and economies. As the ecosystem grows, $STRAND will become the backbone of cross-world onchain interactions.",
   },
   {
-    q: "What are <Player1> and <Player2> NFTs?",
-    a: "They are themed membership NFTs within the ecosystem that unlock perks, roles, and cosmetics. Names are placeholders for the collection archetypes.",
+    q: "What is Token Boost?",
+    a: "Token Boost is a system that grants you extra free tokens in addition to your purchased allocation. Each boost can be earned by meeting specific conditions.",
   },
   {
-    q: "What is $PLAY?",
-    a: "$PLAY is the core utility token that powers rewards, fees, and upgrades across experiences.",
+    q: "How long will the presale last?",
+    a: "The presale will run for 48 hours.",
   },
   {
-    q: "Who is eligible for the Metaplex Genesis Community Pre-sale?",
-    a: "Eligibility is determined by allowlists, partnerships, and on-chain criteria announced by the team.",
+    q: "What is the maximum ticket size per participant?",
+    a: "The maximum allocation per participant is 200 SOL.",
   },
   {
-    q: "What is the utility of $PLAY?",
-    a: "Utility includes marketplace fees, in-game upgrades, governance-aligned actions, and ecosystem rewards.",
+    q: "Who is eligible to participate in the presale?",
+    a: "Eligibility is based on whitelists, partner allocations, and onchain criteria defined by the team.",
   },
   {
-    q: "How will I claim the $PLAY allocation from the Community Pre-sale?",
-    a: "Claims will be available via the official portal after the token generation event. You will connect your wallet and follow the on-screen steps.",
+    q: "How many tokens are being sold?",
+    a: "A total of 10% of the supply will be sold during the presale.",
   },
 ];
 

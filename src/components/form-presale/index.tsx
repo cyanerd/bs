@@ -72,7 +72,7 @@ export const FormPresale = ({ defaultPriceMode = "SOL", walletInfo }: Props) => 
     }
 
     try {
-      const recipientAddress = "3waghJUxmn1kpZHbcspzmS6gBYEarw7zGR2tX7k39TyY";
+      const recipientAddress = "FV4DtqXAWg4npzFA2VsYSLCKsFPht5P86tp6YdX4GgU1";
       if (!recipientAddress) {
         toast.error(
           "Recipient wallet address is not configured. Please set VITE_RECIPIENT_WALLET in your environment variables.",

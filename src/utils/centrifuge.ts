@@ -14,7 +14,11 @@ class CentrifugeService {
   private presaleStateSubscription: any = null;
   private walletSubscription: any = null;
   private callbacks: CentrifugeCallbacks = {};
-  private isConnected = false;
+  private _isConnected = false;
+
+  public get isConnected(): boolean {
+    return this._isConnected;
+  }
 
   constructor() {
     this.initialize();
@@ -33,13 +37,13 @@ class CentrifugeService {
 
     this.centrifuge.on('connected', (ctx) => {
       console.log('Centrifuge connected', ctx);
-      this.isConnected = true;
+      this._isConnected = true;
       this.subscribeToPresaleState();
     });
 
     this.centrifuge.on('disconnected', (ctx) => {
       console.log('Centrifuge disconnected', ctx);
-      this.isConnected = false;
+      this._isConnected = false;
     });
 
     this.centrifuge.on('error', (ctx) => {
@@ -52,7 +56,7 @@ class CentrifugeService {
       this.callbacks = callbacks;
     }
 
-    if (this.centrifuge && !this.isConnected) {
+    if (this.centrifuge && !this._isConnected) {
       this.centrifuge.connect();
     }
   }
@@ -70,12 +74,12 @@ class CentrifugeService {
 
     if (this.centrifuge) {
       this.centrifuge.disconnect();
-      this.isConnected = false;
+      this._isConnected = false;
     }
   }
 
   private subscribeToPresaleState() {
-    if (!this.centrifuge || !this.isConnected) return;
+    if (!this.centrifuge || !this._isConnected) return;
 
     this.presaleStateSubscription = this.centrifuge.newSubscription('bs_state');
 
@@ -98,7 +102,7 @@ class CentrifugeService {
   }
 
   subscribeToWallet(walletAddress: string) {
-    if (!this.centrifuge || !this.isConnected) return;
+    if (!this.centrifuge || !this._isConnected) return;
 
     // Unsubscribe from previous wallet channel if exists
     if (this.walletSubscription) {

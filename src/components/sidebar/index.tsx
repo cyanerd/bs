@@ -15,6 +15,7 @@ import {
   RowText,
   RowValue,
 } from "./styles";
+import { Hint } from "@/components/common/hint/Hint";
 
 const formatBoost = (value: number): string => {
   return value > 0 ? `+${value}%` : "-";
@@ -45,10 +46,14 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Your WL tier:</RowText>
               <RowValue>
-                {walletInfo !== null && <LoadingWrapper loaded={true}>
-                  {walletInfo?.tier && walletInfo.tier > 0 ? `WL${walletInfo.tier}` : 'no WL'}
-                </LoadingWrapper>}
-                {walletInfo === null && '-' }
+                {walletInfo !== null && (
+                  <LoadingWrapper loaded={true}>
+                    {walletInfo?.tier && walletInfo.tier > 0
+                      ? `WL${walletInfo.tier}`
+                      : "no WL"}
+                  </LoadingWrapper>
+                )}
+                {walletInfo === null && "-"}
               </RowValue>
             </Row>
           </li>
@@ -105,7 +110,23 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
           </li>
           <li>
             <Row>
-              <RowText>Lucky number:</RowText>
+              <RowText>
+                Lucky number:
+                <Hint>
+                  <p>
+                    Eligible communities:
+                    <br /> @bodoggos
+                    <br /> @Claynosaurz
+                    <br /> @DegenApeAcademy
+                    <br /> @FamousFoxFed
+                    <br /> @GalacticGeckoSG
+                    <br /> @MadLads
+                    <br /> @MonkeDAO
+                    <br /> @okaybears
+                    <br /> @sagamonkes
+                  </p>
+                </Hint>
+              </RowText>
               <RowValue>
                 <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostLucky ?? 0)}

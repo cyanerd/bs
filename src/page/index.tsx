@@ -87,7 +87,7 @@ const PageContent = () => {
                 }}
               >
                 <a
-                  href="https://google.com"
+                  href="https://x.com/blockstranding"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -111,21 +111,21 @@ const PageContent = () => {
                   />
                 </a>
                 <a
-                  href="https://google.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  // href=""
+                  // target="_blank"
+                  // rel="noopener noreferrer"
                   style={{
                     display: "block",
                     width: "34px",
                     height: "34px",
                     transition: "all 0.2s ease",
                   }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "0.8";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "1";
-                  }}
+                  // onMouseEnter={(e) => {
+                  //   e.currentTarget.style.opacity = "0.8";
+                  // }}
+                  // onMouseLeave={(e) => {
+                  //   e.currentTarget.style.opacity = "1";
+                  // }}
                 >
                   <img
                     src="/icons/2_discord_button.png"
@@ -135,21 +135,21 @@ const PageContent = () => {
                   />
                 </a>
                 <a
-                  href="https://google.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  // href=""
+                  // target="_blank"
+                  // rel="noopener noreferrer"
                   style={{
                     display: "block",
                     width: "34px",
                     height: "34px",
                     transition: "all 0.2s ease",
                   }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "0.8";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "1";
-                  }}
+                  // onMouseEnter={(e) => {
+                  //   e.currentTarget.style.opacity = "0.8";
+                  // }}
+                  // onMouseLeave={(e) => {
+                  //   e.currentTarget.style.opacity = "1";
+                  // }}
                 >
                   <img
                     src="/icons/3_gitbook_button.png"
@@ -163,10 +163,7 @@ const PageContent = () => {
           }
           end={<></>}
         />
-        <Hero
-          title="Block Stranding"
-          description="The First Fully On-Chain Adventure Game on Solana. On September 11th, 2025, we launched Block Stranding, a fully on-chain adventure game on Solana. We are the first to bring this concept to life and we are proud to be the first to do so."
-        />
+        <Hero />
         <LayoutMain
           sidebar={
             <>

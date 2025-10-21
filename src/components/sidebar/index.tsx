@@ -1,8 +1,8 @@
-import React from 'react';
-import {PresaleState} from '@/api/config';
-import {WalletInfo} from '@/api/presale';
-import {LoadingWrapper} from '@/components/loading-wrapper';
-import {formatPrice} from '@/utils/format';
+import React from "react";
+import { PresaleState } from "@/api/config";
+import { WalletInfo } from "@/api/presale";
+import { LoadingWrapper } from "@/components/common/loading-wrapper";
+import { formatPrice } from "@/utils/format";
 import {
   SidebarRoot,
   SidebarHeader,
@@ -14,10 +14,10 @@ import {
   Row,
   RowText,
   RowValue,
-} from './styles';
+} from "./styles";
 
 const formatBoost = (value: number): string => {
-  return value > 0 ? `+${value}%` : '-';
+  return value > 0 ? `+${value}%` : "-";
 };
 
 type Props = {
@@ -26,9 +26,8 @@ type Props = {
   loaded: boolean;
 };
 
-export const Sidebar = ({presaleState, walletInfo, loaded}: Props) => {
-
-  console.log('walletInfo', walletInfo);
+export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
+  console.log("walletInfo", walletInfo);
 
   return (
     <SidebarRoot>
@@ -73,8 +72,13 @@ export const Sidebar = ({presaleState, walletInfo, loaded}: Props) => {
           <HeaderValue>
             <LoadingWrapper loaded={walletInfo !== null}>
               {(() => {
-                const total = (walletInfo?.boostSolflare ?? 0) + (walletInfo?.boostBonk ?? 0) + (walletInfo?.boostLucky ?? 0) + (walletInfo?.boost1Hour ?? 0) + (walletInfo?.boostCode ?? 0);
-                return total > 0 ? `+${total}%` : '-';
+                const total =
+                  (walletInfo?.boostSolflare ?? 0) +
+                  (walletInfo?.boostBonk ?? 0) +
+                  (walletInfo?.boostLucky ?? 0) +
+                  (walletInfo?.boost1Hour ?? 0) +
+                  (walletInfo?.boostCode ?? 0);
+                return total > 0 ? `+${total}%` : "-";
               })()}
             </LoadingWrapper>
           </HeaderValue>

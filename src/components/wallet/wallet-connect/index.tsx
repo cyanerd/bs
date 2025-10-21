@@ -10,7 +10,7 @@ import { Container, Copied, Dropdown, Icon, Wrapper } from "./styles";
 import type { WalletReceiveData } from "~features/client/mixed/ui/content/start-game/content/wallet/types";
 import { Web3 } from "@/utils/web3";
 import { useWalletBalance } from "@/hooks/useWalletBalance";
-import { Button } from "@/components/button";
+import { Button } from "@/components/common/button";
 
 type Props = {
   requiresSignature: boolean;
@@ -145,7 +145,11 @@ export const WalletConnect: React.FC<Props> = ({
       {modalVisible && <WalletModal onClose={() => setModalVisible(false)} />}
       <Container>
         <Wrapper>
-          <Button onClick={handleClickWallet}>
+          <Button
+            onClick={handleClickWallet}
+            $minWidth="250px"
+            $maxWidth="250px"
+          >
             {connected ? (
               <>
                 <Icon src={icon} />

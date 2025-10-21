@@ -1,9 +1,5 @@
-export { Header } from "./header";
-export { Hero } from "./hero";
-export { Main } from "./main";
-export { Section } from "./section";
-
-export * as HeaderStyles from "./header";
-export * as HeroStyles from "./hero";
-export * as MainStyles from "./main";
-export * as SectionStyles from "./section";
+export * from "./header";
+export * from "./hero";
+export * from "./main";
+export * from "./section";
+export * from "./footer";

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Flexbox } from "@/components/flexbox";
+import { Flexbox } from "@/components/common/flexbox";
 
 export const Container = styled(Flexbox)`
   gap: 2rem;

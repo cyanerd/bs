@@ -62,7 +62,7 @@ export const FaqChevron = styled.span<{
 export const FaqAnswer = styled.div<{
   $open?: boolean;
 }>`
-  color: #bbb;
+  color: #999;
   font-size: 0.95rem;
   max-height: ${({ $open }) => ($open ? "600px" : "0px")};
   overflow: hidden;

@@ -1,6 +1,6 @@
 import React from "react";
 import { BarWrapper, Bar, Fill, InBarText, BottomRow } from "./styles";
-import { LoadingWrapper } from '@/components/loading-wrapper';
+import { LoadingWrapper } from "@/components/common/loading-wrapper";
 
 type Props = {
   value: number; // 0 - 100

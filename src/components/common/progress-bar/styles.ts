@@ -55,5 +55,5 @@ export const BottomRow = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 0.25rem;
-  color: #bbb;
+  color: #999;
 `;

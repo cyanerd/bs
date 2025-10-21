@@ -5,8 +5,12 @@ export const Button = styled.button<{
   $color?: string;
   $width?: string;
   $size?: "small" | "medium";
+  $minWidth?: string;
+  $maxWidth?: string;
 }>`
   width: ${({ $width }) => $width || "auto"};
+  min-width: ${({ $minWidth }) => $minWidth || "auto"};
+  max-width: ${({ $maxWidth }) => $maxWidth || "auto"};
   margin: 0 auto;
   display: flex;
   justify-content: center;

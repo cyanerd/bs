@@ -1,20 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HintRoot, IconButton, Tooltip } from "./styles";
 
 export const Hint = ({ children }: React.PropsWithChildren<{}>) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+
+  // We need this effect to detect whether the user's device uses a coarse pointer (like touch screens)
+  // or a fine pointer (like a mouse). This allows us to adjust the Hint's interaction logic: on coarse
+  // (touch) devices, we toggle the hint on click, while on fine pointer (mouse), we show it on hover.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia && window.matchMedia("(pointer: coarse)");
+    const update = () => setIsCoarsePointer(!!(mql && mql.matches));
+    update();
+    if (mql) {
+      if (typeof mql.addEventListener === "function") {
+        mql.addEventListener("change", update);
+        return () => mql.removeEventListener("change", update);
+      }
+      // Safari fallback
+      if (typeof (mql as any).addListener === "function") {
+        (mql as any).addListener(update);
+        return () => (mql as any).removeListener(update);
+      }
+    }
+  }, []);
 
   const show = () => setIsVisible(true);
   const hide = () => setIsVisible(false);
   const toggle = () => setIsVisible((v) => !v);
 
   return (
-    <HintRoot onMouseLeave={hide}>
+    <HintRoot onMouseLeave={!isCoarsePointer ? hide : undefined}>
       <IconButton
         type="button"
         aria-label="Hint"
-        onMouseEnter={show}
-        onClick={toggle}
+        onMouseEnter={!isCoarsePointer ? show : undefined}
+        onClick={isCoarsePointer ? toggle : undefined}
+        onFocus={!isCoarsePointer ? show : undefined}
+        onBlur={!isCoarsePointer ? hide : undefined}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

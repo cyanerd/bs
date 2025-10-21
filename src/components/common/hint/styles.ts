@@ -26,8 +26,8 @@ export const IconButton = styled.button`
   }
 
   @media (pointer: coarse) {
-    width: 40px;
-    height: 40px;
+    width: 24px;
+    height: 24px;
   }
 `;
 

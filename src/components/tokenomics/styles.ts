@@ -47,7 +47,7 @@ export const LegendItem = styled.li<{ $active?: boolean }>`
     transition: color 160ms ease;
   }
   .sub {
-    color: #9aa39a;
+    color: #999;
     font-size: 0.9rem;
     margin-top: 0.125rem;
   }

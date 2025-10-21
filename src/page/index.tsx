@@ -248,10 +248,7 @@ const PageContent = () => {
         </LayoutSection>
 
         <LayoutSection>
-          <h3 style={{ textAlign: "center", marginBottom: "2rem" }}>
-            Partners
-          </h3>
-          <Partners items={OUR_FRIENDS} />
+          <Partners items={OUR_FRIENDS} title="Our Friends" noBorder />
         </LayoutSection>
 
         <LayoutSection>

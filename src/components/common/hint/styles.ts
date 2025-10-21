@@ -5,7 +5,6 @@ export const HintRoot = styled.div`
   vertical-align: middle;
   margin-left: 0.5rem;
   position: relative;
-  top: 2px;
 `;
 
 export const IconButton = styled.button`
@@ -13,14 +12,22 @@ export const IconButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   color: currentColor;
   opacity: 0.75;
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   &:hover {
     opacity: 1;
+  }
+
+  @media (pointer: coarse) {
+    width: 40px;
+    height: 40px;
   }
 `;
 
@@ -28,7 +35,7 @@ export const Tooltip = styled.div<{ $visible: boolean }>`
   width: 164px;
   position: absolute;
   top: 100%;
-  left: -50%;
+  left: 50%;
   transform: translateX(-50%) translateY(-4px);
   background: #444;
   color: #fff;

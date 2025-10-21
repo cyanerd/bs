@@ -115,6 +115,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
                 <Hint>
                   <p>
                     Eligible communities:
+                    <br />
                     <br /> @bodoggos
                     <br /> @Claynosaurz
                     <br /> @DegenApeAcademy

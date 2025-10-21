@@ -18,7 +18,7 @@ export const KEY_PARTNERS: PartnerItem[] = [
   },
   {
     name: "Play Solana",
-    href: "#",
+    href: "https://x.com/blockstranding/status/1980728542687072711",
     imageSrc: "/images/partners/Play-Solana.jpg",
   },
   {

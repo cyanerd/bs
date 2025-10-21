@@ -7,9 +7,7 @@ import { WalletModal } from "../wallet-modal";
 import { Container, Copied, Dropdown, Icon, Wrapper } from "./styles";
 
 // @ts-ignore
-import type { WalletReceiveData } from "~features/client/mixed/ui/content/start-game/content/wallet/types";
 import { Web3 } from "@/utils/web3";
-import { useWalletBalance } from "@/hooks/useWalletBalance";
 import { Button } from "@/components/common/button";
 
 type Props = {

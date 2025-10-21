@@ -62,13 +62,32 @@ export function useUserAuth() {
     setWalletAddress(publicKey);
     setWalletConnected(true);
     setCookie(WALLET_COOKIE_NAME, publicKey);
+    console.log('completeWalletConnect');
 
-    // Subscribe to wallet channel in centrifuge
-    centrifugeService.subscribeToWallet(publicKey);
-    centrifugeService.updateCallbacks({
-      onWalletDepositUpdate: handleWalletDepositUpdate
-    });
+    // Wait for centrifuge to connect, then subscribe to wallet channel
+    const subscribeToWalletWhenReady = () => {
+      if (centrifugeService.isConnected) {
+        console.log('Centrifuge already connected, subscribing to wallet');
+        centrifugeService.subscribeToWallet(publicKey);
+        centrifugeService.updateCallbacks({
+          onWalletDepositUpdate: handleWalletDepositUpdate
+        });
+      } else {
+        console.log('Waiting for centrifuge connection...');
+        const checkConnection = setInterval(() => {
+          if (centrifugeService.isConnected) {
+            clearInterval(checkConnection);
+            console.log('Centrifuge connected, now subscribing to wallet');
+            centrifugeService.subscribeToWallet(publicKey);
+            centrifugeService.updateCallbacks({
+              onWalletDepositUpdate: handleWalletDepositUpdate
+            });
+          }
+        }, 100); // Check every 100ms
+      }
+    };
 
+    subscribeToWalletWhenReady();
     fetchWallet();
   };
 
@@ -87,6 +106,7 @@ export function useUserAuth() {
 
   useEffect(() => {
     if (!connected) {
+      console.log('logout');
       logout();
     }
   }, [connected]);

@@ -16,7 +16,7 @@ class CentrifugeService {
   private callbacks: CentrifugeCallbacks = {};
   private _isConnected = false;
 
-  get isConnected(): boolean {
+  public get isConnected(): boolean {
     return this._isConnected;
   }
 

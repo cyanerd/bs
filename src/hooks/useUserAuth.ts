@@ -62,7 +62,6 @@ export function useUserAuth() {
     setWalletAddress(publicKey);
     setWalletConnected(true);
     setCookie(WALLET_COOKIE_NAME, publicKey);
-    console.log('completeWalletConnect');
 
     // Wait for centrifuge to connect, then subscribe to wallet channel
     const subscribeToWalletWhenReady = () => {
@@ -106,7 +105,6 @@ export function useUserAuth() {
 
   useEffect(() => {
     if (!connected) {
-      console.log('logout');
       logout();
     }
   }, [connected]);

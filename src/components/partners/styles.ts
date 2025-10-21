@@ -3,16 +3,12 @@ import styled from "styled-components";
 export const Partners = styled.div<{ $noBorder?: boolean }>`
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 2rem;
   padding: 2rem;
   border-top: ${({ $noBorder }) => ($noBorder ? "none" : "1px solid #333")};
   border-bottom: ${({ $noBorder }) => ($noBorder ? "none" : "1px solid #333")};
   align-items: center;
   justify-content: center;
-
-  @media (max-width: 768px) {
-    gap: 2rem;
-  }
 `;
 
 export const Title = styled.h3`

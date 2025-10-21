@@ -37,7 +37,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
         <CardHeader>
           <HeaderText>Your deposit:</HeaderText>
           <HeaderValue>
-            <LoadingWrapper loaded={walletInfo !== null}>
+            <LoadingWrapper loaded={true}>
               {walletInfo?.totalDeposited ?? 0} SOL
             </LoadingWrapper>
           </HeaderValue>
@@ -47,9 +47,10 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Your WL tier:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                {walletInfo !== null && <LoadingWrapper loaded={true}>
                   WL{walletInfo?.tier ?? 0}
-                </LoadingWrapper>
+                </LoadingWrapper>}
+                {walletInfo === null && '-' }
               </RowValue>
             </Row>
           </li>
@@ -70,7 +71,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
         <CardHeader>
           <HeaderText>Token Boost:</HeaderText>
           <HeaderValue>
-            <LoadingWrapper loaded={walletInfo !== null}>
+            <LoadingWrapper loaded={true}>
               {(() => {
                 const total =
                   (walletInfo?.boostSolflare ?? 0) +
@@ -88,7 +89,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>SolFlare partner:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostSolflare ?? 0)}
                 </LoadingWrapper>
               </RowValue>
@@ -98,7 +99,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Bonk Family:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostBonk ?? 0)}
                 </LoadingWrapper>
               </RowValue>
@@ -108,7 +109,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Lucky number:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostLucky ?? 0)}
                 </LoadingWrapper>
               </RowValue>
@@ -118,7 +119,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>1st Hour Buyer:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boost1Hour ?? 0)}
                 </LoadingWrapper>
               </RowValue>
@@ -128,7 +129,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Code applied:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={walletInfo !== null}>
+                <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostCode ?? 0)}
                 </LoadingWrapper>
               </RowValue>

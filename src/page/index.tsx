@@ -227,6 +227,7 @@ const PageContent = () => {
               walletInfo={walletInfo}
               requiresSignature={ready}
               onConnect={completeWalletConnect}
+              onRefreshWalletInfo={fetchWalletInfo}
               showDepositPrice
             />
           }

@@ -3,7 +3,15 @@ import { fetchWalletInfo, WalletInfo } from "@/api/presale";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { setCookie, getCookie, WALLET_COOKIE_NAME, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
+import { 
+  setCookie, 
+  getCookie, 
+  removeCookie, 
+  WALLET_COOKIE_NAME, 
+  REFERRAL_CODE_COOKIE_NAME, 
+  SIGNATURE_COOKIE_NAME, 
+  SIGNATURE_WALLET_COOKIE_NAME 
+} from "@/utils/cookies";
 
 export function useUserAuth() {
   const [isWalletConnected, setWalletConnected] = useState(false);
@@ -54,6 +62,9 @@ export function useUserAuth() {
   const logout = () => {
     setWalletAddress("");
     setWalletConnected(false);
+    removeCookie(WALLET_COOKIE_NAME);
+    removeCookie(SIGNATURE_COOKIE_NAME);
+    removeCookie(SIGNATURE_WALLET_COOKIE_NAME);
   };
 
   useEffect(() => {

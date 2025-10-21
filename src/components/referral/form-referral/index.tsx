@@ -26,7 +26,6 @@ export const FormReferral = ({
         disabled={!ready}
         disabledText="Please connect your wallet to apply your referral code"
         onApply={handleReferralApply}
-        minLength={4}
         maxLength={8}
       />
     </Flexbox>

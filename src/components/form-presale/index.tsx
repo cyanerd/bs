@@ -40,6 +40,7 @@ type Props = {
   showDepositPrice?: boolean;
   requiresSignature: boolean;
   onConnect: (publicKey: string) => Promise<void>;
+  onRefreshWalletInfo?: () => Promise<void>;
 };
 
 export const FormPresale = ({
@@ -48,6 +49,7 @@ export const FormPresale = ({
   showDepositPrice,
   requiresSignature,
   onConnect,
+  onRefreshWalletInfo,
 }: Props) => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction, wallet } = useWallet();
@@ -133,12 +135,15 @@ export const FormPresale = ({
       const signature = await sendTransaction(transaction, connection);
       console.log("Transaction sent:", signature);
 
-      toast.error("Transaction sent! Confirming...");
+      toast.info("Transaction sent! Confirming...");
       await connection.confirmTransaction(signature, "confirmed");
 
-      toast.error(
-        `Transfer successful! ${depositAmount} SOL sent to the presale wallet.\nTransaction: ${signature}`,
-      );
+      toast.success('Transfer successful!');
+
+      setTimeout(() => {
+        onRefreshWalletInfo?.();
+      }, 2000);
+
     } catch (error: any) {
       console.error("Transfer error:", error);
       const errorMessage = error?.message || "Unknown error occurred";

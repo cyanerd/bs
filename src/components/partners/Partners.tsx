@@ -14,17 +14,32 @@ type Props = {
   title?: string;
   subtitle?: string;
   noBorder?: boolean;
+  noWrap?: boolean;
+  align?: "center" | "start" | "end";
 };
 
-export const Partners = ({ items, title, subtitle, noBorder }: Props) => {
+export const Partners = ({
+  items,
+  title,
+  subtitle,
+  noBorder,
+  noWrap,
+  align,
+}: Props) => {
   return (
     <>
       {title && <Title style={{ marginTop: 0 }}>{title}</Title>}
 
-      <PartnersStyled $noBorder={noBorder}>
+      <PartnersStyled $noBorder={noBorder} $noWrap={noWrap} $align={align}>
         {subtitle && (
-          <Row>
-            <span style={{ textTransform: "uppercase" }}>{subtitle}</span>
+          <Row
+            style={{
+              width: "100%",
+            }}
+          >
+            <span style={{ textTransform: "uppercase", whiteSpace: "nowrap" }}>
+              {subtitle}
+            </span>
           </Row>
         )}
 
@@ -41,14 +56,16 @@ export const Partners = ({ items, title, subtitle, noBorder }: Props) => {
                 <LinkBadge>View on X</LinkBadge>
               </Link>
             ) : (
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-                justifyContent: 'center',
-                textAlign: 'center',
-                alignItems: 'center'
-              }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  alignItems: "center",
+                }}
+              >
                 <img
                   src={item.imageSrc}
                   alt={item.name}

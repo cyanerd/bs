@@ -1,17 +1,22 @@
 import styled from "styled-components";
 
-export const Partners = styled.div<{ $noBorder?: boolean }>`
+export const Partners = styled.div<{
+  $noBorder?: boolean;
+  $noWrap?: boolean;
+  $align?: "center" | "start" | "end";
+}>`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: ${({ $noWrap }) => ($noWrap ? "nowrap" : "wrap")};
   gap: ${({ $noBorder }) => ($noBorder ? "3rem" : "2rem")};
   padding: 2rem;
   border-top: ${({ $noBorder }) => ($noBorder ? "none" : "1px solid #333")};
   border-bottom: ${({ $noBorder }) => ($noBorder ? "none" : "1px solid #333")};
-  align-items: center;
+  align-items: ${({ $align }) => $align || "start"};
   justify-content: center;
 
-  @media (max-width: 768px) {
-      gap: 2rem;
+  @media (max-width: 1024px) {
+    gap: 2rem;
+    flex-wrap: wrap;
   }
 `;
 
@@ -24,6 +29,13 @@ export const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 12%;
+  @media (max-width: 768px) {
+    width: 24%;
+  }
+  @media (max-width: 480px) {
+    width: 42%;
+  }
 `;
 
 export const Link = styled.a`
@@ -49,6 +61,6 @@ export const ItemName = styled.span`
   font-size: 0.875rem;
   color: #eee;
   text-transform: none;
-  white-space: nowrap;
   color: #999;
+  max-height: 2rem;
 `;

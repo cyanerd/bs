@@ -14,7 +14,12 @@ export const Hero = ({
     <Wrapper>
       <Title>{title}</Title>
       <Description>{description}</Description>
-      <Partners items={KEY_PARTNERS} subtitle="Key partners:" />
+      <Partners
+        items={KEY_PARTNERS}
+        subtitle="Key partners:"
+        noWrap
+        align="center"
+      />
     </Wrapper>
   );
 };

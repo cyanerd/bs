@@ -1,14 +1,7 @@
 import React, { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { useUserAuth } from "@/hooks/useUserAuth";
-import { usePresaleState } from "@/hooks/usePresaleState";
-import { setCookie, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
-
-import { WalletConnect } from "@/components/wallet/wallet-connect";
-import { WalletContext } from "@/components/wallet/wallet-context";
-
-import { Container, Wrapper } from "./styles";
 import {
   Header,
   Hero,
@@ -16,14 +9,6 @@ import {
   Section as LayoutSection,
   Footer,
 } from "@/components/layout";
-import {
-  Partners,
-  Row,
-  Link,
-  LinkBadge,
-} from "@/components/layout/hero/styles";
-
-import "react-toastify/dist/ReactToastify.css";
 import { FormPresale } from "@/components/form-presale";
 import { Sidebar } from "@/components/sidebar";
 import { FAQ } from "@/components/faq";
@@ -31,6 +16,13 @@ import { TwitterBoost } from "@/components/twitter/twitter-boost";
 import { TwitterSays } from "@/components/twitter/twitter-says";
 import { FormReferral } from "@/components/referral/form-referral";
 import { Tokenomics } from "@/components/tokenomics";
+import { OUR_FRIENDS, Partners } from "@/components/partners";
+import { WalletContext } from "@/components/wallet/wallet-context";
+import { useUserAuth } from "@/hooks/useUserAuth";
+import { usePresaleState } from "@/hooks/usePresaleState";
+import { setCookie, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
+
+import { Container, Wrapper } from "./styles";
 
 const PageContent = () => {
   const {
@@ -259,32 +251,7 @@ const PageContent = () => {
           <h3 style={{ textAlign: "center", marginBottom: "2rem" }}>
             Partners
           </h3>
-          <Partners
-            style={{
-              border: "none",
-              display: "flex",
-              gap: "3rem",
-              flexWrap: "wrap",
-            }}
-          >
-            {partners.map((partner, index) => (
-              <Row key={index}>
-                <Link
-                  href={partner.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={partner.imageSrc}
-                    alt={partner.name}
-                    height={56}
-                    style={{ borderRadius: 4 }}
-                  />
-                  <LinkBadge>View on X</LinkBadge>
-                </Link>
-              </Row>
-            ))}
-          </Partners>
+          <Partners items={OUR_FRIENDS} />
         </LayoutSection>
 
         <LayoutSection>

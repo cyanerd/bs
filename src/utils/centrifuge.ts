@@ -2,7 +2,7 @@ import { Centrifuge } from 'centrifuge';
 
 // Centrifuge configuration constants
 const CENTRIFUGE_URL = 'wss://presale.blockstranding.com/connection/websocket';
-const CENTRIFUGE_TOKEN = 'eyJzdWIiOiJicyIsImlhdCI6MTc2MTA0OTMyNn0.0ttywKHJxDtSn5PM15I6t1rGW4ri7EQFev2PeR82iZs';
+const CENTRIFUGE_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiczEiLCJpYXQiOjE3NjEwNTQ5Mjl9.gEaWNFDrqb7NBxOxWjGRE1Dk_z74D9UdE5BlqDPJ-68';
 
 export interface CentrifugeCallbacks {
   onPresaleStateUpdate?: (data: any) => void;

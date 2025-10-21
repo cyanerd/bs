@@ -46,6 +46,12 @@ export const Link = styled.a`
   text-align: center;
   align-items: center;
   text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.75;
+    cursor: pointer;
+  }
 `;
 
 export const LinkBadge = styled.span`

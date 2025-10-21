@@ -62,7 +62,7 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <FaqWrapper>
+    <FaqWrapper style={{ paddingTop: 0 }}>
       <FaqHeader>FAQ</FaqHeader>
       <FaqList>
         {data.map((item, index) => {

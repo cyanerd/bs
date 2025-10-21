@@ -46,7 +46,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
               <RowText>Your WL tier:</RowText>
               <RowValue>
                 {walletInfo !== null && <LoadingWrapper loaded={true}>
-                  WL{walletInfo?.tier ?? 0}
+                  {walletInfo?.tier && walletInfo.tier > 0 ? `WL${walletInfo.tier}` : 'no WL'}
                 </LoadingWrapper>}
                 {walletInfo === null && '-' }
               </RowValue>

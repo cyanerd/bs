@@ -282,6 +282,17 @@ export const FormPresale = ({
         </li>
         <li>Vesting: 100% unlocked at TGE</li>
       </ConstraintsList>
+
+      <div style={{ textAlign: "center", marginTop: "1rem", color: "#999" }}>
+        Need help?{" "}
+        <a
+          href="https://t.me/blockstranding_support"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Contact Support
+        </a>
+      </div>
     </FormRoot>
   );
 };

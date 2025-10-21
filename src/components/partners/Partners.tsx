@@ -19,7 +19,7 @@ type Props = {
 export const Partners = ({ items, title, subtitle, noBorder }: Props) => {
   return (
     <>
-      {title && <Title>{title}</Title>}
+      {title && <Title style={{ marginTop: 0 }}>{title}</Title>}
 
       <PartnersStyled $noBorder={noBorder}>
         {subtitle && (

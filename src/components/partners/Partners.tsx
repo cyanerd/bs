@@ -30,19 +30,34 @@ export const Partners = ({ items, title, subtitle, noBorder }: Props) => {
 
         {items.map((item, index) => (
           <Row key={index}>
-            <Link href={item.href} target="_blank" rel="noopener noreferrer">
-              <img
-                src={item.imageSrc}
-                alt={item.name}
-                height={56}
-                style={{ borderRadius: 4 }}
-              />
-              {item.href ? (
+            {item.href ? (
+              <Link href={item.href} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={item.imageSrc}
+                  alt={item.name}
+                  height={56}
+                  style={{ borderRadius: 4 }}
+                />
                 <LinkBadge>View on X</LinkBadge>
-              ) : (
+              </Link>
+            ) : (
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                justifyContent: 'center',
+                textAlign: 'center',
+                alignItems: 'center'
+              }}>
+                <img
+                  src={item.imageSrc}
+                  alt={item.name}
+                  height={56}
+                  style={{ borderRadius: 4 }}
+                />
                 <ItemName>{item.name}</ItemName>
-              )}
-            </Link>
+              </div>
+            )}
           </Row>
         ))}
       </PartnersStyled>

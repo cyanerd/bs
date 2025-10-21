@@ -27,8 +27,6 @@ type Props = {
 };
 
 export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
-  console.log("walletInfo", walletInfo);
-
   return (
     <SidebarRoot>
       <SidebarHeader>Inventory & Stats</SidebarHeader>

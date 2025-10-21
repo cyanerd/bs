@@ -217,8 +217,8 @@ export const FormPresale = ({
             maxLength={6}
             value={priceMode === "SOL" ? solPrice ?? "" : usdcPrice ?? ""}
             onChange={(e) => {
-              const nextValue =
-                e.target.value === "" ? null : Number(e.target.value);
+              const inputValue = e.target.value.replace(/-/g, '').slice(0, 6);
+              const nextValue = inputValue === "" ? null : Number(inputValue);
               if (priceMode === "SOL") {
                 setSOLPrice(nextValue);
               } else {

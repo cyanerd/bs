@@ -38,14 +38,14 @@ export function useUserAuth() {
     setLoading(true);
 
     return getAuth()
-      .then((data) => {
-        if (data?.valid) {
-          const userData = data.userData;
-          setName(userData.name || "");
+      .then(({ valid, user, error }) => {
+        if (valid) {
+          setName(user.name || "Anonymous");
           setTwitterConnected(true);
-        } else if (data?.error) {
-          toast.error(data.error, {
-            autoClose: 10000,
+        } else if (error) {
+          console.error(error);
+          toast.error("Failed to auth and get a user data", {
+            autoClose: 5000,
           });
         }
       })
@@ -109,6 +109,30 @@ export function useUserAuth() {
     fetchWallet();
     await fetchWalletBalance();
   };
+
+  // Get back from X to the page
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const accessToken = urlParams.get("access_token");
+    const refreshToken = urlParams.get("refresh_token");
+
+    if (accessToken && refreshToken) {
+      const oneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      const sevenDays = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+      setCookie("access_token", accessToken, { expires: oneDay });
+      setCookie("refresh_token", refreshToken, { expires: sevenDays });
+
+      auth().then(() => {
+        toast.success("X connected successfully!", {
+          autoClose: 5000,
+        });
+      });
+
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
 
   const logout = () => {
     setWalletAddress("");

@@ -23,4 +23,4 @@ export const setCookie = (name: string, value: string | boolean | null, options:
   });
 };
 
-export { WALLET_COOKIE_NAME, SIGNATURE_COOKIE_NAME, SIGNATURE_WALLET_COOKIE_NAME, REFERRAL_CODE_COOKIE_NAME } from './const';
+export { WALLET_COOKIE_NAME, SIGNATURE_COOKIE_NAME, SIGNATURE_WALLET_COOKIE_NAME } from './const';

@@ -6,10 +6,8 @@ import { useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
 import {
   setCookie,
-  getCookie,
   removeCookie,
   WALLET_COOKIE_NAME,
-  REFERRAL_CODE_COOKIE_NAME,
   SIGNATURE_COOKIE_NAME,
   SIGNATURE_WALLET_COOKIE_NAME
 } from "@/utils/cookies";
@@ -24,7 +22,7 @@ export function useUserAuth() {
   const [name, setName] = useState("");
   const [walletInfo, setWalletInfo] = useState<WalletInfo | null>(null);
   const [walletBalance, setWalletBalance] = useState<number | null>(null);
-  const [referralCode, setReferralCode] = useState<string>(() => getCookie(REFERRAL_CODE_COOKIE_NAME) || "");
+  const [referralCode, setReferralCode] = useState<string>("");
 
   const { connected, wallet, publicKey } = useWallet();
   const { connection } = useConnection();
@@ -54,9 +52,9 @@ export function useUserAuth() {
       });
   };
 
-  const fetchWallet = async () => {
+  const fetchWallet = async (refCodeChanged = false) => {
     try {
-      const info = await fetchWalletInfo(wallet?.adapter.name, referralCode);
+      const info = await fetchWalletInfo(wallet?.adapter.name, referralCode, refCodeChanged);
       setWalletInfo(info);
     } catch {}
   }
@@ -110,19 +108,8 @@ export function useUserAuth() {
     await fetchWalletBalance();
   };
 
-  // Get back from X to the page
   useEffect(() => {
-    // const accessToken = getCookie("access_token");
-    // const refreshToken = getCookie("refresh_token");
-    // console.log('accessToken', accessToken, refreshToken);
-
-    // if (accessToken && refreshToken) {
-      auth().then(() => {
-        // toast.success("X connected successfully!", {
-        //   autoClose: 5000,
-        // });
-      });
-    // }
+      auth();
   }, []);
 
   const logout = () => {

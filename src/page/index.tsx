@@ -19,7 +19,6 @@ import { OUR_FRIENDS, Partners } from "@/components/partners";
 import { WalletContext } from "@/components/wallet/wallet-context";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { usePresaleState } from "@/hooks/usePresaleState";
-import { setCookie, REFERRAL_CODE_COOKIE_NAME } from "@/utils/cookies";
 
 import { Container, Wrapper } from "./styles";
 
@@ -54,11 +53,6 @@ const PageContent = () => {
 
   const handleReferralApply = async (refCode: string) => {
     setReferralCode(refCode);
-    setCookie(REFERRAL_CODE_COOKIE_NAME, refCode);
-
-    toast.success(`Referral code applied: ${refCode}`, {
-      autoClose: 5000,
-    });
   };
 
   useEffect(() => {
@@ -71,7 +65,19 @@ const PageContent = () => {
         }
       })();
     }
-  }, [ready, walletAddress, walletName, referralCode]);
+  }, [ready, walletAddress, walletName]);
+
+  useEffect(() => {
+    if (ready && walletAddress) {
+      (async () => {
+        try {
+          await fetchWalletInfo(true);
+        } catch (e) {
+          // swallow, already logged in API layer
+        }
+      })();
+    }
+  }, [referralCode]);
 
   return (
     <Wrapper>

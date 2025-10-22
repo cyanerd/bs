@@ -5,7 +5,7 @@ export const MobileBanner = () => {
   return (
     <MobileBannerContainer>
       <MobileBannerText>
-        We recommend using desktop for the presale
+        For the presale, we recommend using the desktop version
       </MobileBannerText>
     </MobileBannerContainer>
   );

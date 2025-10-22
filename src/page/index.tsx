@@ -25,6 +25,7 @@ import { fetchWalletInfo as _fetch } from "@/api/presale";
 import { Container, Wrapper } from "./styles";
 
 const PRESALE_OFF = false;
+const SHOW_BANNER = true;
 
 const PageContent = () => {
   const {
@@ -43,6 +44,7 @@ const PageContent = () => {
   } = useUserAuth();
 
   const { presaleState, loaded } = usePresaleState(walletName);
+
 
   const ready = Boolean(isWalletConnected && walletAddress);
 
@@ -74,7 +76,7 @@ const PageContent = () => {
 
   return (
     <Wrapper>
-      <MobileBanner />
+      {SHOW_BANNER && <MobileBanner />}
       <Container>
         <Header
           start={

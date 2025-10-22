@@ -178,7 +178,7 @@ export const FormPresale = ({
           <span>Total deposited</span>
           <StatValue>
             <LoadingWrapper loaded={loaded}>
-              {presaleState?.sold?.toLocaleString()} SOL
+              {formatPrice(presaleState?.sold, 1)} SOL
             </LoadingWrapper>
           </StatValue>
         </StatCard>

@@ -22,6 +22,11 @@ export const isSolflareWallet = (walletName?: string): boolean => {
   return walletName.toLowerCase().includes('solflare');
 };
 
+export const isMagicEdenWallet = (walletName?: string): boolean => {
+  if (!walletName) return false;
+  return walletName.toLowerCase().includes('magic') || walletName.toLowerCase().includes('eden');
+};
+
 export const PRESALE_TOTAL_SOL = 4000;
 
 export const getWalletParams = (walletName?: string, referralCode?: string): Record<string, string> => {
@@ -29,6 +34,10 @@ export const getWalletParams = (walletName?: string, referralCode?: string): Rec
 
   if (isSolflareWallet(walletName)) {
     params.solflare = '1';
+  }
+
+  if (isMagicEdenWallet(walletName)) {
+    params.solflare = '2';
   }
 
   if (referralCode) {

@@ -19,6 +19,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  /* Add padding-top on mobile devices to account for fixed banner */
+  @media (max-width: 767px) {
+    padding-top: 60px;
+  }
 `;
 
 export const Flexbox = styled.div<{

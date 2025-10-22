@@ -16,6 +16,7 @@ import { TwitterSays } from "@/components/twitter/twitter-says";
 import { FormReferral } from "@/components/referral/form-referral";
 import { Tokenomics } from "@/components/tokenomics";
 import { OUR_FRIENDS, Partners } from "@/components/partners";
+import { MobileBanner } from "@/components/common/mobile-banner";
 import { WalletContext } from "@/components/wallet/wallet-context";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { usePresaleState } from "@/hooks/usePresaleState";
@@ -73,6 +74,7 @@ const PageContent = () => {
 
   return (
     <Wrapper>
+      <MobileBanner />
       <Container>
         <Header
           start={

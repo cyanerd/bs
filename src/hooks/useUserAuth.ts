@@ -115,7 +115,7 @@ export function useUserAuth() {
   const logout = () => {
     setWalletAddress("");
     setWalletConnected(false);
-    setWalletInfo(prevInfo => prevInfo ? { ...prevInfo, totalDeposited: 0 } : null); // Reset totalDeposited on disconnect
+    setWalletInfo(null);
     setWalletBalance(null); // Clear wallet balance on disconnect
 
     // Unsubscribe from wallet channel in centrifuge

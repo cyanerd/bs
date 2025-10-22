@@ -23,7 +23,7 @@ export const KEY_PARTNERS: PartnerItem[] = [
   },
   {
     name: "Phantom",
-    href: "#",
+    href: "https://x.com/blockstranding/status/1980986380286382385",
     imageSrc: "/images/partners/Phantom.jpg",
   },
   {

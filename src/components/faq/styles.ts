@@ -63,7 +63,6 @@ export const FaqAnswer = styled.div<{
   $open?: boolean;
 }>`
   color: #999;
-  font-size: 0.95rem;
   max-height: ${({ $open }) => ($open ? "600px" : "0px")};
   overflow: hidden;
   transition: max-height 250ms ease-in-out, opacity 200ms ease-in-out,

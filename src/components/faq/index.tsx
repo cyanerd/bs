@@ -29,6 +29,10 @@ const data: QA[] = [
     a: "Token Boost is a system that grants you extra free tokens in addition to your purchased allocation. Each boost can be earned by meeting specific conditions.",
   },
   {
+    q: "Do the presale tokens have vesting? ",
+    a: "No, there is no vesting for presale participants. All tokens will be 100% unlocked at TGE.",
+  },
+  {
     q: "How long will the presale last?",
     a: "The presale will run for 48 hours.",
   },

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_HOST, PresaleResponse, PresaleState, getBasicAuthHeaders, getWalletParams } from "./config";
+import {toast} from 'react-toastify';
 
 export const fetchPresaleState = async (walletName?: string): Promise<PresaleState> => {
   try {
@@ -30,6 +31,7 @@ export const fetchPresaleState = async (walletName?: string): Promise<PresaleSta
 export interface WalletInfo {
   tier: number;
   price: number;
+  code: string;
   totalDeposited: number;
   boostSolflare: number;
   boostMagicEden: number;
@@ -44,7 +46,11 @@ type WalletInfoResponse = {
   data: WalletInfo;
 };
 
-export const fetchWalletInfo = async (walletName?: string, referralCode?: string): Promise<WalletInfo> => {
+export const fetchWalletInfo = async (
+  walletName?: string,
+  referralCode?: string,
+  refCodeChanged?: boolean
+): Promise<WalletInfo> => {
   const url = `${API_HOST}/presale/wallet`;
   try {
     const params = getWalletParams(walletName, referralCode);
@@ -54,6 +60,17 @@ export const fetchWalletInfo = async (walletName?: string, referralCode?: string
       withCredentials: true,
     });
     if (response.data.result === 'success') {
+      if (refCodeChanged && referralCode) {
+        if (response.data.data?.code && response.data.data?.code === referralCode) {
+          toast.success(`Referral code applied: ${referralCode}`, {
+            autoClose: 5000,
+          });
+        } else {
+          toast.error(`Referral code is not valid`, {
+            autoClose: 5000,
+          });
+        }
+      }
       return response.data.data;
     }
     throw new Error('API returned non-success result');

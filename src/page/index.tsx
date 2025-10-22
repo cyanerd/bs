@@ -19,6 +19,7 @@ import { OUR_FRIENDS, Partners } from "@/components/partners";
 import { WalletContext } from "@/components/wallet/wallet-context";
 import { useUserAuth } from "@/hooks/useUserAuth";
 import { usePresaleState } from "@/hooks/usePresaleState";
+import { fetchWalletInfo as _fetch } from "@/api/presale";
 
 import { Container, Wrapper } from "./styles";
 
@@ -53,6 +54,7 @@ const PageContent = () => {
 
   const handleReferralApply = async (refCode: string) => {
     setReferralCode(refCode);
+    await _fetch(walletName, refCode, true);
   };
 
   useEffect(() => {
@@ -66,18 +68,6 @@ const PageContent = () => {
       })();
     }
   }, [ready, walletAddress, walletName]);
-
-  useEffect(() => {
-    if (ready && walletAddress) {
-      (async () => {
-        try {
-          await fetchWalletInfo(true);
-        } catch (e) {
-          // swallow, already logged in API layer
-        }
-      })();
-    }
-  }, [referralCode]);
 
   return (
     <Wrapper>

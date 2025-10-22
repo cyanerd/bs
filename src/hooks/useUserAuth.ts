@@ -52,9 +52,9 @@ export function useUserAuth() {
       });
   };
 
-  const fetchWallet = async (refCodeChanged = false) => {
+  const fetchWallet = async () => {
     try {
-      const info = await fetchWalletInfo(wallet?.adapter.name, referralCode, refCodeChanged);
+      const info = await fetchWalletInfo(wallet?.adapter.name, referralCode);
       setWalletInfo(info);
     } catch {}
   }

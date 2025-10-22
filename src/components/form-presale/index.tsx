@@ -86,33 +86,21 @@ export const FormPresale = ({
 
     // Only support SOL transfers for now
     if (priceMode === "USDC") {
-      toast.error(
-        "USDC transfers are not yet supported. Please switch to SOL mode.",
-      );
+      toast.error("USDC transfers are not supported.");
       return;
     }
 
     try {
       const recipientAddress = "EkP4BHr2my4LwdgFr29FgJ3nh9HT5bAovVyjiofzx6wk";
-      if (!recipientAddress) {
-        toast.error(
-          "Recipient wallet address is not configured. Please set VITE_RECIPIENT_WALLET in your environment variables.",
-        );
-        return;
-      }
       const recipientPublicKey = new PublicKey(recipientAddress);
 
       const depositAmount = solPrice;
       if (!depositAmount) {
-        toast.error("Please enter a valid deposit amount.");
         return;
       }
 
       // Validate deposit amount range
       if (depositAmount < MIN_DEPOSIT || depositAmount > MAX_DEPOSIT) {
-        toast.error(
-          `Deposit amount must be between ${MIN_DEPOSIT} SOL and ${MAX_DEPOSIT} SOL.`,
-        );
         return;
       }
 
@@ -156,9 +144,8 @@ export const FormPresale = ({
     } catch (error: any) {
       console.error("Transfer error:", error);
       const errorMessage = error?.message || "Unknown error occurred";
-      toast.error(
-        `Transfer failed: ${errorMessage}\n\nPlease check the console for more details.`,
-      );
+      // toast.error(`Transfer failed: ${errorMessage}\n\nPlease check the console for more details.`);
+      toast.error(`Transfer failed`);
     }
   };
 

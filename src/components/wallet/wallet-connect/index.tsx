@@ -98,7 +98,8 @@ export const WalletConnect: React.FC<Props> = ({
     } catch (error) {
       disconnect();
 
-      toast.error(`Unable to sign wallet\n${(error as Error).message}`, {
+      // toast.error(`Unable to sign wallet\n${(error as Error).message}`, {
+      toast.error(`Unable to sign wallet`, {
         autoClose: 5000,
       });
     }

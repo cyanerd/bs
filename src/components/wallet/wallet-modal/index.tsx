@@ -36,7 +36,8 @@ export const WalletModal: React.FC<Props> = ({ onClose }) => {
     try {
       select(walletName);
     } catch (error) {
-      toast.error(`Unable to select wallet\n${(error as Error).message}`, {
+      // toast.error(`Unable to select wallet\n${(error as Error).message}`, {
+      toast.error(`Unable to select wallet`, {
         autoClose: 10000,
       });
     }

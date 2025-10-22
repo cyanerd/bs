@@ -114,6 +114,7 @@ export function useUserAuth() {
   useEffect(() => {
     const accessToken = getCookie("access_token");
     const refreshToken = getCookie("refresh_token");
+    console.log('accessToken', accessToken, refreshToken);
 
     if (accessToken && refreshToken) {
       auth().then(() => {

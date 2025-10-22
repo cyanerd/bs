@@ -169,7 +169,6 @@ export const WalletConnect: React.FC<Props> = ({
               marginTop: '4px',
               fontSize: '12px',
               color: '#999',
-              fontFamily: 'monospace'
             }}>
               Balance: {formatPrice(walletBalance, 4)} SOL
             </div>

@@ -91,7 +91,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
         <List>
           {!!walletInfo?.boostSolflare && <li>
             <Row>
-              <RowText>SolFlare special:</RowText>
+              <RowText>Solflare special:</RowText>
               <RowValue>
                 <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostSolflare ?? 0)}

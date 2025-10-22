@@ -80,7 +80,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
                   (walletInfo?.boostSolflare ?? 0) +
                   (walletInfo?.boostBonk ?? 0) +
                   (walletInfo?.boostMagicEden ?? 0) +
-                  (walletInfo?.boostLucky ?? 0) +
+                  (walletInfo?.boostPartner ?? 0) +
                   (walletInfo?.boost1Hour ?? 0) +
                   (walletInfo?.boostCode ?? 0);
                 return total > 0 ? `+${total}%` : "-";
@@ -132,26 +132,11 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
           <li>
             <Row>
               <RowText>
-                Lucky number:
-                <Hint>
-                  <div>
-                    Eligible communities:
-                    <br />
-                    <br /> @bodoggos
-                    <br /> @Claynosaurz
-                    <br /> @DegenApeAcademy
-                    <br /> @FamousFoxFed
-                    <br /> @GalacticGeckoSG
-                    <br /> @MadLads
-                    <br /> @MonkeDAO
-                    <br /> @okaybears
-                    <br /> @sagamonkes
-                  </div>
-                </Hint>
+                Partner comms:
               </RowText>
               <RowValue>
                 <LoadingWrapper loaded={true}>
-                  {formatBoost(walletInfo?.boostLucky ?? 0)}
+                  {formatBoost(walletInfo?.boostPartner ?? 0)}
                 </LoadingWrapper>
               </RowValue>
             </Row>

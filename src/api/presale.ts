@@ -34,7 +34,7 @@ export interface WalletInfo {
   boostSolflare: number;
   boostMagicEden: number;
   boostBonk: number;
-  boostLucky: number;
+  boostPartner: number;
   boost1Hour: number;
   boostCode: number;
 }

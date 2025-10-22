@@ -64,6 +64,7 @@ export const Swatch = styled.span`
 export const DonutSlice = styled.path<{ $active: boolean }>`
   transform-origin: center;
   transition: transform 160ms ease;
+  outline: none;
   cursor: pointer;
   /* Softer glow on active */
   filter: drop-shadow(

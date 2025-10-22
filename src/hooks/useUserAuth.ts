@@ -116,6 +116,7 @@ export function useUserAuth() {
     setWalletAddress("");
     setWalletConnected(false);
     setWalletInfo(null);
+    setReferralCode("");
     setWalletBalance(null); // Clear wallet balance on disconnect
 
     // Unsubscribe from wallet channel in centrifuge

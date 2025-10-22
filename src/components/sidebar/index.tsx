@@ -113,7 +113,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
               <RowText>
                 Lucky number:
                 <Hint>
-                  <p>
+                  <div>
                     Eligible communities:
                     <br />
                     <br /> @bodoggos
@@ -125,7 +125,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
                     <br /> @MonkeDAO
                     <br /> @okaybears
                     <br /> @sagamonkes
-                  </p>
+                  </div>
                 </Hint>
               </RowText>
               <RowValue>

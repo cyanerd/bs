@@ -84,7 +84,6 @@ class CentrifugeService {
     this.presaleStateSubscription = this.centrifuge.newSubscription('bs_state');
 
     this.presaleStateSubscription.on('publication', (ctx: any) => {
-      console.log('Presale state update:', ctx.data);
       if (this.callbacks.onPresaleStateUpdate) {
         this.callbacks.onPresaleStateUpdate(ctx.data);
       }

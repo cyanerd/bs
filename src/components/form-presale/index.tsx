@@ -29,7 +29,7 @@ import {
 } from "./styles";
 import { ProgressBar } from "../common/progress-bar";
 import { WalletInfo } from "@/api/presale";
-import { PRESALE_TOTAL_SOL } from "@/api/config";
+import {PRESALE_TOTAL_SOL, PresaleState} from '@/api/config';
 import { LoadingWrapper } from "@/components/common/loading-wrapper";
 import { formatPrice } from "@/utils/format";
 import { WalletConnect } from "../wallet/wallet-connect";
@@ -42,6 +42,8 @@ type Props = {
   requiresSignature: boolean;
   onConnect: (publicKey: string) => Promise<void>;
   onRefreshWalletInfo?: () => Promise<void>;
+  presaleState: PresaleState;
+  loaded: boolean;
 };
 
 export const FormPresale = ({
@@ -52,10 +54,11 @@ export const FormPresale = ({
   requiresSignature,
   onConnect,
   onRefreshWalletInfo,
+  presaleState,
+  loaded
 }: Props) => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction, wallet } = useWallet();
-  const { presaleState, loaded } = usePresaleState(wallet?.adapter.name);
 
   const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
   const [solPrice, setSOLPrice] = useState<number | null>(null);

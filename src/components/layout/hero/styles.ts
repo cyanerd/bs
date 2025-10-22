@@ -17,7 +17,7 @@ export const Title = styled.h1`
   margin-bottom: 1rem;
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
   width: 100%;
   margin: 0 auto;
   text-align: center;

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchPresaleState } from '../api/presale';
 import { PresaleState } from '../api/config';
 import { centrifugeService } from '../utils/centrifuge';
@@ -16,10 +16,14 @@ export const usePresaleState = (walletName?: string) => {
   // Callback for updating presale state via centrifuge
   const handlePresaleStateUpdate = useCallback((data: any) => {
     if (data && typeof data === 'object') {
-      setPresaleState(prevState => ({
-        ...prevState,
-        ...data
-      }));
+      setPresaleState(prevState => {
+        const newState = {
+          ...prevState,
+          ...data,
+        };
+        console.log('new state from Centrifuge: ', newState);
+        return newState;
+      });
     }
   }, []);
 

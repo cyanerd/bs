@@ -189,6 +189,8 @@ const PageContent = () => {
               onRefreshWalletInfo={fetchWalletInfo}
               showDepositPrice
               presaleOff={PRESALE_OFF}
+              presaleState={presaleState}
+              loaded={loaded}
             />
           }
         />

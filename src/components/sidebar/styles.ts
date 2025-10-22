@@ -48,7 +48,7 @@ export const Row = styled.div`
   gap: 1rem;
 `;
 
-export const RowText = styled.p`
+export const RowText = styled.span`
   flex: 1;
   text-align: left;
   margin: 0;

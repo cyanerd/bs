@@ -28,7 +28,7 @@ export const KEY_PARTNERS: PartnerItem[] = [
   },
   {
     name: "Solana Name Services",
-    href: "#",
+    href: "https://x.com/blockstranding/status/1980625186702430242",
     imageSrc: "/images/partners/Solana-Name-Services.png",
   },
   {
@@ -36,13 +36,14 @@ export const KEY_PARTNERS: PartnerItem[] = [
     href: "https://x.com/blockstranding/status/1980295884827980000",
     imageSrc: "/images/partners/Solana-Mobile.jpg",
   },
+  {
+    name: "Saga Monkes",
+    href: "#",
+    imageSrc: "/images/friends/saga-monkeys.jpg",
+  },
 ];
 
 export const OUR_FRIENDS: PartnerItem[] = [
-  {
-    name: "Saga Monkes",
-    imageSrc: "/images/friends/saga-monkeys.jpg",
-  },
   {
     name: "1Minute",
     imageSrc: "/images/friends/1-minute.jpg",

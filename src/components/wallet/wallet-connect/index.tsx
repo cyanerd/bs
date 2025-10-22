@@ -9,17 +9,20 @@ import { Container, Copied, Dropdown, Icon, Wrapper } from "./styles";
 // @ts-ignore
 import { Web3 } from "@/utils/web3";
 import { Button } from "@/components/common/button";
+import { formatPrice } from "@/utils/format";
 
 type Props = {
   requiresSignature: boolean;
   signatureEnabled?: boolean;
   onConnect: (publicKey: string) => Promise<void>;
+  walletBalance?: number | null;
 };
 
 export const WalletConnect: React.FC<Props> = ({
   requiresSignature,
   signatureEnabled = true,
   onConnect,
+  walletBalance,
 }) => {
   const { connected, disconnect, wallet, publicKey, signMessage } = useWallet();
 
@@ -160,6 +163,17 @@ export const WalletConnect: React.FC<Props> = ({
               "Connect wallet"
             )}
           </Button>
+          {connected && walletBalance !== null && walletBalance !== undefined && (
+            <div style={{
+              textAlign: 'center',
+              marginTop: '4px',
+              fontSize: '12px',
+              color: '#999',
+              fontFamily: 'monospace'
+            }}>
+              Balance: {formatPrice(walletBalance, 4)} SOL
+            </div>
+          )}
           {dropdownActive && (
             <Dropdown ref={refDropdown}>
               <Dropdown.Item onClick={handleClickCopy}>

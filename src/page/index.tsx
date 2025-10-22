@@ -33,6 +33,7 @@ const PageContent = () => {
     completeWalletConnect,
     auth,
     walletInfo,
+    walletBalance,
     walletName,
     referralCode,
     setReferralCode,
@@ -184,6 +185,7 @@ const PageContent = () => {
           content={
             <FormPresale
               walletInfo={walletInfo}
+              walletBalance={walletBalance}
               requiresSignature={ready}
               onConnect={completeWalletConnect}
               onRefreshWalletInfo={fetchWalletInfo}

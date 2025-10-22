@@ -6,7 +6,7 @@ import { centrifugeService } from '../utils/centrifuge';
 export const usePresaleState = (walletName?: string) => {
   const [presaleState, setPresaleState] = useState<PresaleState>({
     backers: 255,
-    sold: 4000,
+    sold: 0,
     finish: 1761127157,
     priceNoWL: 0.00023,
   });
@@ -17,11 +17,10 @@ export const usePresaleState = (walletName?: string) => {
   const handlePresaleStateUpdate = useCallback((data: any) => {
     if (data && typeof data === 'object') {
       setPresaleState(prevState => {
-        const newState = {
+        return {
           ...prevState,
-          ...data,
+          ...data
         };
-        return newState;
       });
     }
   }, []);

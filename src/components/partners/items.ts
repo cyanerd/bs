@@ -38,7 +38,7 @@ export const KEY_PARTNERS: PartnerItem[] = [
   },
   {
     name: "Saga Monkes",
-    href: "#",
+    href: "https://x.com/blockstranding/status/1968763072903807045",
     imageSrc: "/images/friends/saga-monkeys.jpg",
   },
 ];

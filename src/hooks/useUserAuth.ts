@@ -1,6 +1,7 @@
 import { getAuth } from "@/api/getAuth";
 import { fetchWalletInfo, WalletInfo } from "@/api/presale";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
 import {
@@ -22,9 +23,11 @@ export function useUserAuth() {
   const [walletAddress, setWalletAddress] = useState("");
   const [name, setName] = useState("");
   const [walletInfo, setWalletInfo] = useState<WalletInfo | null>(null);
+  const [walletBalance, setWalletBalance] = useState<number | null>(null);
   const [referralCode, setReferralCode] = useState<string>(() => getCookie(REFERRAL_CODE_COOKIE_NAME) || "");
 
-  const { connected, wallet } = useWallet();
+  const { connected, wallet, publicKey } = useWallet();
+  const { connection } = useConnection();
 
   // Callback for updating totalDeposited from centrifuge
   const handleWalletDepositUpdate = useCallback((totalDepositedValue: number) => {
@@ -58,6 +61,22 @@ export function useUserAuth() {
     } catch {}
   }
 
+  const fetchWalletBalance = async () => {
+    if (!publicKey || !connection) {
+      setWalletBalance(null);
+      return;
+    }
+
+    try {
+      const balance = await connection.getBalance(publicKey);
+      const balanceInSol = balance / LAMPORTS_PER_SOL;
+      setWalletBalance(balanceInSol);
+    } catch (error) {
+      console.error('Failed to fetch wallet balance:', error);
+      setWalletBalance(null);
+    }
+  }
+
   const completeWalletConnect = async (publicKey: string) => {
     setWalletAddress(publicKey);
     setWalletConnected(true);
@@ -88,12 +107,14 @@ export function useUserAuth() {
 
     subscribeToWalletWhenReady();
     fetchWallet();
+    await fetchWalletBalance();
   };
 
   const logout = () => {
     setWalletAddress("");
     setWalletConnected(false);
     setWalletInfo(prevInfo => prevInfo ? { ...prevInfo, totalDeposited: 0 } : null); // Reset totalDeposited on disconnect
+    setWalletBalance(null); // Clear wallet balance on disconnect
 
     // Unsubscribe from wallet channel in centrifuge
     centrifugeService.unsubscribeFromWallet();
@@ -109,6 +130,13 @@ export function useUserAuth() {
     }
   }, [connected]);
 
+  // Fetch balance when wallet is connected and publicKey is available
+  useEffect(() => {
+    if (connected && publicKey && isWalletConnected) {
+      fetchWalletBalance();
+    }
+  }, [connected, publicKey, isWalletConnected]);
+
   return {
     auth,
     completeWalletConnect,
@@ -118,6 +146,7 @@ export function useUserAuth() {
     walletAddress,
     name,
     walletInfo,
+    walletBalance,
     walletName: wallet?.adapter.name,
     referralCode,
     setReferralCode,

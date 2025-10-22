@@ -38,6 +38,7 @@ type Props = {
   presaleOff: boolean;
   defaultPriceMode?: "SOL" | "USDC";
   walletInfo?: WalletInfo | null;
+  walletBalance?: number | null;
   showDepositPrice?: boolean;
   requiresSignature: boolean;
   onConnect: (publicKey: string) => Promise<void>;
@@ -50,6 +51,7 @@ export const FormPresale = ({
   presaleOff,
   defaultPriceMode = "SOL",
   walletInfo,
+  walletBalance,
   showDepositPrice,
   requiresSignature,
   onConnect,
@@ -58,7 +60,7 @@ export const FormPresale = ({
   loaded
 }: Props) => {
   const { connection } = useConnection();
-  const { publicKey, sendTransaction, wallet } = useWallet();
+  const { publicKey, sendTransaction } = useWallet();
 
   const [priceMode, setPriceMode] = useState<"SOL" | "USDC">(defaultPriceMode);
   const [solPrice, setSOLPrice] = useState<number | null>(null);
@@ -114,12 +116,15 @@ export const FormPresale = ({
         return;
       }
 
-      // Check if user has enough balance
-      const balance = await connection.getBalance(publicKey);
-      const balanceInSol = balance / LAMPORTS_PER_SOL;
+      // Check if user has enough balance using cached balance
+      if (walletBalance === null || walletBalance === undefined) {
+        toast.error("Unable to check wallet balance. Please refresh the page and try again.");
+        return;
+      }
+
       const requiredAmount = depositAmount + 0.001; // Add small buffer for transaction fee
 
-      if (balanceInSol < requiredAmount) {
+      if (walletBalance < requiredAmount) {
         toast.error("Insufficient balance");
         return;
       }
@@ -269,6 +274,7 @@ export const FormPresale = ({
         requiresSignature={requiresSignature}
         signatureEnabled={false}
         onConnect={onConnect}
+        walletBalance={walletBalance}
       />
 
       <br />

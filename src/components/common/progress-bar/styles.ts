@@ -28,6 +28,7 @@ export const Fill = styled.div<{ $value: number }>`
   height: 100%;
   width: ${({ $value }) => Math.min(Math.max($value, 0), 100)}%;
   background-color: var(--primary-color);
+  transition: width 0.3s ease-in-out;
   background-image: linear-gradient(
     135deg,
     rgba(0, 0, 0, 0.12) 25%,

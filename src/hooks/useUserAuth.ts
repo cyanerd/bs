@@ -112,17 +112,17 @@ export function useUserAuth() {
 
   // Get back from X to the page
   useEffect(() => {
-    const accessToken = getCookie("access_token");
-    const refreshToken = getCookie("refresh_token");
-    console.log('accessToken', accessToken, refreshToken);
+    // const accessToken = getCookie("access_token");
+    // const refreshToken = getCookie("refresh_token");
+    // console.log('accessToken', accessToken, refreshToken);
 
-    if (accessToken && refreshToken) {
+    // if (accessToken && refreshToken) {
       auth().then(() => {
         toast.success("X connected successfully!", {
           autoClose: 5000,
         });
       });
-    }
+    // }
   }, []);
 
   const logout = () => {

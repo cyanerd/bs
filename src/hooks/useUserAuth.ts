@@ -118,9 +118,9 @@ export function useUserAuth() {
 
     // if (accessToken && refreshToken) {
       auth().then(() => {
-        toast.success("X connected successfully!", {
-          autoClose: 5000,
-        });
+        // toast.success("X connected successfully!", {
+        //   autoClose: 5000,
+        // });
       });
     // }
   }, []);

@@ -18,13 +18,7 @@ export const fetchPresaleState = async (walletName?: string): Promise<PresaleSta
     }
   } catch (error) {
     console.error('Failed to fetch presale state:', error);
-    // Return default values if API fails
-    return {
-      backers: 255,
-      sold: 4000,
-      finish: 1761127157,
-      priceNoWL: 0.00023,
-    };
+    throw new Error('API returned non-success result');
   }
 };
 

@@ -25,7 +25,7 @@ import { fetchWalletInfo as _fetch } from "@/api/presale";
 import { Container, Wrapper } from "./styles";
 
 const PRESALE_OFF = false;
-const SHOW_BANNER = true;
+const SHOW_BANNER = false;
 
 const PageContent = () => {
   const {
@@ -43,7 +43,7 @@ const PageContent = () => {
     setWalletInfo
   } = useUserAuth();
 
-  const { presaleState, loaded } = usePresaleState(walletName);
+  const { presaleState, loaded, error } = usePresaleState(walletName);
 
 
   const ready = Boolean(isWalletConnected && walletAddress);
@@ -176,6 +176,7 @@ const PageContent = () => {
                 presaleState={presaleState}
                 walletInfo={walletInfo}
                 loaded={loaded}
+                error={error}
               />
               <FormReferral
                 ready={ready}
@@ -195,6 +196,7 @@ const PageContent = () => {
               presaleOff={PRESALE_OFF}
               presaleState={presaleState}
               loaded={loaded}
+              error={error}
             />
           }
         />

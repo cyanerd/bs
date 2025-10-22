@@ -25,9 +25,10 @@ type Props = {
   presaleState: PresaleState;
   walletInfo?: WalletInfo | null;
   loaded: boolean;
+  error: string | null;
 };
 
-export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
+export const Sidebar = ({ presaleState, walletInfo, loaded, error }: Props) => {
   return (
     <SidebarRoot>
       <SidebarHeader>Inventory & Stats</SidebarHeader>
@@ -61,7 +62,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>Price:</RowText>
               <RowValue>
-                <LoadingWrapper loaded={loaded}>
+                <LoadingWrapper loaded={loaded} error={error}>
                   $ {formatPrice(walletInfo?.price ?? presaleState?.priceNoWL)}
                 </LoadingWrapper>
               </RowValue>

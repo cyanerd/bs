@@ -45,6 +45,7 @@ type Props = {
   onRefreshWalletInfo?: () => Promise<void>;
   presaleState: PresaleState;
   loaded: boolean;
+  error: string | null;
 };
 
 export const FormPresale = ({
@@ -57,7 +58,8 @@ export const FormPresale = ({
   onConnect,
   onRefreshWalletInfo,
   presaleState,
-  loaded
+  loaded,
+  error
 }: Props) => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
@@ -161,7 +163,7 @@ export const FormPresale = ({
         <StatCard>
           <span>Price</span>
           <StatValue>
-            <LoadingWrapper loaded={loaded}>
+            <LoadingWrapper loaded={loaded} error={error}>
               $ {formatPrice(walletInfo?.price ?? presaleState?.priceNoWL)}
             </LoadingWrapper>
           </StatValue>
@@ -169,7 +171,7 @@ export const FormPresale = ({
         <StatCard>
           <span>Total deposited</span>
           <StatValue>
-            <LoadingWrapper loaded={loaded}>
+            <LoadingWrapper loaded={loaded} error={error}>
               {formatPrice(presaleState?.sold, 1)} SOL
             </LoadingWrapper>
           </StatValue>
@@ -177,7 +179,7 @@ export const FormPresale = ({
         <StatCard>
           <span>Backers</span>
           <StatValue>
-            <LoadingWrapper loaded={loaded}>
+            <LoadingWrapper loaded={loaded} error={error}>
               {presaleState?.backers?.toLocaleString()}
             </LoadingWrapper>
           </StatValue>

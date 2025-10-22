@@ -112,25 +112,15 @@ export function useUserAuth() {
 
   // Get back from X to the page
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const accessToken = urlParams.get("access_token");
-    const refreshToken = urlParams.get("refresh_token");
+    const accessToken = getCookie("access_token");
+    const refreshToken = getCookie("refresh_token");
 
     if (accessToken && refreshToken) {
-      const oneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
-      const sevenDays = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
-      setCookie("access_token", accessToken, { expires: oneDay });
-      setCookie("refresh_token", refreshToken, { expires: sevenDays });
-
       auth().then(() => {
         toast.success("X connected successfully!", {
           autoClose: 5000,
         });
       });
-
-      window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
 

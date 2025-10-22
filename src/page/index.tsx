@@ -38,6 +38,7 @@ const PageContent = () => {
     referralCode,
     setReferralCode,
     fetchWalletInfo,
+    setWalletInfo
   } = useUserAuth();
 
   const { presaleState, loaded } = usePresaleState(walletName);
@@ -54,7 +55,8 @@ const PageContent = () => {
 
   const handleReferralApply = async (refCode: string) => {
     setReferralCode(refCode);
-    await _fetch(walletName, refCode, true);
+    const newWalletInfo = await _fetch(walletName, refCode, true);
+    setWalletInfo(newWalletInfo);
   };
 
   useEffect(() => {

@@ -154,6 +154,7 @@ export function useUserAuth() {
     referralCode,
     setReferralCode,
     fetchWalletInfo: fetchWallet,
-    totalDeposited: walletInfo?.totalDeposited || 0
+    totalDeposited: walletInfo?.totalDeposited || 0,
+    setWalletInfo
   };
 }

@@ -72,7 +72,14 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
 
       <Card>
         <CardHeader>
-          <HeaderText>Token Boost:</HeaderText>
+          <HeaderText>
+            Token Boost:
+            <Hint>
+              <div>
+                Token Boost is a system that grants you extra free tokens in addition to your purchased allocation. Each boost can be earned by meeting specific conditions.
+              </div>
+            </Hint>
+          </HeaderText>
           <HeaderValue>
             <LoadingWrapper loaded={true}>
               {(() => {

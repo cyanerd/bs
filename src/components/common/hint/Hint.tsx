@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HintRoot, IconButton, Tooltip } from "./styles";
 
 export const Hint = ({ children }: React.PropsWithChildren<{}>) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+  const hintRef = useRef<HTMLDivElement>(null);
 
   // We need this effect to detect whether the user's device uses a coarse pointer (like touch screens)
   // or a fine pointer (like a mouse). This allows us to adjust the Hint's interaction logic: on coarse
@@ -30,8 +31,27 @@ export const Hint = ({ children }: React.PropsWithChildren<{}>) => {
   const hide = () => setIsVisible(false);
   const toggle = () => setIsVisible((v) => !v);
 
+  // Close hint when clicking outside
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (hintRef.current && !hintRef.current.contains(event.target as Node)) {
+        hide();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isVisible]);
+
   return (
-    <HintRoot onMouseLeave={!isCoarsePointer ? hide : undefined}>
+    <HintRoot ref={hintRef} onMouseLeave={!isCoarsePointer ? hide : undefined}>
       <IconButton
         type="button"
         aria-label="Hint"

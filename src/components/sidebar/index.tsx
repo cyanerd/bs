@@ -133,6 +133,21 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
             <Row>
               <RowText>
                 Partner comms:
+                <Hint>
+                  <div>
+                    Eligible communities:
+                    <br />
+                    <br /> @bodoggos
+                    <br /> @Claynosaurz
+                    <br /> @DegenApeAcademy
+                    <br /> @FamousFoxFed
+                    <br /> @GalacticGeckoSG
+                    <br /> @MadLads
+                    <br /> @MonkeDAO
+                    <br /> @okaybears
+                    <br /> @sagamonkes
+                  </div>
+                </Hint>
               </RowText>
               <RowValue>
                 <LoadingWrapper loaded={true}>

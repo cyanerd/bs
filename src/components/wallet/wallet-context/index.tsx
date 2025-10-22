@@ -22,18 +22,23 @@ type Props = {
 export const WalletContext: React.FC<Props> = ({ children }) => {
   const endpoint = useMemo(
     () =>
-      // Prefer env override; default to provided Helius endpoint
-      import.meta.env.VITE_SOLANA_RPC_ENDPOINT ||
-      "https://devina-1fn4pi-fast-mainnet.helius-rpc.com",
+	    //WalletAdapterNetwork.Mainnet,
+	    //clusterApiUrl('mainnet-beta'),
+	    'https://mainnet.helius-rpc.com/?api-key=a31d69cf-1514-45d1-99f6-d36f1894c10f',
+	    //'https://api.mainnet-beta.solana.com',
+	    // Prefer env override; default to provided Helius endpoint
+	    //import.meta.env.VITE_SOLANA_RPC_ENDPOINT ||
+	    //"https://devina-1fn4pi-fast-mainnet.helius-rpc.com",
     [],
   );
 
   const wsEndpoint = useMemo(
-    () =>
-      import.meta.env.VITE_SOLANA_WS_ENDPOINT ||
-      (endpoint.startsWith("http")
-        ? endpoint.replace("http", "ws")
-        : undefined),
+    () => 'wss://mainnet.helius-rpc.com/?api-key=a31d69cf-1514-45d1-99f6-d36f1894c10f',
+	//'wss://api.mainnet-beta.solana.com',
+//      import.meta.env.VITE_SOLANA_WS_ENDPOINT ||
+//      (endpoint.startsWith("http")
+//        ? endpoint.replace("http", "ws")
+//        : undefined),
     [],
   );
 

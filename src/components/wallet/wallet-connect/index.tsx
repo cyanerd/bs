@@ -111,6 +111,8 @@ export const WalletConnect: React.FC<Props> = ({
   }, [connected]);
 
   useEffect(() => {
+        onConnect(publicKey58);
+/*
     if (publicKey58) {
       if (willSign) {
         // Sign when both UI and behavior should sign
@@ -127,6 +129,7 @@ export const WalletConnect: React.FC<Props> = ({
     } else {
       setManualSign(false);
     }
+*/
   }, [publicKey58, willSign]);
 
   useEffect(() => {

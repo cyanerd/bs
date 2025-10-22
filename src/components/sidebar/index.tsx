@@ -79,6 +79,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
                 const total =
                   (walletInfo?.boostSolflare ?? 0) +
                   (walletInfo?.boostBonk ?? 0) +
+                  (walletInfo?.boostMagicEden ?? 0) +
                   (walletInfo?.boostLucky ?? 0) +
                   (walletInfo?.boost1Hour ?? 0) +
                   (walletInfo?.boostCode ?? 0);
@@ -88,22 +89,42 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
           </HeaderValue>
         </CardHeader>
         <List>
-          <li>
+          {!!walletInfo?.boostSolflare && <li>
             <Row>
-              <RowText>SolFlare partner:</RowText>
+              <RowText>SolFlare special:</RowText>
               <RowValue>
                 <LoadingWrapper loaded={true}>
                   {formatBoost(walletInfo?.boostSolflare ?? 0)}
                 </LoadingWrapper>
               </RowValue>
             </Row>
+          </li>}
+          {!!walletInfo?.boostMagicEden && <li>
+            <Row>
+              <RowText>Magic Eden special:</RowText>
+              <RowValue>
+                <LoadingWrapper loaded={true}>
+                  {formatBoost(walletInfo?.boostMagicEden ?? 0)}
+                </LoadingWrapper>
+              </RowValue>
+            </Row>
+          </li>}
+          <li>
+            <Row>
+              <RowText>1st hour buyer:</RowText>
+              <RowValue>
+                <LoadingWrapper loaded={true}>
+                  {formatBoost(walletInfo?.boost1Hour ?? 0)}
+                </LoadingWrapper>
+              </RowValue>
+            </Row>
           </li>
           <li>
             <Row>
-              <RowText>Bonk Family:</RowText>
+              <RowText>Ref code applied:</RowText>
               <RowValue>
                 <LoadingWrapper loaded={true}>
-                  {formatBoost(walletInfo?.boostBonk ?? 0)}
+                  {formatBoost(walletInfo?.boostCode ?? 0)}
                 </LoadingWrapper>
               </RowValue>
             </Row>
@@ -137,20 +158,10 @@ export const Sidebar = ({ presaleState, walletInfo, loaded }: Props) => {
           </li>
           <li>
             <Row>
-              <RowText>1st Hour Buyer:</RowText>
+              <RowText>BONK contributor:</RowText>
               <RowValue>
                 <LoadingWrapper loaded={true}>
-                  {formatBoost(walletInfo?.boost1Hour ?? 0)}
-                </LoadingWrapper>
-              </RowValue>
-            </Row>
-          </li>
-          <li>
-            <Row>
-              <RowText>Code applied:</RowText>
-              <RowValue>
-                <LoadingWrapper loaded={true}>
-                  {formatBoost(walletInfo?.boostCode ?? 0)}
+                  {formatBoost(walletInfo?.boostBonk ?? 0)}
                 </LoadingWrapper>
               </RowValue>
             </Row>

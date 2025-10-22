@@ -32,6 +32,7 @@ export interface WalletInfo {
   price: number;
   totalDeposited: number;
   boostSolflare: number;
+  boostMagicEden: number;
   boostBonk: number;
   boostLucky: number;
   boost1Hour: number;

@@ -21,7 +21,6 @@ export const usePresaleState = (walletName?: string) => {
           ...prevState,
           ...data,
         };
-        console.log('new state from Centrifuge: ', newState);
         return newState;
       });
     }

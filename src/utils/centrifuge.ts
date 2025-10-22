@@ -32,17 +32,14 @@ class CentrifugeService {
 
     // Connection event handlers
     this.centrifuge.on('connecting', (ctx) => {
-      console.log('Centrifuge connecting', ctx);
     });
 
     this.centrifuge.on('connected', (ctx) => {
-      console.log('Centrifuge connected', ctx);
       this._isConnected = true;
       this.subscribeToPresaleState();
     });
 
     this.centrifuge.on('disconnected', (ctx) => {
-      console.log('Centrifuge disconnected', ctx);
       this._isConnected = false;
     });
 
@@ -90,7 +87,6 @@ class CentrifugeService {
     });
 
     this.presaleStateSubscription.on('subscribed', (ctx: any) => {
-      console.log('Subscribed to bs_state', ctx);
     });
 
     this.presaleStateSubscription.on('error', (ctx: any) => {
@@ -112,7 +108,6 @@ class CentrifugeService {
     this.walletSubscription = this.centrifuge.newSubscription(channelName);
 
     this.walletSubscription.on('publication', (ctx: any) => {
-      console.log('Wallet deposit update:', ctx.data);
       // According to requirements, only totalDeposited number is received
       if (this.callbacks.onWalletDepositUpdate && typeof ctx.data === 'number') {
         this.callbacks.onWalletDepositUpdate(ctx.data);
@@ -120,7 +115,6 @@ class CentrifugeService {
     });
 
     this.walletSubscription.on('subscribed', (ctx: any) => {
-      console.log(`Subscribed to ${channelName}`, ctx);
     });
 
     this.walletSubscription.on('error', (ctx: any) => {

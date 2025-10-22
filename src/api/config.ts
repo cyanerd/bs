@@ -1,5 +1,5 @@
 const isLocalhost = typeof window !== 'undefined' && window.location.hostname === 'localhost';
-export const API_HOST = isLocalhost ? "http://localhost:3001/api" : "https://presale.blockstranding.com/api";
+export const API_HOST = isLocalhost ? "http://localhost:3001/api" : "https://presale.blockstranding.com/api/presale";
 
 export const NEED_BASIC_AUTH = true;
 const BASIC_AUTH_USER = 'dev';

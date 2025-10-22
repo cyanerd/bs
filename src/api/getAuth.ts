@@ -3,7 +3,7 @@ import { API_HOST, getBasicAuthHeaders } from "./config";
 
 export const getAuth = async () => {
   try {
-    const response = await axios.get(`${API_HOST}/auth/jwt`, {
+    const response = await axios.get(`${API_HOST}/presale/auth/jwt`, {
       headers: {
         ...getBasicAuthHeaders(),
       },

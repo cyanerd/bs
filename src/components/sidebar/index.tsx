@@ -28,6 +28,8 @@ type Props = {
   error: string | null;
 };
 
+const SHOW_LAST_CHANCE = true;
+
 export const Sidebar = ({ presaleState, walletInfo, loaded, error }: Props) => {
   return (
     <SidebarRoot>
@@ -90,6 +92,7 @@ export const Sidebar = ({ presaleState, walletInfo, loaded, error }: Props) => {
                   (walletInfo?.boostMagicEden ?? 0) +
                   (walletInfo?.boostPartner ?? 0) +
                   (walletInfo?.boost1Hour ?? 0) +
+                  (walletInfo?.lastChance ?? 0) +
                   (walletInfo?.boostCode ?? 0);
                 return total > 0 ? `+${total}%` : "-";
               })()}
@@ -97,6 +100,16 @@ export const Sidebar = ({ presaleState, walletInfo, loaded, error }: Props) => {
           </HeaderValue>
         </CardHeader>
         <List>
+          {SHOW_LAST_CHANCE && <li>
+            <Row style={{ color: 'var(--accent-color)' }}>
+              <RowText>Last chance:</RowText>
+              <RowValue>
+                <LoadingWrapper loaded={true}>
+                  {formatBoost(walletInfo?.lastChance ?? 0)}
+                </LoadingWrapper>
+              </RowValue>
+            </Row>
+          </li>}
           {!!walletInfo?.boostSolflare && <li>
             <Row>
               <RowText>Solflare special:</RowText>

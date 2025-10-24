@@ -32,6 +32,7 @@ export interface WalletInfo {
   boostBonk: number;
   boostPartner: number;
   boost1Hour: number;
+  lastChance: number;
   boostCode: number;
 }
 
